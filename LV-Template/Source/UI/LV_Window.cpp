@@ -14,9 +14,6 @@
 //==============================================================================
 LV_Window::LV_Window()
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
-
 }
 
 LV_Window::~LV_Window()
@@ -25,27 +22,49 @@ LV_Window::~LV_Window()
 
 void LV_Window::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
-
-    g.setColour (juce::Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (juce::Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("LV_Window", getLocalBounds(),
-                juce::Justification::centred, true);   // draw some placeholder text
+    // Paint UI components
+    paintBackground(g);
+    paintLogoAndLink(g);
+    paintText(g);
 }
 
 void LV_Window::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
+}
 
+void LV_Window::paintBackground(juce::Graphics &g)
+{
+    //Image layer from Illustrator
+    pluginBackground = juce::ImageCache::getFromMemory(BinaryData::pluginBackground2_png, BinaryData::pluginBackground2_pngSize);
+    
+    // Draw and position the image
+    g.drawImageWithin(pluginBackground, 0, 0, width, height, juce::RectanglePlacement::stretchToFit);
+}
+
+void LV_Window::paintLogoAndLink(juce::Graphics &g)
+{
+    // Logo layer
+    footerLogo = juce::ImageCache::getFromMemory(BinaryData::landon5504_png, BinaryData::landon5504_pngSize);
+    
+    // Draw and position the image
+    g.drawImageWithin(footerLogo, width * 0.38, height * 0.8 + 4, width * 0.25, height * 0.1, juce::RectanglePlacement::centred);
+    
+    // Patreon link
+    mWebLink.setURL(mWebUrl);
+    addAndMakeVisible(mWebLink);
+    mWebLink.setBounds(width * 0.38, height * 0.8 + 4, width * 0.25, height * 0.1);
+}
+
+void LV_Window::paintText(juce::Graphics &g)
+{
+    // Plugin text
+    g.setColour (juce::Colours::whitesmoke.withAlpha(0.125f));
+    g.setFont(width * 0.015);
+    g.drawFittedText ("Plugin v1.0.0", width * 0.12, height * 0.12, width, height, juce::Justification::topLeft, 1);
+}
+
+void LV_Window::setWidthAndHeight(float w, float h)
+{
+    width = w;
+    height = h;
 }

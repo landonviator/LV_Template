@@ -4,6 +4,14 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
   <MAINGROUP id="kzQ9XS" name="LV-Template">
     <GROUP id="{1E4C0345-1395-B056-1E6D-178D9AAA9999}" name="Source">
+      <GROUP id="{9EBA8083-DC91-C17C-9D62-45028BFA63E3}" name="Assets">
+        <FILE id="XDMAWs" name="landon55-03.png" compile="0" resource="1" file="Source/Assets/landon55-03.png"/>
+        <FILE id="ho2yp7" name="landon55-04.png" compile="0" resource="1" file="Source/Assets/landon55-04.png"/>
+        <FILE id="TPnhiO" name="pluginBackground.png" compile="0" resource="1"
+              file="Source/Assets/pluginBackground.png"/>
+        <FILE id="Qna0ro" name="pluginBackground2.png" compile="0" resource="1"
+              file="Source/Assets/pluginBackground2.png"/>
+      </GROUP>
       <GROUP id="{ED7AFB7F-1B2F-633E-3DF2-982150233326}" name="DSP"/>
       <GROUP id="{E4B206C5-59D6-CE56-058E-0AC2CF03D793}" name="UI">
         <FILE id="GNHI3y" name="LV_Window.cpp" compile="1" resource="0" file="Source/UI/LV_Window.cpp"/>

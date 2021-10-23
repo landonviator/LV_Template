@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "UI/LV_Window.h"
 
 //==============================================================================
 /**
@@ -25,9 +26,14 @@ public:
     void resized() override;
 
 private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
+    
     LVTemplateAudioProcessor& audioProcessor;
+    
+    /** Window ====================================================================*/
+    LV_Window windowComponent;
+    void initWindow();
+    void saveWindowSize();
+    bool constructorFinished {false};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

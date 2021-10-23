@@ -18,13 +18,10 @@ class LV_Fader : public Slider
 {
 public:
     
-    LV_Fader(juce::String suffix, double rangeStart, double rangeEnd, double intervalValue, double returnValue)
+    LV_Fader()
     {
         setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
         setTextBoxStyle(juce::Slider::TextBoxBelow, true, 72, 32);
-        setRange(rangeStart, rangeEnd, intervalValue);
-        setDoubleClickReturnValue(true, returnValue);
-        setTextValueSuffix(suffix);
         setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.35f));
         setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::black.withAlpha(0.0f));
         setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));

@@ -15,6 +15,7 @@ LVTemplateAudioProcessorEditor::LVTemplateAudioProcessorEditor (LVTemplateAudioP
 {
     initWindow();
     addAndMakeVisible(windowComponent);
+    addAndMakeVisible(demoFader);
 }
 
 LVTemplateAudioProcessorEditor::~LVTemplateAudioProcessorEditor()
@@ -36,6 +37,9 @@ void LVTemplateAudioProcessorEditor::resized()
     // Plugin background UI
     windowComponent.setWidthAndHeight(width, height);
     windowComponent.setBounds(getLocalBounds());
+    
+    // Position demo slider
+    demoFader.setBounds(128, 128, 128, 256);
     
     // Save plugin size in the tree
     saveWindowSize();

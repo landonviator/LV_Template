@@ -18,7 +18,7 @@ void LV_CustomAbleDialLAF::drawRotarySlider (Graphics& g, int x, int y, int widt
     auto bounds = Rectangle<int> (x, y, width, height).toFloat().reduced (10);
     auto radius = jmin (bounds.getWidth(), bounds.getHeight()) / 2.0f;
     auto toAngle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);
-    auto lineW = jmin (4.0f, radius * 0.5f);
+    auto lineW = jmin (8.0f, radius * 0.5f);
     auto arcRadius = radius - lineW * 0.5f;
 
     // Dial-path background
@@ -49,7 +49,7 @@ void LV_CustomAbleDialLAF::drawRotarySlider (Graphics& g, int x, int y, int widt
                                 toAngle,
                                 true);
 
-        g.setColour (Colour::fromRGB(181, 234, 215).withAlpha(0.5f));
+        g.setColour (Colour::fromRGB(179,72,78));
         g.strokePath (valueArc, PathStrokeType (lineW, PathStrokeType::curved, PathStrokeType::rounded));
     }
 
@@ -132,7 +132,7 @@ void LV_FaderLAF::drawLinearSlider (Graphics& g, int x, int y, int width, int he
             Rectangle<float> thumbRec;
             thumbRec.setSize(static_cast<float> (height / 3.0), static_cast<float> (height / 8.0));
             
-            g.setColour (Colour::fromRGB(120,121,118).darker(0.25));
+            g.setColour(slider.findColour(Slider::thumbColourId));
             g.fillRoundedRectangle(thumbRec.withCentre(isThreeVal ? thumbPoint : maxPoint), 4.0f);
         }
 

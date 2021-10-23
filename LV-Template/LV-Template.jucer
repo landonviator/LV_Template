@@ -14,6 +14,10 @@
       </GROUP>
       <GROUP id="{ED7AFB7F-1B2F-633E-3DF2-982150233326}" name="DSP"/>
       <GROUP id="{E4B206C5-59D6-CE56-058E-0AC2CF03D793}" name="UI">
+        <FILE id="f1dBag" name="LV_FaderComponent.cpp" compile="1" resource="0"
+              file="Source/UI/LV_FaderComponent.cpp"/>
+        <FILE id="OMllmo" name="LV_FaderComponent.h" compile="0" resource="0"
+              file="Source/UI/LV_FaderComponent.h"/>
         <FILE id="GNHI3y" name="LV_Window.cpp" compile="1" resource="0" file="Source/UI/LV_Window.cpp"/>
         <FILE id="favMOj" name="LV_Window.h" compile="0" resource="0" file="Source/UI/LV_Window.h"/>
       </GROUP>

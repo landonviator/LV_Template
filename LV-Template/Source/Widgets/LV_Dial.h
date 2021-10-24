@@ -18,13 +18,10 @@ class LV_Dial : public Slider
 {
 public:
     
-    LV_Dial(juce::String suffix, double rangeStart, double rangeEnd, double intervalValue, double returnValue)
+    LV_Dial()
     {
         setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
         setTextBoxStyle(Slider::TextBoxBelow, false, 96, 32);
-        setRange(rangeStart, rangeEnd, intervalValue);
-        setDoubleClickReturnValue(true, returnValue);
-        setTextValueSuffix(suffix);
         setColour(Slider::ColourIds::rotarySliderFillColourId, findColour(Slider::ColourIds::thumbColourId));
         setColour(Slider::ColourIds::thumbColourId, Colour::fromRGB(35, 35, 35).withAlpha(0.0f));
         setColour(Slider::ColourIds::rotarySliderOutlineColourId, Colour::fromRGB(35, 35, 35));

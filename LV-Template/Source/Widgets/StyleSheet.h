@@ -51,8 +51,7 @@ public:
         float angle = rotaryStartAngle + (sliderPos * (rotaryEndAngle - rotaryStartAngle));
                         
         Rectangle<float> dialArea (rx, ry, diameter, diameter);
-        g.setColour(Colour::fromFloatRGBA(0.15, 0.15, 0.15, 1)); //center
-        g.setGradientFill(ColourGradient::vertical(Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0).darker(1.0).darker(0.1), 0, Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0).darker(1.0).darker(0.1), 0));
+        g.setColour(slider.findColour(Slider::thumbColourId)); //center
         g.fillEllipse(dialArea);
                         
         g.setColour(Colours::black.withAlpha(0.15f)); //outline
@@ -77,7 +76,7 @@ public:
                 float angle = rotaryStartAngle + (sliderPos * (rotaryEndAngle - rotaryStartAngle));
                 
                 juce::Rectangle<float> dialArea (rx, ry, diameter, diameter);
-                g.setColour(juce::Colour::fromRGB(179, 153, 212).darker(1.0f).darker(0.5f)); //center
+                g.setColour(slider.findColour(Slider::thumbColourId)); //center
                 g.fillEllipse(dialArea);
                 
                 g.setColour(juce::Colours::black.brighter(0.5f).withAlpha(0.75f)); //outline

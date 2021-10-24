@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    LV_FaderComponent.cpp
-    Created: 23 Oct 2021 2:38:27am
-    Author:  Landon Viator
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
 #include "LV_FaderComponent.h"
 
@@ -19,7 +9,6 @@ LV_FaderComponent::LV_FaderComponent(juce::String suffix, double rangeStart, dou
     slider.setDoubleClickReturnValue(true, returnValue);
     slider.setTextValueSuffix(suffix);
     slider.setLookAndFeel(&customFader);
-    slider.setComponentEffect(&sliderShadow);
     addAndMakeVisible(slider);
 }
 
@@ -49,4 +38,14 @@ void LV_FaderComponent::init_shadows()
     sliderShadowProperties.offset = juce::Point<int> (0, 0);
     sliderShadowProperties.colour = juce::Colours::black.withAlpha(1.0f);
     sliderShadow.setShadowProperties (sliderShadowProperties);
+}
+
+void LV_FaderComponent::enableShadow(bool enable)
+{
+    slider.setComponentEffect(nullptr);
+    
+    if (enable)
+    {
+        slider.setComponentEffect(&sliderShadow);
+    }
 }

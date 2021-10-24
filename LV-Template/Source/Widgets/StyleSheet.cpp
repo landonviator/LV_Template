@@ -18,7 +18,7 @@ void LV_CustomAbleDialLAF::drawRotarySlider (Graphics& g, int x, int y, int widt
     auto bounds = Rectangle<int> (x, y, width, height).toFloat().reduced (10);
     auto radius = jmin (bounds.getWidth(), bounds.getHeight()) / 2.0f;
     auto toAngle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);
-    auto lineW = jmin (8.0f, radius * 0.5f);
+    auto lineW = jmin (4.0f, radius * 0.5f);
     auto arcRadius = radius - lineW * 0.5f;
 
     // Dial-path background
@@ -49,7 +49,7 @@ void LV_CustomAbleDialLAF::drawRotarySlider (Graphics& g, int x, int y, int widt
                                 toAngle,
                                 true);
 
-        g.setColour (Colour::fromRGB(179,72,78));
+        g.setColour (slider.findColour(Slider::rotarySliderFillColourId));
         g.strokePath (valueArc, PathStrokeType (lineW, PathStrokeType::curved, PathStrokeType::rounded));
     }
 
@@ -57,7 +57,7 @@ void LV_CustomAbleDialLAF::drawRotarySlider (Graphics& g, int x, int y, int widt
     Point<float> thumbPoint (bounds.getCentreX() + (arcRadius - lineW * 1.25) * std::cos (toAngle - MathConstants<float>::halfPi),
                              bounds.getCentreY() + (arcRadius - lineW * 1.25) * std::sin (toAngle - MathConstants<float>::halfPi));
 
-    g.setColour (Colour::fromRGB(179,72,78));
+    g.setColour (slider.findColour(Slider::thumbColourId));
     g.drawLine(backgroundArc.getBounds().getCentreX(), backgroundArc.getBounds().getCentreY(), thumbPoint.getX(), thumbPoint.getY(), lineW / 2.0);
 }
 

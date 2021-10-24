@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "UI/LV_Window.h"
 #include "UI/LV_FaderComponent.h"
+#include "UI/LV_DialComponent.h"
 
 //==============================================================================
 /**
@@ -38,6 +39,9 @@ private:
     
     /** Fader =====================================================================*/
     LV_FaderComponent demoFader {" dB", -24.0, 24.0, 0.25, 0.0};
+    
+    /** Dial =====================================================================*/
+    LV_DialComponent demoDial {" dB", -24.0, 24.0, 0.25, 0.0, 1};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

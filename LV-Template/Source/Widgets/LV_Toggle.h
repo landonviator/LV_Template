@@ -14,22 +14,19 @@
 namespace juce
 {
 
-class LV_Toggle : public TextButton
-{
-public:
-    
-    LV_Toggle()
+    class LV_Toggle : public TextButton
     {
-        setClickingTogglesState(true);
-        setColour(juce::TextButton::ColourIds::buttonColourId, juce::Colours::black.withAlpha(0.35f));
-        setColour(juce::TextButton::ColourIds::buttonOnColourId, juce::Colours::black.withAlpha(0.35f));
-        setColour(juce::TextButton::ColourIds::textColourOffId, juce::Colours::skyblue.withAlpha(0.75f));
-        setColour(juce::TextButton::ColourIds::textColourOnId, juce::Colours::skyblue.withAlpha(0.75f));
-        setColour(juce::ComboBox::ColourIds::outlineColourId, juce::Colour::fromFloatRGBA(0, 0, 0, 0));
-    }
+        
+    public:
     
-private:
-    
-    
-};
+        LV_Toggle()
+        {
+            setClickingTogglesState(true);
+            setColour(juce::TextButton::ColourIds::buttonColourId, juce::Colours::black.withAlpha(0.35f));
+            setColour(juce::TextButton::ColourIds::buttonOnColourId, juce::Colours::black.withAlpha(0.35f));
+            setColour(juce::TextButton::ColourIds::textColourOffId, juce::Colours::skyblue.withAlpha(0.75f));
+            setColour(juce::TextButton::ColourIds::textColourOnId, juce::Colours::skyblue.withAlpha(0.75f));
+            setColour(juce::ComboBox::ColourIds::outlineColourId, juce::Colour::fromFloatRGBA(0, 0, 0, 0));
+        } 
+    };
 }

@@ -16,6 +16,8 @@ LVTemplateAudioProcessorEditor::LVTemplateAudioProcessorEditor (LVTemplateAudioP
     initWindow();
     addAndMakeVisible(windowComponent);
     
+    addAndMakeVisible(demoTitleBorder);
+    
     demoFader.setColour(juce::Slider::thumbColourId, juce::Colours::rebeccapurple);
     demoFader.enableShadow(true);
     addAndMakeVisible(demoFader);
@@ -24,6 +26,7 @@ LVTemplateAudioProcessorEditor::LVTemplateAudioProcessorEditor (LVTemplateAudioP
     demoDial.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::rebeccapurple);
     demoDial.enableShadow(true);
     addAndMakeVisible(demoDial);
+    
 }
 
 LVTemplateAudioProcessorEditor::~LVTemplateAudioProcessorEditor()
@@ -51,6 +54,9 @@ void LVTemplateAudioProcessorEditor::resized()
     
     // Position demo dial
     demoDial.setBounds(demoFader.getX() + demoFader.getWidth(), demoFader.getY(), 128, 128);
+    
+    // Position demo border
+    demoTitleBorder.setBounds(128, 100, demoFader.getWidth(), demoFader.getHeight() + 28);
     
     // Save plugin size in the tree
     saveWindowSize();

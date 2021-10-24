@@ -33,7 +33,7 @@ public:
     {
         setColour(juce::GroupComponent::ColourIds::outlineColourId, juce::Colours::whitesmoke.withAlpha(0.125f));
         setColour(juce::GroupComponent::ColourIds::textColourId, juce::Colours::whitesmoke.withAlpha(0.125f));
-        setTextLabelPosition(juce::Justification::left);
+        setTextLabelPosition(juce::Justification::centred);
     }
     
 private:

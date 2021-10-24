@@ -22,6 +22,10 @@
               file="Source/UI/LV_FaderComponent.cpp"/>
         <FILE id="OMllmo" name="LV_FaderComponent.h" compile="0" resource="0"
               file="Source/UI/LV_FaderComponent.h"/>
+        <FILE id="CU3gg6" name="LV_GroupComponent.cpp" compile="1" resource="0"
+              file="Source/UI/LV_GroupComponent.cpp"/>
+        <FILE id="xfoO7Z" name="LV_GroupComponent.h" compile="0" resource="0"
+              file="Source/UI/LV_GroupComponent.h"/>
         <FILE id="GNHI3y" name="LV_Window.cpp" compile="1" resource="0" file="Source/UI/LV_Window.cpp"/>
         <FILE id="favMOj" name="LV_Window.h" compile="0" resource="0" file="Source/UI/LV_Window.h"/>
       </GROUP>

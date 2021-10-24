@@ -14,6 +14,7 @@
 #include "UI/LV_FaderComponent.h"
 #include "UI/LV_DialComponent.h"
 #include "UI/LV_GroupComponent.h"
+#include "UI/LV_LabelComponent.h"
 
 //==============================================================================
 /**
@@ -46,6 +47,9 @@ private:
     
     /** Title Border ==============================================================*/
     LV_GroupComponent demoTitleBorder {"Demo Title"};
+    
+    /** Label =====================================================================*/
+    LV_LabelComponent demoLabel {"Input", demoDial};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

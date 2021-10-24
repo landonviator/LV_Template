@@ -26,6 +26,10 @@
               file="Source/UI/LV_GroupComponent.cpp"/>
         <FILE id="xfoO7Z" name="LV_GroupComponent.h" compile="0" resource="0"
               file="Source/UI/LV_GroupComponent.h"/>
+        <FILE id="cYlpZS" name="LV_LabelComponent.cpp" compile="1" resource="0"
+              file="Source/UI/LV_LabelComponent.cpp"/>
+        <FILE id="Liobhs" name="LV_LabelComponent.h" compile="0" resource="0"
+              file="Source/UI/LV_LabelComponent.h"/>
         <FILE id="GNHI3y" name="LV_Window.cpp" compile="1" resource="0" file="Source/UI/LV_Window.cpp"/>
         <FILE id="favMOj" name="LV_Window.h" compile="0" resource="0" file="Source/UI/LV_Window.h"/>
       </GROUP>

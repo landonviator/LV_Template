@@ -31,6 +31,9 @@ void LVTemplateAudioProcessorEditor::uiResized(float width, float height)
     // Position power toggle
     demoPowerToggle.setBounds(demoMenu.getX() + demoMenu.getWidth() * 1.5, demoMenu.getY(), 32, 32);
     
+    // Position push button
+    demoPushButton.setBounds(demoDial.getX(), demoDial.getY() + demoDial.getHeight(), demoDial.getWidth(), demoDial.getHeight() / 2.0f);
+    
     // Save plugin size in the tree
     saveWindowSize();
 }

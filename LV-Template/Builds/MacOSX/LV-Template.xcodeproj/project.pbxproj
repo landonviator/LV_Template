@@ -50,6 +50,7 @@
 		89654B7E014E3D0E6836A5AA /* LV_FaderComponent.cpp */ = {isa = PBXBuildFile; fileRef = DC561985C2FA8C9F8F148F1B; };
 		8FF04CCFEF69A3E5C5284CC6 /* UI-Paint.cpp */ = {isa = PBXBuildFile; fileRef = 5C78E2E84FB68F103CBA5242; };
 		965E51DFB0DCFBFA4A21895D /* include_juce_audio_plugin_client_AU_1.mm */ = {isa = PBXBuildFile; fileRef = D76B7D0CC6A6D7E67F546C4A; };
+		A1A0867B74D26AA58D1049EB /* LV_PushButtonComponent.cpp */ = {isa = PBXBuildFile; fileRef = 7EC0A879582377BCE597FB96; };
 		A77E998F56794ED8A72ACF36 /* Standalone Plugin */ = {isa = PBXBuildFile; fileRef = C79D4DF9092D6964A00C3549; };
 		A884F2E3B27ADD9890539DF6 /* PluginProcessor.cpp */ = {isa = PBXBuildFile; fileRef = 28E986E69A159BE55ED2468D; };
 		A93305F73C4F2B12315B666E /* Carbon.framework */ = {isa = PBXBuildFile; fileRef = FC00BB7DECDF21EB3925FC7E; };
@@ -108,6 +109,7 @@
 		4969C650722F95E886320BD4 /* LV_DialComponent.cpp */ /* LV_DialComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LV_DialComponent.cpp; path = "../../Source/UI-Components/LV_DialComponent.cpp"; sourceTree = SOURCE_ROOT; };
 		49A3CF2F7B9D6371371FF73A /* LV_Label.h */ /* LV_Label.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_Label.h; path = ../../Source/Widgets/LV_Label.h; sourceTree = SOURCE_ROOT; };
 		4AF5E1C34FBC5F2BED290930 /* juce_audio_plugin_client */ /* juce_audio_plugin_client */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_plugin_client; path = /Users/land00m/Documents/GitHub/JUCE/modules/juce_audio_plugin_client; sourceTree = "<absolute>"; };
+		4C8A9E89ED9F95438ED69144 /* LV_PushButton.h */ /* LV_PushButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_PushButton.h; path = ../../Source/Widgets/LV_PushButton.h; sourceTree = SOURCE_ROOT; };
 		50AC070FADB17C23CEEDE24D /* LV_MenuComponent.h */ /* LV_MenuComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_MenuComponent.h; path = "../../Source/UI-Components/LV_MenuComponent.h"; sourceTree = SOURCE_ROOT; };
 		51FFA81CA9FB544473A5DDD1 /* IOKit.framework */ /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		5626BED659983E303E035599 /* LV_GroupComponent.h */ /* LV_GroupComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_GroupComponent.h; path = ../../Source/Widgets/LV_GroupComponent.h; sourceTree = SOURCE_ROOT; };
@@ -121,6 +123,7 @@
 		737CB965BA38A4E8BBF2029D /* StyleSheet.h */ /* StyleSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StyleSheet.h; path = ../../Source/Widgets/StyleSheet.h; sourceTree = SOURCE_ROOT; };
 		794CC0D5CF0D76C03DEDAFD7 /* pluginBackground2.png */ /* pluginBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pluginBackground2.png; path = ../../Source/Assets/pluginBackground2.png; sourceTree = SOURCE_ROOT; };
 		7DEBE1FB6BCCC6A38058AFE8 /* VST3 */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LV-Template.vst3"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EC0A879582377BCE597FB96 /* LV_PushButtonComponent.cpp */ /* LV_PushButtonComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LV_PushButtonComponent.cpp; path = "../../Source/UI-Components/LV_PushButtonComponent.cpp"; sourceTree = SOURCE_ROOT; };
 		7ED938D854A1D507E4B4DBE6 /* include_juce_audio_processors.mm */ /* include_juce_audio_processors.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_processors.mm; path = ../../JuceLibraryCode/include_juce_audio_processors.mm; sourceTree = SOURCE_ROOT; };
 		7F67CB07581BCE768623F634 /* AudioUnit.framework */ /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		82E6B475F3810E37F44B1034 /* Shared Code */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libLV-Template.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +151,7 @@
 		C3683ABA288AA375E57EE4F0 /* LV_Fader.h */ /* LV_Fader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_Fader.h; path = ../../Source/Widgets/LV_Fader.h; sourceTree = SOURCE_ROOT; };
 		C3D9059767581FE1C776EDBF /* include_juce_audio_plugin_client_Standalone.cpp */ /* include_juce_audio_plugin_client_Standalone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_Standalone.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp; sourceTree = SOURCE_ROOT; };
 		C4811EC2BFB022DEDD2AC9BA /* LV_LabelComponent.cpp */ /* LV_LabelComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LV_LabelComponent.cpp; path = "../../Source/UI-Components/LV_LabelComponent.cpp"; sourceTree = SOURCE_ROOT; };
+		C6048468EDDB85F229A3EF60 /* LV_PushButtonComponent.h */ /* LV_PushButtonComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_PushButtonComponent.h; path = "../../Source/UI-Components/LV_PushButtonComponent.h"; sourceTree = SOURCE_ROOT; };
 		C79D4DF9092D6964A00C3549 /* Standalone Plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LV-Template.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C93AEEECAB4D75BF2DB89177 /* landon55-03.png */ /* landon55-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "landon55-03.png"; path = "../../Source/Assets/landon55-03.png"; sourceTree = SOURCE_ROOT; };
 		CABD6961D87A350F24F7D22B /* Info-Standalone_Plugin.plist */ /* Info-Standalone_Plugin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Standalone_Plugin.plist"; path = "Info-Standalone_Plugin.plist"; sourceTree = SOURCE_ROOT; };
@@ -338,6 +342,8 @@
 				50AC070FADB17C23CEEDE24D,
 				AA73FD91E62091BCC2E62780,
 				20445275FFC0A93EEDA09ABC,
+				7EC0A879582377BCE597FB96,
+				C6048468EDDB85F229A3EF60,
 				A21272700AFAB0EAFC17067E,
 				902AF4761A71ABCEF658BB7D,
 			);
@@ -352,6 +358,7 @@
 				5626BED659983E303E035599,
 				49A3CF2F7B9D6371371FF73A,
 				9146147714A34AFF938C2A30,
+				4C8A9E89ED9F95438ED69144,
 				A84874C48845C6428BEDCE01,
 				D42001A3C4925CCA050339FE,
 				737CB965BA38A4E8BBF2029D,
@@ -706,6 +713,7 @@
 				2F213A8650E3A1B70B20EF53,
 				C90A54F37DFB02B5D5F7F063,
 				F432E1410A5C25EFB5AA9719,
+				A1A0867B74D26AA58D1049EB,
 				E0954B8B96FD68C4A1C33FD1,
 				23C67697621A7481F5310FD1,
 				E887C3F4AAE2930788A71879,

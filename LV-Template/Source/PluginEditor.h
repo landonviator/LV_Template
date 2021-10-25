@@ -17,6 +17,7 @@
 #include "UI-Components/LV_LabelComponent.h"
 #include "UI-Components/LV_MenuComponent.h"
 #include "UI-Components/LV_PowerToggle.h"
+#include "UI-Components/LV_PushButtonComponent.h"
 
 //==============================================================================
 /**
@@ -64,6 +65,9 @@ private:
     
     /** Power Toggle ==============================================================*/
     LV_PowerToggle demoPowerToggle;
+    
+    /** Push Toggle ===============================================================*/
+    LV_PushButtonComponent demoPushButton {"Button On"};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

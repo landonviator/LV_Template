@@ -26,7 +26,10 @@ void LVTemplateAudioProcessorEditor::uiResized(float width, float height)
     demoTitleBorder.setBounds(128, 100, demoFader.getWidth(), demoFader.getHeight() + 28);
     
     // Position demo menu
-    demoMenu.setBounds(demoDial.getX() + demoDial.getWidth(), demoDial.getY(), demoDial.getWidth(), demoMenu.getWidth() / 2.5);
+    demoMenu.setBounds(demoDial.getX() + demoDial.getWidth(), demoDial.getY(), 128, demoMenu.getWidth() / 2.5);
+    
+    // Position power toggle
+    demoPowerToggle.setBounds(demoMenu.getX() + demoMenu.getWidth() * 1.5, demoMenu.getY(), 32, 32);
     
     // Save plugin size in the tree
     saveWindowSize();

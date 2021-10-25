@@ -26,5 +26,9 @@ void LVTemplateAudioProcessorEditor::uiConstructor()
     demoDial.enableShadow(true);
     addAndMakeVisible(demoDial);
     
+    demoMenu.addItem("comp", 1);
     addAndMakeVisible(demoMenu);
+    
+    addAndMakeVisible(demoPowerToggle);
+    demoPowerToggle.setColour(juce::ToggleButton::tickColourId, juce::Colours::blue);
 }

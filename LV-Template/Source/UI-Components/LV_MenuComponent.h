@@ -24,6 +24,7 @@ public:
 
     void paint (juce::Graphics&) override;
     void resized() override;
+    void addItem(const juce::String &newItemText, int newItemId);
 
 private:
     

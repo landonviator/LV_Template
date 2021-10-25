@@ -32,3 +32,8 @@ void LV_MenuComponent::resized()
 {
     menu.setBounds(getLocalBounds());
 }
+
+void LV_MenuComponent::addItem(const juce::String &newItemText, int newItemId)
+{
+    menu.addItem(newItemText, newItemId);
+}

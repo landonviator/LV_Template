@@ -25,6 +25,10 @@
               file="Source/UI-Components/LV_MenuComponent.cpp"/>
         <FILE id="jV7q2I" name="LV_MenuComponent.h" compile="0" resource="0"
               file="Source/UI-Components/LV_MenuComponent.h"/>
+        <FILE id="PXNjCH" name="LV_PowerToggle.cpp" compile="1" resource="0"
+              file="Source/UI-Components/LV_PowerToggle.cpp"/>
+        <FILE id="lOXFSv" name="LV_PowerToggle.h" compile="0" resource="0"
+              file="Source/UI-Components/LV_PowerToggle.h"/>
         <FILE id="TT8FQb" name="LV_Window.cpp" compile="1" resource="0" file="Source/UI-Components/LV_Window.cpp"/>
         <FILE id="M5Ajq1" name="LV_Window.h" compile="0" resource="0" file="Source/UI-Components/LV_Window.h"/>
       </GROUP>

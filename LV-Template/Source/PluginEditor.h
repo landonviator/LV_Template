@@ -16,6 +16,7 @@
 #include "UI-Components/LV_GroupComponent.h"
 #include "UI-Components/LV_LabelComponent.h"
 #include "UI-Components/LV_MenuComponent.h"
+#include "UI-Components/LV_PowerToggle.h"
 
 //==============================================================================
 /**
@@ -50,7 +51,7 @@ private:
     LV_FaderComponent demoFader {" dB", -24.0, 24.0, 0.25, 0.0};
     
     /** Dial ======================================================================*/
-    LV_DialComponent demoDial {" dB", -24.0, 24.0, 0.25, 0.0, 1};
+    LV_DialComponent demoDial {" dB", -24.0, 24.0, 0.25, 0.0, 2};
     
     /** Title Border ==============================================================*/
     LV_GroupComponent demoTitleBorder {"Demo Title"};
@@ -59,7 +60,10 @@ private:
     LV_LabelComponent demoLabel {"Input", demoDial};
     
     /** Menu ======================================================================*/
-    LV_MenuComponent demoMenu {"Default Item"};
+    LV_MenuComponent demoMenu {"Default Preset"};
+    
+    /** Power Toggle ==============================================================*/
+    LV_PowerToggle demoPowerToggle;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

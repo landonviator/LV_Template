@@ -75,6 +75,7 @@
 		EEF6F7602C2A88D9E5C0E0A8 /* BinaryData.cpp */ = {isa = PBXBuildFile; fileRef = EA921E89B207FE6FE0F2C94C; };
 		F0329F30459CDE6DF5F4B005 /* AU */ = {isa = PBXBuildFile; fileRef = 869A55F3B611103C2E4A55D7; };
 		F245F657BE1B6CF1EC1EDA22 /* include_juce_gui_basics.mm */ = {isa = PBXBuildFile; fileRef = C289CFB2F381FD098F6B2E97; };
+		F432E1410A5C25EFB5AA9719 /* LV_PowerToggle.cpp */ = {isa = PBXBuildFile; fileRef = AA73FD91E62091BCC2E62780; };
 		F9BF9F67E9C157E3AAD401C2 /* include_juce_audio_basics.mm */ = {isa = PBXBuildFile; fileRef = 2070D621F2917CC740F9F8F5; };
 		FA8EDEB78FB31032E3F92A86 /* Foundation.framework */ = {isa = PBXBuildFile; fileRef = 391EF4A7D9986FDD5DCC07E6; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		1A1DA2C633A205CC5E059B49 /* juce_gui_basics */ /* juce_gui_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_basics; path = /Users/land00m/Documents/GitHub/JUCE/modules/juce_gui_basics; sourceTree = "<absolute>"; };
 		1E65DFD85C2DED764C357A28 /* juce_gui_extra */ /* juce_gui_extra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_extra; path = /Users/land00m/Documents/GitHub/JUCE/modules/juce_gui_extra; sourceTree = "<absolute>"; };
 		1E93D3DE4B5F4F79419A85D9 /* juce_graphics */ /* juce_graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_graphics; path = /Users/land00m/Documents/GitHub/JUCE/modules/juce_graphics; sourceTree = "<absolute>"; };
+		20445275FFC0A93EEDA09ABC /* LV_PowerToggle.h */ /* LV_PowerToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_PowerToggle.h; path = "../../Source/UI-Components/LV_PowerToggle.h"; sourceTree = SOURCE_ROOT; };
 		2070D621F2917CC740F9F8F5 /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		2104ED79E1464B8061BDB685 /* include_juce_graphics.mm */ /* include_juce_graphics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_graphics.mm; path = ../../JuceLibraryCode/include_juce_graphics.mm; sourceTree = SOURCE_ROOT; };
 		289EB6D679855C64022D1CA0 /* Info-VST3.plist */ /* Info-VST3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-VST3.plist"; path = "Info-VST3.plist"; sourceTree = SOURCE_ROOT; };
@@ -137,6 +139,7 @@
 		A531053764876C37C46BD1D7 /* AudioToolbox.framework */ /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A84874C48845C6428BEDCE01 /* LV_Toggle.h */ /* LV_Toggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_Toggle.h; path = ../../Source/Widgets/LV_Toggle.h; sourceTree = SOURCE_ROOT; };
 		AA43C4360A42188C7710C04F /* UI-Constructor.cpp */ /* UI-Constructor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "UI-Constructor.cpp"; path = "../../Source/UI-Methods/UI-Constructor.cpp"; sourceTree = SOURCE_ROOT; };
+		AA73FD91E62091BCC2E62780 /* LV_PowerToggle.cpp */ /* LV_PowerToggle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LV_PowerToggle.cpp; path = "../../Source/UI-Components/LV_PowerToggle.cpp"; sourceTree = SOURCE_ROOT; };
 		BAF19E914DD4E430F7FC81B9 /* LV_DialComponent.h */ /* LV_DialComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_DialComponent.h; path = "../../Source/UI-Components/LV_DialComponent.h"; sourceTree = SOURCE_ROOT; };
 		BB83F40FCC54BB482FF4D390 /* juce_audio_basics */ /* juce_audio_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_basics; path = /Users/land00m/Documents/GitHub/JUCE/modules/juce_audio_basics; sourceTree = "<absolute>"; };
 		C17E0C738B595FE04CB8DA4D /* CoreAudio.framework */ /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -333,6 +336,8 @@
 				9C0E32984D07EDB07295599B,
 				DE3018BB4A571876E93D0E92,
 				50AC070FADB17C23CEEDE24D,
+				AA73FD91E62091BCC2E62780,
+				20445275FFC0A93EEDA09ABC,
 				A21272700AFAB0EAFC17067E,
 				902AF4761A71ABCEF658BB7D,
 			);
@@ -700,6 +705,7 @@
 				81692C412DD56C06C23DE9E3,
 				2F213A8650E3A1B70B20EF53,
 				C90A54F37DFB02B5D5F7F063,
+				F432E1410A5C25EFB5AA9719,
 				E0954B8B96FD68C4A1C33FD1,
 				23C67697621A7481F5310FD1,
 				E887C3F4AAE2930788A71879,

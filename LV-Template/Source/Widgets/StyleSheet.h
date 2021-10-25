@@ -101,5 +101,21 @@ public:
     
 };
 
+class LV_CustomPowerToggleLAF : public LookAndFeel_V4
+{
+    
+public:
+
+    
+    void drawToggleButton(juce::Graphics &g,
+                                       juce::ToggleButton &toggleButton,
+                                       bool shouldDrawButtonAsHighlighted,
+                          bool shouldDrawButtonAsDown) override;
+    
+    
+private:
+    
+};
+
 
 }

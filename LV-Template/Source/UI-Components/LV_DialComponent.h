@@ -20,30 +20,49 @@
 //==============================================================================
 /*
 */
-class LV_DialComponent  : public juce::Component
+class LV_DialComponent  : public juce::Slider
 {
 public:
-    LV_DialComponent(juce::String suffix, double rangeStart, double rangeEnd, double intervalValue, double returnValue, int dialStyle);
+    LV_DialComponent(juce::String suffix,
+                     double rangeStart,
+                     double rangeEnd,
+                     double intervalValue,
+                     double returnValue,
+                     int dialStyle,
+                     juce::AudioProcessorValueTreeState& tree,
+                     juce::String parameter);
+    
     ~LV_DialComponent() override;
 
-    void paint (juce::Graphics&) override;
-    void resized() override;
-    void setColour(int colourID, juce::Colour newColour);
-    void enableShadow(bool enable);
     void setDialStyle(int dialStyle);
 
 private:
     
     /** Slider ================================================================*/
-    juce::LV_Dial dial;
+    juce::Slider dial;
     juce::LV_HardDialLAF hardDial;
     juce::LV_AlphaDialLAF alphaDial;
     juce::LV_CustomAbleDialLAF ableDial {false};
     
-    /** Fader shadow ==========================================================*/
+    /** Attachment ============================================================*/
+    using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
+    std::unique_ptr<SliderAttachment> dialAttach;
+    
+    /** Methods ================================================================*/
+    void paint (juce::Graphics&) override;
+    void resized() override;
+    void initAttach(juce::AudioProcessorValueTreeState& tree, juce::String parameter);
+    void initProps(juce::String suffix,
+                   double rangeStart,
+                   double rangeEnd,
+                   double intervalValue,
+                   double returnValue,
+                   int dialStyle);
+    
+    /** Fader shadow ===========================================================*/
     juce::DropShadow shadowProperties;
     juce::DropShadowEffect dialShadow;
-    void init_shadows();
+    void initShadows();
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LV_DialComponent)
 };

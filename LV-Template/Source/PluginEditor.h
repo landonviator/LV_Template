@@ -11,13 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "UI-Components/LV_Window.h"
-#include "UI-Components/LV_FaderComponent.h"
-#include "UI-Components/LV_DialComponent.h"
-#include "UI-Components/LV_GroupComponent.h"
-#include "UI-Components/LV_LabelComponent.h"
-#include "UI-Components/LV_MenuComponent.h"
-#include "UI-Components/LV_PowerToggle.h"
-#include "UI-Components/LV_PushButtonComponent.h"
+#include "DemoSliderBank.h"
 
 //==============================================================================
 /**
@@ -48,26 +42,10 @@ private:
     void saveWindowSize();
     bool constructorFinished {false};
     
-    /** Fader =====================================================================*/
-    LV_FaderComponent demoFader {" dB", -24.0, 24.0, 0.25, 0.0};
+    /** Test Sliders ==============================================================*/
+    DemoSliderBank sliders;
     
-    /** Dial ======================================================================*/
-    LV_DialComponent demoDial {" dB", -24.0, 24.0, 0.25, 0.0, 2};
     
-    /** Title Border ==============================================================*/
-    LV_GroupComponent demoTitleBorder {"Demo Title"};
-    
-    /** Label =====================================================================*/
-    LV_LabelComponent demoLabel {"Input", demoDial};
-    
-    /** Menu ======================================================================*/
-    LV_MenuComponent demoMenu {"Default Preset"};
-    
-    /** Power Toggle ==============================================================*/
-    LV_PowerToggle demoPowerToggle;
-    
-    /** Push Toggle ===============================================================*/
-    LV_PushButtonComponent demoPushButton {"Button On"};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

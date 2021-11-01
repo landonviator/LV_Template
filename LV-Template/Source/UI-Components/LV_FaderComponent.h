@@ -16,31 +16,49 @@
 #include <JuceHeader.h>
 #include "../Widgets/LV_Fader.h"
 #include "../Widgets/StyleSheet.h"
+#include "../Parameters/ParamDefs.h"
 
 //==============================================================================
 /*
 */
-class LV_FaderComponent  : public juce::Component
+class LV_FaderComponent  : public juce::Slider
 {
 public:
-    LV_FaderComponent(juce::String suffix, double rangeStart, double rangeEnd, double intervalValue, double returnValue);
+    LV_FaderComponent(
+                      juce::String suffix,
+                      double rangeStart,
+                      double rangeEnd,
+                      double intervalValue,
+                      double returnValue,
+                      juce::AudioProcessorValueTreeState& tree,
+                      juce::String parameter);
+    
     ~LV_FaderComponent() override;
-
-    void paint (juce::Graphics&) override;
-    void resized() override;
-    void setColour(int colourID, juce::Colour newColour);
-    void enableShadow(bool enable);
     
 private:
     
     /** Slider ================================================================*/
-    juce::LV_Fader slider;
+    juce::Slider slider;
     juce::LV_FaderLAF customFader;
     
-    /** Fader shadow ==========================================================*/
+    /** Attachment ============================================================*/
+    using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
+    std::unique_ptr<SliderAttachment> sliderAttach;
+    
+    /** Methods ===============================================================*/
+    void paint (juce::Graphics&) override;
+    void resized() override;
+    void initAttach(juce::AudioProcessorValueTreeState& tree, juce::String parameter);
+    void initProps(juce::String suffix,
+                   double rangeStart,
+                   double rangeEnd,
+                   double intervalValue,
+                   double returnValue);
+    
+    /** Fader shadow ===========================================================*/
     juce::DropShadow sliderShadowProperties;
     juce::DropShadowEffect sliderShadow;
-    void init_shadows();
+    void initShadows();
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LV_FaderComponent)
 };

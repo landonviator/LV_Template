@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "./Parameters/ParamDefs.h"
 
 //==============================================================================
 /**
@@ -72,7 +73,7 @@ public:
     /** Window Vars =====================================================*/
     float windowWidth {0.0f};
     float windowHeight {0.0f};
-
+    
 private:
     
     /** Parameters ======================================================*/

@@ -130,7 +130,7 @@ void LV_FaderLAF::drawLinearSlider (Graphics& g, int x, int y, int width, int he
         if (! isTwoVal)
         {
             Rectangle<float> thumbRec;
-            thumbRec.setSize(static_cast<float> (height / 3.0), static_cast<float> (height / 8.0));
+            thumbRec.setSize(static_cast<float> (height / 4.0), static_cast<float> (height / 10.0));
             
             g.setColour(slider.findColour(Slider::thumbColourId));
             g.fillRoundedRectangle(thumbRec.withCentre(isThreeVal ? thumbPoint : maxPoint), 4.0f);

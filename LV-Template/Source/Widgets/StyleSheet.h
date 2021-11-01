@@ -75,17 +75,17 @@ public:
                 float ry = centerY - radius;
                 float angle = rotaryStartAngle + (sliderPos * (rotaryEndAngle - rotaryStartAngle));
                 
-                juce::Rectangle<float> dialArea (rx, ry, diameter, diameter);
-                g.setColour(slider.findColour(Slider::thumbColourId)); //center
-                g.fillEllipse(dialArea);
-                
-                g.setColour(juce::Colours::black.brighter(0.5f).withAlpha(0.75f)); //outline
-                g.drawEllipse(rx, ry, diameter, diameter, 3.0f);
-                juce::Path dialTick;
-                g.setColour(juce::Colours::black.brighter(1.0f).withAlpha(0.75f)); //tick color
-                dialTick.addRectangle(0, -radius + 2, 3.0f, radius * 0.6);
-                g.fillPath(dialTick, juce::AffineTransform::rotation(angle).translated(centerX, centerY));
-            }
+        juce::Rectangle<float> dialArea (rx, ry, diameter, diameter);
+        g.setColour(slider.findColour(Slider::thumbColourId)); //center
+        g.fillEllipse(dialArea);
+        
+        g.setColour(juce::Colours::black.brighter(0.5f).withAlpha(1.0f)); //outline
+        g.drawEllipse(rx, ry, diameter, diameter, 3.0f);
+        juce::Path dialTick;
+        g.setColour(juce::Colours::black.brighter(1.0f).withAlpha(0.75f)); //tick color
+        dialTick.addRectangle(0, -radius + 2, 3.0f, radius * 0.6);
+        g.fillPath(dialTick, juce::AffineTransform::rotation(angle).translated(centerX, centerY));
+    }
 };
 
 

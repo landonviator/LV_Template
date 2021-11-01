@@ -4,6 +4,13 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
   <MAINGROUP id="kzQ9XS" name="LV-Template">
     <GROUP id="{1E4C0345-1395-B056-1E6D-178D9AAA9999}" name="Source">
+      <GROUP id="{F1476A80-C303-E975-F0C3-E3F610B8D3A5}" name="Parameters">
+        <FILE id="ADBlnO" name="ParamDefs.h" compile="0" resource="0" file="Source/Parameters/ParamDefs.h"/>
+      </GROUP>
+      <FILE id="vKeMfC" name="DemoSliderBank.cpp" compile="1" resource="0"
+            file="Source/DemoSliderBank.cpp"/>
+      <FILE id="vWEWUF" name="DemoSliderBank.h" compile="0" resource="0"
+            file="Source/DemoSliderBank.h"/>
       <GROUP id="{3DD0A1A6-7F71-0B05-9919-6CEB64452610}" name="UI-Components">
         <FILE id="MiRso7" name="LV_DialComponent.cpp" compile="1" resource="0"
               file="Source/UI-Components/LV_DialComponent.cpp"/>

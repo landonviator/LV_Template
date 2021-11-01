@@ -23,10 +23,14 @@ LVTemplateAudioProcessor::LVTemplateAudioProcessor()
 treeState (*this, nullptr, "PARAMETER", createParameterLayout())
 #endif
 {
+    treeState.addParameterListener (inputID, this);
+    treeState.addParameterListener (outputID, this);
 }
 
 LVTemplateAudioProcessor::~LVTemplateAudioProcessor()
 {
+    treeState.removeParameterListener (inputID, this);
+    treeState.removeParameterListener (outputID, this);
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::createParameterLayout()
@@ -36,8 +40,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
   // Make sure to update the number of reservations after adding params
   params.reserve(2);
 
-  auto pInput = std::make_unique<juce::AudioParameterFloat>("input", "Input", -24.0, 24.0, 0.0);
-  auto pOutput = std::make_unique<juce::AudioParameterFloat>("output", "Output", -24.0, 24.0, 0.0);
+  auto pInput = std::make_unique<juce::AudioParameterFloat>(inputID, inputName, -24.0, 24.0, 0.0);
+  auto pOutput = std::make_unique<juce::AudioParameterFloat>(outputID, outputName, -24.0, 24.0, 0.0);
   
   params.push_back(std::move(pInput));
   params.push_back(std::move(pOutput));
@@ -47,7 +51,15 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
 
 void LVTemplateAudioProcessor::parameterChanged(const juce::String &parameterID, float newValue)
 {
+    if (parameterID == inputID)
+    {
+        DBG("Input: " << newValue);
+    }
     
+    else
+    {
+        DBG("Output: " << newValue);
+    }
 }
 
 //==============================================================================
@@ -115,8 +127,6 @@ void LVTemplateAudioProcessor::changeProgramName (int index, const juce::String&
 //==============================================================================
 void LVTemplateAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
 }
 
 void LVTemplateAudioProcessor::releaseResources()

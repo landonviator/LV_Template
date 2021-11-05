@@ -45,6 +45,7 @@ void LV_Window::paintLogoAndLink(juce::Graphics &g)
 {
     // Logo layer
     footerLogo = juce::ImageCache::getFromMemory(BinaryData::landon5504_png, BinaryData::landon5504_pngSize);
+    footerLogo.multiplyAllAlphas(0.25f);
     
     // Draw and position the image
     g.drawImageWithin(footerLogo, width * 0.38, height * 0.8 + 4, width * 0.25, height * 0.1, juce::RectanglePlacement::centred);

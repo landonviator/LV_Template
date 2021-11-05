@@ -39,10 +39,11 @@ void DemoSliderBank::resized()
     auto topMargin = height * 0.2;
     auto sliderHeight = height * 0.5;
     auto sliderWidth = width * 0.08;
+    auto dialSize = width * 0.11;
     
     slider1.setBounds(leftMargin, topMargin, sliderWidth, sliderHeight);
         
-    slider2.setBounds(slider1.getX() + slider1.getWidth(), topMargin, sliderWidth, sliderHeight);
+    slider2.setBounds(slider1.getX() + slider1.getWidth(), topMargin, dialSize, dialSize);
 }
 
 void DemoSliderBank::setBoundsConstraints(float boundsWidth, float boundsHeight)

@@ -61,7 +61,11 @@
         <FILE id="Qna0ro" name="pluginBackground2.png" compile="0" resource="1"
               file="Source/Assets/pluginBackground2.png"/>
       </GROUP>
-      <GROUP id="{ED7AFB7F-1B2F-633E-3DF2-982150233326}" name="DSP"/>
+      <GROUP id="{ED7AFB7F-1B2F-633E-3DF2-982150233326}" name="DSP">
+        <FILE id="IY5PRn" name="LV_CircleMap.cpp" compile="1" resource="0"
+              file="Source/DSP/LV_CircleMap.cpp"/>
+        <FILE id="uv9kyg" name="LV_CircleMap.h" compile="0" resource="0" file="Source/DSP/LV_CircleMap.h"/>
+      </GROUP>
       <GROUP id="{2D743AC8-CC21-A100-D4D8-35C53692ABF7}" name="Widgets">
         <FILE id="NtZqxT" name="LV_Dial.h" compile="0" resource="0" file="Source/Widgets/LV_Dial.h"/>
         <FILE id="hvM8hq" name="LV_Fader.h" compile="0" resource="0" file="Source/Widgets/LV_Fader.h"/>

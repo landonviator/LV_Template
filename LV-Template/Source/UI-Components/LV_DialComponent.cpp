@@ -17,13 +17,12 @@ LV_DialComponent::LV_DialComponent(juce::String suffix,
                                    double rangeEnd,
                                    double intervalValue,
                                    double returnValue,
-                                   int dialStyle,
                                    juce::AudioProcessorValueTreeState& tree,
                                    juce::String parameter)
 {
     initShadows();
     initAttach(tree, parameter);
-    initProps(suffix, rangeStart, rangeEnd, intervalValue, returnValue, dialStyle);
+    initProps(suffix, rangeStart, rangeEnd, intervalValue, returnValue);
 
 }
 
@@ -49,27 +48,30 @@ void LV_DialComponent::initShadows()
     dialShadow.setShadowProperties (shadowProperties);
 }
 
-void LV_DialComponent::setDialStyle(int dialStyle)
+void LV_DialComponent::setDialStyle(DialStyle dialStyle)
 {
-    jassert(dialStyle < 4 && dialStyle > 0);
-    
     switch (dialStyle)
     {
-        case 1:
+        case DialStyle::kHardDial:
             dial.setLookAndFeel(&hardDial);
             break;
             
-        case 2:
+        case DialStyle::kAlphaDial:
             dial.setLookAndFeel(&alphaDial);
             break;
             
-        case 3:
+        case DialStyle::kAbleDial:
             dial.setLookAndFeel(&ableDial);
             break;
     }
 }
 
-void LV_DialComponent::initProps(juce::String suffix, double rangeStart, double rangeEnd, double intervalValue, double returnValue, int dialStyle)
+void LV_DialComponent::setColour(int colourID, juce::Colour newColour)
+{
+    dial.setColour(colourID, newColour);
+}
+
+void LV_DialComponent::initProps(juce::String suffix, double rangeStart, double rangeEnd, double intervalValue, double returnValue)
 {
     dial.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     dial.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 96, 32);
@@ -81,8 +83,6 @@ void LV_DialComponent::initProps(juce::String suffix, double rangeStart, double 
     dial.setRange(rangeStart, rangeEnd, intervalValue);
     dial.setDoubleClickReturnValue(true, returnValue);
     dial.setTextValueSuffix(suffix);
-    setDialStyle(dialStyle);
-    dial.setComponentEffect(&dialShadow);
     addAndMakeVisible(dial);
 }
 
@@ -90,4 +90,14 @@ void LV_DialComponent::initAttach(juce::AudioProcessorValueTreeState& tree, juce
 {
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     dialAttach = std::make_unique<SliderAttachment>(tree, parameter, dial);
+}
+
+void LV_DialComponent::enableShadow(bool enable)
+{
+    dial.setComponentEffect(nullptr);
+    
+    if (enable)
+    {
+        dial.setComponentEffect(&dialShadow);
+    }
 }

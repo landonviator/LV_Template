@@ -69,6 +69,7 @@
 		D31B5AC8DBCF80CE14492479 /* CoreMIDI.framework */ = {isa = PBXBuildFile; fileRef = 447A10B9860ED526EBD9AA44; };
 		D852275A35B78E040BFC9974 /* include_juce_gui_extra.mm */ = {isa = PBXBuildFile; fileRef = 9F6F2FB4D497605C107F5EF7; };
 		D9AE4BA2D3AE0592C10A42E4 /* Accelerate.framework */ = {isa = PBXBuildFile; fileRef = 5EF40E3471BE4B32E3A6FA5B; };
+		D9EE62A7618A94921227A806 /* LV_CircleMap.cpp */ = {isa = PBXBuildFile; fileRef = EC007E52C68518455AFC4F5F; };
 		DA26B17D768CAD899665209E /* include_juce_graphics.mm */ = {isa = PBXBuildFile; fileRef = 2104ED79E1464B8061BDB685; };
 		E0954B8B96FD68C4A1C33FD1 /* LV_Window.cpp */ = {isa = PBXBuildFile; fileRef = A21272700AFAB0EAFC17067E; };
 		E887C3F4AAE2930788A71879 /* UI-InitWindow.cpp */ = {isa = PBXBuildFile; fileRef = F44CB987D5372629D80908F2; };
@@ -94,6 +95,7 @@
 		20445275FFC0A93EEDA09ABC /* LV_PowerToggle.h */ /* LV_PowerToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_PowerToggle.h; path = "../../Source/UI-Components/LV_PowerToggle.h"; sourceTree = SOURCE_ROOT; };
 		2070D621F2917CC740F9F8F5 /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		2104ED79E1464B8061BDB685 /* include_juce_graphics.mm */ /* include_juce_graphics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_graphics.mm; path = ../../JuceLibraryCode/include_juce_graphics.mm; sourceTree = SOURCE_ROOT; };
+		25B34D21366CE3AD2C4CCC08 /* LV_CircleMap.h */ /* LV_CircleMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_CircleMap.h; path = ../../Source/DSP/LV_CircleMap.h; sourceTree = SOURCE_ROOT; };
 		289EB6D679855C64022D1CA0 /* Info-VST3.plist */ /* Info-VST3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-VST3.plist"; path = "Info-VST3.plist"; sourceTree = SOURCE_ROOT; };
 		28E986E69A159BE55ED2468D /* PluginProcessor.cpp */ /* PluginProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginProcessor.cpp; path = ../../Source/PluginProcessor.cpp; sourceTree = SOURCE_ROOT; };
 		2A61F486AD04E57693B9EC2E /* JuceHeader.h */ /* JuceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JuceHeader.h; path = ../../JuceLibraryCode/JuceHeader.h; sourceTree = SOURCE_ROOT; };
@@ -170,6 +172,7 @@
 		E04DD3788E8E077C29F77D11 /* DemoSliderBank.h */ /* DemoSliderBank.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DemoSliderBank.h; path = ../../Source/DemoSliderBank.h; sourceTree = SOURCE_ROOT; };
 		E585EB333BC63204E7732B84 /* include_juce_events.mm */ /* include_juce_events.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_events.mm; path = ../../JuceLibraryCode/include_juce_events.mm; sourceTree = SOURCE_ROOT; };
 		EA921E89B207FE6FE0F2C94C /* BinaryData.cpp */ /* BinaryData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryData.cpp; path = ../../JuceLibraryCode/BinaryData.cpp; sourceTree = SOURCE_ROOT; };
+		EC007E52C68518455AFC4F5F /* LV_CircleMap.cpp */ /* LV_CircleMap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LV_CircleMap.cpp; path = ../../Source/DSP/LV_CircleMap.cpp; sourceTree = SOURCE_ROOT; };
 		ED6B7BD226A5DD7E7C5B4AAC /* include_juce_core.mm */ /* include_juce_core.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_core.mm; path = ../../JuceLibraryCode/include_juce_core.mm; sourceTree = SOURCE_ROOT; };
 		EF21DA119E01424A765F00F3 /* JucePluginDefines.h */ /* JucePluginDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JucePluginDefines.h; path = ../../JuceLibraryCode/JucePluginDefines.h; sourceTree = SOURCE_ROOT; };
 		F08098B562971676C6EA4208 /* WebKit.framework */ /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -283,6 +286,15 @@
 				82E6B475F3810E37F44B1034,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		69787E3A1DC64A833580E215 /* DSP */ = {
+			isa = PBXGroup;
+			children = (
+				EC007E52C68518455AFC4F5F,
+				25B34D21366CE3AD2C4CCC08,
+			);
+			name = DSP;
 			sourceTree = "<group>";
 		};
 		713909CEAA970F82BCB10BC8 /* UI-Methods */ = {
@@ -428,6 +440,7 @@
 				BCA2EDC6DCA557C9EBB9ABDB,
 				713909CEAA970F82BCB10BC8,
 				F90565D3E65CADCE25F110C5,
+				69787E3A1DC64A833580E215,
 				C43AB0921385E7D11F648103,
 				28E986E69A159BE55ED2468D,
 				58FD49CF23FF1000D531768B,
@@ -736,6 +749,7 @@
 				8FF04CCFEF69A3E5C5284CC6,
 				ADFE7902372F387465DE7F76,
 				1E4214C14BB2F87653B0A822,
+				D9EE62A7618A94921227A806,
 				2EC953E2F4BEF6BB94AAB6C8,
 				A884F2E3B27ADD9890539DF6,
 				2BEAE01F6AD22E17A6F06A74,

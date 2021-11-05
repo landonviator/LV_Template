@@ -14,11 +14,14 @@
 
 //==============================================================================
 DemoSliderBank::DemoSliderBank(juce::AudioProcessorValueTreeState& tree) :
-slider1(" dB", -24.0, 24.0, 0.1, 0.0, tree, inputID),
-slider2(" dB", -24.0, 24.0, 0.1, 0.0, 1, tree, outputID)
+slider1(" dB", 0.0, 5.0, 0.1, 0.0, tree, inputID),
+slider2(" dB", 0.0, 100.0, 1.0, 0.0, tree, outputID)
 {
     addAndMakeVisible(slider1);
+    
     addAndMakeVisible(slider2);
+    slider2.setDialStyle(LV_DialComponent::DialStyle::kHardDial);
+    slider2.enableShadow(true);
 }
 
 DemoSliderBank::~DemoSliderBank()

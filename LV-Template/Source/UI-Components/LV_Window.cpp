@@ -59,7 +59,7 @@ void LV_Window::paintText(juce::Graphics &g)
 {
     // Plugin text
     g.setColour (juce::Colours::whitesmoke.withAlpha(0.125f));
-    g.setFont(width * 0.015);
+    g.setFont(juce::Font ("Helvetica", width * 0.015, juce::Font::FontStyleFlags::plain));
     g.drawFittedText ("Plugin v1.0.0", width * 0.12, height * 0.12, width, height, juce::Justification::topLeft, 1);
 }
 

@@ -86,6 +86,34 @@ public:
         dialTick.addRectangle(0, -radius + 2, 3.0f, radius * 0.6);
         g.fillPath(dialTick, juce::AffineTransform::rotation(angle).translated(centerX, centerY));
     }
+    
+    void drawLabel (Graphics& g, Label& label) override
+    {
+        g.fillAll (label.findColour (Label::backgroundColourId));
+
+        if (! label.isBeingEdited())
+        {
+            auto alpha = label.isEnabled() ? 1.0f : 0.5f;
+            const Font font (juce::Font ("Helvetica", 12.0f, juce::Font::FontStyleFlags::plain));
+
+            g.setColour (label.findColour (Label::textColourId).withMultipliedAlpha (alpha));
+            g.setFont (font);
+
+            auto textArea = getLabelBorderSize (label).subtractedFrom (label.getLocalBounds());
+
+            g.drawFittedText (label.getText(), textArea, label.getJustificationType(),
+                              jmax (1, (int) ((float) textArea.getHeight() / font.getHeight())),
+                              label.getMinimumHorizontalScale());
+
+            g.setColour (label.findColour (Label::outlineColourId).withMultipliedAlpha (alpha));
+        }
+        else if (label.isEnabled())
+        {
+            g.setColour (label.findColour (Label::outlineColourId));
+        }
+
+        g.drawRect (label.getLocalBounds());
+    }
 };
 
 
@@ -98,6 +126,8 @@ public:
                                            float minSliderPos,
                                            float maxSliderPos,
                                                      const Slider::SliderStyle style, Slider& slider) override;
+    
+    void drawLabel(Graphics &g, Label &label) override;
     
 };
 

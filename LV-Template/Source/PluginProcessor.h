@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "./Parameters/ParamDefs.h"
+#include "./DSP/LV_CircleMap.h"
 
 //==============================================================================
 /**
@@ -75,6 +76,8 @@ public:
     float windowHeight {0.0f};
     
 private:
+    
+    LV_CircleMap logisticMapModule;
     
     /** Parameters ======================================================*/
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();

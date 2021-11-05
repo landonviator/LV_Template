@@ -28,13 +28,21 @@ public:
                      double rangeEnd,
                      double intervalValue,
                      double returnValue,
-                     int dialStyle,
                      juce::AudioProcessorValueTreeState& tree,
                      juce::String parameter);
     
     ~LV_DialComponent() override;
 
-    void setDialStyle(int dialStyle);
+    enum class DialStyle
+    {
+        kHardDial,
+        kAlphaDial,
+        kAbleDial
+    };
+    
+    void setDialStyle(DialStyle dialStyle);
+    void setColour(int colourID, juce::Colour newColour);
+    void enableShadow(bool enable);
 
 private:
     
@@ -56,8 +64,7 @@ private:
                    double rangeStart,
                    double rangeEnd,
                    double intervalValue,
-                   double returnValue,
-                   int dialStyle);
+                   double returnValue);
     
     /** Fader shadow ===========================================================*/
     juce::DropShadow shadowProperties;

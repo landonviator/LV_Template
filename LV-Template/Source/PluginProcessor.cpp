@@ -40,8 +40,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
   // Make sure to update the number of reservations after adding params
   params.reserve(2);
 
-  auto pInput = std::make_unique<juce::AudioParameterFloat>(inputID, inputName, -24.0, 24.0, 0.0);
-  auto pOutput = std::make_unique<juce::AudioParameterFloat>(outputID, outputName, -24.0, 24.0, 0.0);
+  auto pInput = std::make_unique<juce::AudioParameterFloat>(inputID, inputName, 0.0, 5.0, 0.0);
+  auto pOutput = std::make_unique<juce::AudioParameterFloat>(outputID, outputName, 0.0, 100.0, 0.0);
   
   params.push_back(std::move(pInput));
   params.push_back(std::move(pOutput));
@@ -53,12 +53,12 @@ void LVTemplateAudioProcessor::parameterChanged(const juce::String &parameterID,
 {
     if (parameterID == inputID)
     {
-        DBG("Input: " << newValue);
+        logisticMapModule.setParameter(LV_CircleMap::ParameterId::kDrive, newValue);
     }
     
     else
     {
-        DBG("Output: " << newValue);
+        logisticMapModule.setParameter(LV_CircleMap::ParameterId::kMix, newValue);
     }
 }
 
@@ -127,6 +127,15 @@ void LVTemplateAudioProcessor::changeProgramName (int index, const juce::String&
 //==============================================================================
 void LVTemplateAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    juce::dsp::ProcessSpec spec;
+    spec.maximumBlockSize = samplesPerBlock;
+    spec.sampleRate = sampleRate;
+    spec.numChannels = getTotalNumOutputChannels();
+    
+    logisticMapModule.prepare(spec);
+    
+    logisticMapModule.setParameter(LV_CircleMap::ParameterId::kDrive, 0.0);
+    logisticMapModule.setParameter(LV_CircleMap::ParameterId::kMix, 0.0);
 }
 
 void LVTemplateAudioProcessor::releaseResources()
@@ -170,10 +179,9 @@ void LVTemplateAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
-    }
+    juce::dsp::AudioBlock<float> audioBlock {buffer};
+    
+    logisticMapModule.processBlock(audioBlock);
 }
 
 //==============================================================================

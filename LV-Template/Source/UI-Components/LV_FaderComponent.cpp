@@ -53,6 +53,7 @@ void LV_FaderComponent::initProps(juce::String suffix, double rangeStart, double
     slider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::black.withAlpha(0.0f));
     slider.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
     slider.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
+    slider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(1.0));
     slider.setRange(rangeStart, rangeEnd, intervalValue);
     slider.setDoubleClickReturnValue(true, returnValue);
     slider.setTextValueSuffix(suffix);

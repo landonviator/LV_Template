@@ -16,14 +16,11 @@
 //==============================================================================
 /*
 */
-class LV_LabelComponent  : public juce::Component
+class LV_LabelComponent  : public juce::Label
 {
 public:
     LV_LabelComponent(juce::String name, juce::Component &component);
     ~LV_LabelComponent() override;
-
-    void paint (juce::Graphics&) override;
-    void resized() override;
 
 private:
     

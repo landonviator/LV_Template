@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "./Parameters/ParamDefs.h"
 #include "./DSP/LV_CircleMap.h"
+#include "./DSP/LV_SplitDistortion.h"
 
 //==============================================================================
 /**
@@ -78,6 +79,7 @@ public:
 private:
     
     LV_CircleMap logisticMapModule;
+    LV_SplitDistortion splitDistortionModule;
     
     /** Parameters ======================================================*/
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();

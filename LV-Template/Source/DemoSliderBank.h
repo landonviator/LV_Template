@@ -33,6 +33,7 @@ private:
     
     /** Sliders =====================================================*/
     LV_FaderComponent slider1;
+    LV_FaderComponent slider3;
     LV_DialComponent slider2;
     
     float width;

@@ -14,10 +14,15 @@
 
 //==============================================================================
 DemoSliderBank::DemoSliderBank(juce::AudioProcessorValueTreeState& tree) :
-slider1(" dB", 0.0, 5.0, 0.1, 0.0, tree, inputID),
+slider1(" dB", 0.0, 12.0, 0.1, 0.0, tree, inputID),
+slider3(" Hz", 20.0, 20000.0, 1.0, 1000.0, tree, drive2ID),
 slider2(" dB", 0.0, 100.0, 1.0, 0.0, tree, outputID)
 {
-    addAndMakeVisible(slider1);
+    //addAndMakeVisible(slider1);
+    
+    //addAndMakeVisible(slider3);
+    slider3.setRange(20.0, 20000.0, 1.0);
+    slider3.setSkewFactorFromMidPoint(1000.0);
     
     addAndMakeVisible(slider2);
     slider2.setDialStyle(LV_DialComponent::DialStyle::kHardDial);
@@ -36,14 +41,14 @@ void DemoSliderBank::paint (juce::Graphics& g)
 void DemoSliderBank::resized()
 {
     auto leftMargin = width * 0.1;
-    auto topMargin = height * 0.2;
+    auto topMargin = height * 0.05;
     auto sliderHeight = height * 0.5;
     auto sliderWidth = width * 0.08;
-    auto dialSize = width * 0.11;
+    auto dialSize = width * 0.13;
     
     slider1.setBounds(leftMargin, topMargin, sliderWidth, sliderHeight);
-        
-    slider2.setBounds(slider1.getX() + slider1.getWidth(), topMargin, dialSize, dialSize);
+    slider3.setBounds(slider1.getX() + slider1.getWidth(), topMargin, sliderWidth, sliderHeight);
+    slider2.setBounds(slider3.getX() + slider3.getWidth(), topMargin, dialSize, dialSize);
 }
 
 void DemoSliderBank::setBoundsConstraints(float boundsWidth, float boundsHeight)

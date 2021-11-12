@@ -22,11 +22,3 @@ LV_LabelComponent::LV_LabelComponent(juce::String name, juce::Component &compone
 LV_LabelComponent::~LV_LabelComponent()
 {
 }
-
-void LV_LabelComponent::paint (juce::Graphics& g)
-{
-}
-
-void LV_LabelComponent::resized()
-{
-}

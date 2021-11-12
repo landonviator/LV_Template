@@ -20,8 +20,14 @@ namespace BinaryData
     extern const char*   pluginBackground2_png;
     const int            pluginBackground2_pngSize = 2893608;
 
+    extern const char*   testTexture_png;
+    const int            testTexture_pngSize = 3965203;
+
+    extern const char*   TEXTURE5_png;
+    const int            TEXTURE5_pngSize = 3515887;
+
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 4;
+    const int namedResourceListSize = 6;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

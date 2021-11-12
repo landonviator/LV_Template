@@ -71,8 +71,15 @@ namespace juce
 
     void LV_CustomAbleDialLAF::setDialIsStereoDial(bool isStereoDial)
     {
-        if (isStereoDial) stereoDialScalar = 1.67;
-        else { stereoDialScalar = 1.0;}
+        if (isStereoDial)
+        {
+            stereoDialScalar = 1.67;
+        }
+        
+        else
+        {
+            stereoDialScalar = 1.0;
+        }
     }
 
 /** Alpha Dial Style ====================================================================*/
@@ -127,6 +134,7 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
 
         g.setColour (label.findColour (Label::outlineColourId).withMultipliedAlpha (alpha));
     }
+    
     else if (label.isEnabled())
     {
         g.setColour (label.findColour (Label::outlineColourId));
@@ -146,24 +154,23 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
                                           float rotaryEndAngle,
                                           Slider &slider)
     {
-        
         float diameter = fmin(width, height) * .9;
-                float radius = diameter * 0.5;
-                float centerX = x + width * 0.5;
-                float centerY = y + height * 0.5;
-                float rx = centerX - radius;
-                float ry = centerY - radius;
-                float angle = rotaryStartAngle + (sliderPos * (rotaryEndAngle - rotaryStartAngle));
+        float radius = diameter * 0.5;
+        float centerX = x + width * 0.5;
+        float centerY = y + height * 0.5;
+        float rx = centerX - radius;
+        float ry = centerY - radius;
+        float angle = rotaryStartAngle + (sliderPos * (rotaryEndAngle - rotaryStartAngle));
                 
         juce::Rectangle<float> dialArea (rx, ry, diameter, diameter);
-        g.setColour(slider.findColour(Slider::thumbColourId)); //center
+        g.setColour(slider.findColour(Slider::thumbColourId).withAlpha(0.7f)); //center
         g.fillEllipse(dialArea);
         
-        g.setColour(juce::Colours::black.brighter(0.5f).withAlpha(1.0f)); //outline
-        g.drawEllipse(rx, ry, diameter, diameter, 3.0f);
+        g.setColour(juce::Colours::whitesmoke.darker(1.75f).withAlpha(0.7f)); //outline
+        g.drawEllipse(rx, ry, diameter, diameter, 4.0f);
         juce::Path dialTick;
-        g.setColour(juce::Colours::black.brighter(1.0f).withAlpha(0.75f)); //tick color
-        dialTick.addRectangle(0, -radius + 2, 3.0f, radius * 0.6);
+        g.setColour(juce::Colours::whitesmoke.darker(1.75f).withAlpha(0.7f)); //tick color
+        dialTick.addRectangle(0, -radius + 2, 4.0f, radius * 0.6);
         g.fillPath(dialTick, juce::AffineTransform::rotation(angle).translated(centerX, centerY));
     }
 
@@ -187,6 +194,7 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
 
             g.setColour (label.findColour (Label::outlineColourId).withMultipliedAlpha (alpha));
         }
+        
         else if (label.isEnabled())
         {
             g.setColour (label.findColour (Label::outlineColourId));

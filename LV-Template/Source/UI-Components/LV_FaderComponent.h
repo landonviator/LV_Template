@@ -15,6 +15,7 @@
 
 #include <JuceHeader.h>
 #include "../Widgets/LV_Fader.h"
+#include "../Widgets/LV_Label.h"
 #include "../Widgets/StyleSheet.h"
 #include "../Parameters/ParamDefs.h"
 
@@ -49,7 +50,8 @@ private:
     void paint (juce::Graphics&) override;
     void resized() override;
     void initAttach(juce::AudioProcessorValueTreeState& tree, juce::String parameter);
-    void initProps(juce::String suffix,
+    void initProps(
+                   juce::String suffix,
                    double rangeStart,
                    double rangeEnd,
                    double intervalValue,

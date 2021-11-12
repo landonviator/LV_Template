@@ -24,12 +24,14 @@ treeState (*this, nullptr, "PARAMETER", createParameterLayout())
 #endif
 {
     treeState.addParameterListener (inputID, this);
+    treeState.addParameterListener (drive2ID, this);
     treeState.addParameterListener (outputID, this);
 }
 
 LVTemplateAudioProcessor::~LVTemplateAudioProcessor()
 {
     treeState.removeParameterListener (inputID, this);
+    treeState.removeParameterListener (drive2ID, this);
     treeState.removeParameterListener (outputID, this);
 }
 
@@ -38,12 +40,14 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
   std::vector <std::unique_ptr<juce::RangedAudioParameter>> params;
 
   // Make sure to update the number of reservations after adding params
-  params.reserve(2);
+  params.reserve(3);
 
-  auto pInput = std::make_unique<juce::AudioParameterFloat>(inputID, inputName, 0.0, 5.0, 0.0);
-  auto pOutput = std::make_unique<juce::AudioParameterFloat>(outputID, outputName, 0.0, 100.0, 0.0);
+  auto pInput = std::make_unique<juce::AudioParameterFloat>(inputID, inputName, 0.0, 12.0, 0.0);
+  auto pDrive2 = std::make_unique<juce::AudioParameterFloat>(drive2ID, drive2Name, 20.0, 20000.0, 2500.0);
+  auto pOutput = std::make_unique<juce::AudioParameterFloat>(outputID, outputName, 0.0, 100.0, 100.0);
   
   params.push_back(std::move(pInput));
+  params.push_back(std::move(pDrive2));
   params.push_back(std::move(pOutput));
 
   return { params.begin(), params.end() };
@@ -53,12 +57,17 @@ void LVTemplateAudioProcessor::parameterChanged(const juce::String &parameterID,
 {
     if (parameterID == inputID)
     {
-        logisticMapModule.setParameter(LV_CircleMap::ParameterId::kDrive, newValue);
+        splitDistortionModule.setParameter(LV_SplitDistortion::ParameterId::kDrive, newValue);
+    }
+    
+    else if (parameterID == drive2ID)
+    {
+        splitDistortionModule.setParameter(LV_SplitDistortion::ParameterId::kCutoff, newValue);
     }
     
     else
     {
-        logisticMapModule.setParameter(LV_CircleMap::ParameterId::kMix, newValue);
+        splitDistortionModule.setParameter(LV_SplitDistortion::ParameterId::kWet, newValue);
     }
 }
 
@@ -132,10 +141,7 @@ void LVTemplateAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     spec.sampleRate = sampleRate;
     spec.numChannels = getTotalNumOutputChannels();
     
-    logisticMapModule.prepare(spec);
-    
-    logisticMapModule.setParameter(LV_CircleMap::ParameterId::kDrive, 0.0);
-    logisticMapModule.setParameter(LV_CircleMap::ParameterId::kMix, 0.0);
+    splitDistortionModule.prepare(spec);
 }
 
 void LVTemplateAudioProcessor::releaseResources()
@@ -181,7 +187,7 @@ void LVTemplateAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
 
     juce::dsp::AudioBlock<float> audioBlock {buffer};
     
-    logisticMapModule.processBlock(audioBlock);
+    splitDistortionModule.processBlock(audioBlock);
 }
 
 //==============================================================================

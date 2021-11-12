@@ -35,7 +35,7 @@ void LV_Window::resized()
 void LV_Window::paintBackground(juce::Graphics &g)
 {
     //Image layer from Illustrator
-    pluginBackground = juce::ImageCache::getFromMemory(BinaryData::pluginBackground2_png, BinaryData::pluginBackground2_pngSize);
+    pluginBackground = juce::ImageCache::getFromMemory(BinaryData::testTexture_png, BinaryData::testTexture_pngSize);
     
     // Draw and position the image
     g.drawImageWithin(pluginBackground, 0, 0, width, height, juce::RectanglePlacement::stretchToFit);
@@ -48,12 +48,12 @@ void LV_Window::paintLogoAndLink(juce::Graphics &g)
     footerLogo.multiplyAllAlphas(0.25f);
     
     // Draw and position the image
-    g.drawImageWithin(footerLogo, width * 0.38, height * 0.8 + 4, width * 0.25, height * 0.1, juce::RectanglePlacement::centred);
+    g.drawImageWithin(footerLogo, width * 0.38, height * 0.9, width * 0.25, height * 0.1, juce::RectanglePlacement::centred);
     
     // Patreon link
     mWebLink.setURL(mWebUrl);
     addAndMakeVisible(mWebLink);
-    mWebLink.setBounds(width * 0.38, height * 0.8 + 4, width * 0.25, height * 0.1);
+    mWebLink.setBounds(width * 0.38, height * 0.9, width * 0.25, height * 0.1);
 }
 
 void LV_Window::paintText(juce::Graphics &g)
@@ -61,7 +61,7 @@ void LV_Window::paintText(juce::Graphics &g)
     // Plugin text
     g.setColour (juce::Colours::whitesmoke.withAlpha(0.125f));
     g.setFont(juce::Font ("Helvetica", width * 0.015, juce::Font::FontStyleFlags::plain));
-    g.drawFittedText ("Plugin v1.0.0", width * 0.12, height * 0.12, width, height, juce::Justification::topLeft, 1);
+    g.drawFittedText ("Plugin v1.0.0", width * 0.01, height * 0.02, width, height, juce::Justification::topLeft, 1);
 }
 
 void LV_Window::setWidthAndHeight(float w, float h)

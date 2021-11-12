@@ -13,5 +13,8 @@
 #define inputID "input"
 #define inputName "Input"
 
+#define drive2ID "drive 2"
+#define drive2Name "Drive 2"
+
 #define outputID "output"
 #define outputName "Output"

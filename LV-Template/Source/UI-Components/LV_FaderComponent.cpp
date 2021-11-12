@@ -2,7 +2,8 @@
 #include "LV_FaderComponent.h"
 
 //==============================================================================
-LV_FaderComponent::LV_FaderComponent(juce::String suffix,
+LV_FaderComponent::LV_FaderComponent(
+                                     juce::String suffix,
                                      double rangeStart,
                                      double rangeEnd,
                                      double intervalValue,
@@ -23,7 +24,6 @@ LV_FaderComponent::~LV_FaderComponent()
 
 void LV_FaderComponent::paint (juce::Graphics& g)
 {
-
 }
 
 void LV_FaderComponent::resized()

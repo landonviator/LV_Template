@@ -20,12 +20,12 @@ void LVTemplateAudioProcessorEditor::initWindow()
     
     // Plugin window will always initialize to half the screen width by half of that for a rectangle
     auto width = x / 2.0;
-    auto height = width / 2.0;
+    auto height = width / 1.77778;
     
     //Making the window resizable by aspect ratio and setting size
     AudioProcessorEditor::setResizable(true, true);
     AudioProcessorEditor::setResizeLimits(width * 0.75, height * 0.75, width * 1.25, height * 1.25);
-    AudioProcessorEditor::getConstrainer()->setFixedAspectRatio(2.0);
+    AudioProcessorEditor::getConstrainer()->setFixedAspectRatio(1.77778);
     
     if (audioProcessor.windowWidth != 0.0)
     {

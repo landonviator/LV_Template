@@ -12,6 +12,7 @@
 #include "LV_PowerToggle.h"
 
 //==============================================================================
+namespace juce {
 LV_PowerToggle::LV_PowerToggle()
 {
     addAndMakeVisible(powerToggle);
@@ -23,7 +24,7 @@ LV_PowerToggle::~LV_PowerToggle()
     powerToggle.setLookAndFeel(nullptr);
 }
 
-void LV_PowerToggle::paint (juce::Graphics& g)
+void LV_PowerToggle::paint (Graphics& g)
 {
 
 }
@@ -33,7 +34,8 @@ void LV_PowerToggle::resized()
     powerToggle.setBounds(getLocalBounds());
 }
 
-void LV_PowerToggle::setColour(int colourID, juce::Colour newColour)
+void LV_PowerToggle::setColour(int colourID, Colour newColour)
 {
     powerToggle.setColour(colourID, newColour);
+}
 }

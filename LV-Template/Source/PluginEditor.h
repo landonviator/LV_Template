@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "UI-Components/LV_Window.h"
 #include "UI-Components/LV_PowerToggle.h"
+#include "Widgets/LV_PhaseToggle.h"
 #include "DemoSliderBank.h"
 
 //==============================================================================
@@ -46,7 +47,8 @@ private:
     /** Test Sliders ==============================================================*/
     DemoSliderBank sliders;
     
-    LV_PowerToggle phaseButton;
+    juce::LV_PowerToggle phaseButton;
+    juce::LV_PhaseToggle toggle2 {};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

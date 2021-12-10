@@ -82,7 +82,8 @@
         <FILE id="BTAG51" name="LV_Label.h" compile="0" resource="0" file="Source/Widgets/LV_Label.h"/>
         <FILE id="wrRqEe" name="LV_Menu.h" compile="0" resource="0" file="Source/Widgets/LV_Menu.h"/>
         <FILE id="v8hutJ" name="LV_PushButton.h" compile="0" resource="0" file="Source/Widgets/LV_PushButton.h"/>
-        <FILE id="MDKqtV" name="LV_Toggle.h" compile="0" resource="0" file="Source/Widgets/LV_Toggle.h"/>
+        <FILE id="MDKqtV" name="LV_PhaseToggle.h" compile="0" resource="0"
+              file="Source/Widgets/LV_PhaseToggle.h"/>
         <FILE id="xxs2hz" name="StyleSheet.cpp" compile="1" resource="0" file="Source/Widgets/StyleSheet.cpp"/>
         <FILE id="sqgtgW" name="StyleSheet.h" compile="0" resource="0" file="Source/Widgets/StyleSheet.h"/>
       </GROUP>

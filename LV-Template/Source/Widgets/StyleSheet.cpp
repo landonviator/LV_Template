@@ -335,12 +335,12 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
 
     /** Toggle Styles ====================================================================*/
 
-    void LV_CustomPowerToggleLAF::drawToggleButton(juce::Graphics &g,
+    void LV_CustomToggleLAF::drawToggleButton(juce::Graphics &g,
                                                    juce::ToggleButton &toggleButton,
                                                    bool shouldDrawButtonAsHighlighted,
                                                    bool shouldDrawButtonAsDown)
     {
-        Path powerButton;
+        Path button;
                 
         auto bounds = toggleButton.getLocalBounds();
                 
@@ -350,9 +350,35 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
         float ang = 30.f;
                 
         size -= 9;
+        
+//        switch (toggleStyle)
+//        {
+//            case ToggleStyle::kPhaseToggle :
+//            {
+                button.startNewSubPath(r.getX(), r.getY() + r.getHeight());
+                button.lineTo(r.getX() + r.getWidth(), r.getY());
+//            } break;
+//
+//            case ToggleStyle::kPowerToggle :
+//            {
+//                button.addCentredArc(r.getCentreX(),
+//                                            r.getCentreY(),
+//                                            size * 0.5,
+//                                            size * 0.5,
+//                                            0.f,
+//                                            degreesToRadians(ang),
+//                                            degreesToRadians(360.f - ang),
+//                                            true);
+//
+//                button.startNewSubPath(r.getCentreX(), r.getY());
+//                button.lineTo(r.getCentre());
+//            } break;
+//
+//            case ToggleStyle::kGenericToggle :
+//            {
+//            } break;
+//        }
 
-        powerButton.startNewSubPath(r.getX(), r.getY() + r.getHeight());
-        powerButton.lineTo(r.getX() + r.getWidth(), r.getY());
                 
         PathStrokeType pst(2.0f, PathStrokeType::JointStyle::curved);
                 
@@ -360,7 +386,7 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
         toggleButton.getToggleState() ? toggleButton.findColour(juce::ToggleButton::tickDisabledColourId) : toggleButton.findColour(juce::ToggleButton::tickColourId);
                 
         g.setColour(color);
-        g.strokePath(powerButton, pst);
+        g.strokePath(button, pst);
         g.drawEllipse(r, 2);
     }
 }

@@ -97,14 +97,25 @@ namespace juce
         
     };
 
-    class LV_CustomPowerToggleLAF : public LookAndFeel_V4
+    class LV_CustomToggleLAF : public LookAndFeel_V4
     {
         
     public:
+        
         
         void drawToggleButton(juce::Graphics &g,
                               juce::ToggleButton &toggleButton,
                               bool shouldDrawButtonAsHighlighted,
                               bool shouldDrawButtonAsDown) override;
+//        enum class ToggleStyle
+//        {
+//            kPowerToggle,
+//            kPhaseToggle,
+//            kGenericToggle
+//        };
+        
+    private:
+        
+        //ToggleStyle toggleStyle;
     };
 }

@@ -18,4 +18,7 @@ void LVTemplateAudioProcessorEditor::uiConstructor()
     // Window
     initWindow();
     
+    addAndMakeVisible(phaseButton);
+    phaseButton.setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::dimgrey);
+    phaseButton.setColour(juce::ToggleButton::tickColourId, juce::Colours::springgreen);
 }

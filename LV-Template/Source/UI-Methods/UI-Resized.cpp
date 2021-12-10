@@ -19,6 +19,8 @@ void LVTemplateAudioProcessorEditor::uiResized(float width, float height)
     sliders.setBoundsConstraints(width, height);
     sliders.setBounds(getLocalBounds());
     
+    phaseButton.setBounds(300, 300, 32, 32);
+    
     // Save plugin size in the tree
     saveWindowSize();
 }

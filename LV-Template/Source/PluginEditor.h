@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "UI-Components/LV_Window.h"
+#include "UI-Components/LV_PowerToggle.h"
 #include "DemoSliderBank.h"
 
 //==============================================================================
@@ -45,7 +46,7 @@ private:
     /** Test Sliders ==============================================================*/
     DemoSliderBank sliders;
     
-    
+    LV_PowerToggle phaseButton;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

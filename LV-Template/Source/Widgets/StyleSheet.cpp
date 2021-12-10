@@ -350,22 +350,14 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
         float ang = 30.f;
                 
         size -= 9;
-                
-        powerButton.addCentredArc(r.getCentreX(),
-                                    r.getCentreY(),
-                                    size * 0.5,
-                                    size * 0.5,
-                                    0.f,
-                                    degreesToRadians(ang),
-                                    degreesToRadians(360.f - ang),
-                                    true);
-                
-        powerButton.startNewSubPath(r.getCentreX(), r.getY());
-        powerButton.lineTo(r.getCentre());
+
+        powerButton.startNewSubPath(r.getX(), r.getY() + r.getHeight());
+        powerButton.lineTo(r.getX() + r.getWidth(), r.getY());
                 
         PathStrokeType pst(2.0f, PathStrokeType::JointStyle::curved);
                 
-        auto color = toggleButton.getToggleState() ? Colours::dimgrey : toggleButton.findColour(juce::ToggleButton::tickColourId);
+        auto color =
+        toggleButton.getToggleState() ? toggleButton.findColour(juce::ToggleButton::tickDisabledColourId) : toggleButton.findColour(juce::ToggleButton::tickColourId);
                 
         g.setColour(color);
         g.strokePath(powerButton, pst);

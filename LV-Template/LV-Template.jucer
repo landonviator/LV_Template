@@ -7,39 +7,7 @@
       <GROUP id="{F1476A80-C303-E975-F0C3-E3F610B8D3A5}" name="Parameters">
         <FILE id="ADBlnO" name="ParamDefs.h" compile="0" resource="0" file="Source/Parameters/ParamDefs.h"/>
       </GROUP>
-      <FILE id="vKeMfC" name="DemoSliderBank.cpp" compile="1" resource="0"
-            file="Source/DemoSliderBank.cpp"/>
-      <FILE id="vWEWUF" name="DemoSliderBank.h" compile="0" resource="0"
-            file="Source/DemoSliderBank.h"/>
       <GROUP id="{3DD0A1A6-7F71-0B05-9919-6CEB64452610}" name="UI-Components">
-        <FILE id="MiRso7" name="LV_DialComponent.cpp" compile="1" resource="0"
-              file="Source/UI-Components/LV_DialComponent.cpp"/>
-        <FILE id="XJdXDp" name="LV_DialComponent.h" compile="0" resource="0"
-              file="Source/UI-Components/LV_DialComponent.h"/>
-        <FILE id="owdBsq" name="LV_FaderComponent.cpp" compile="1" resource="0"
-              file="Source/UI-Components/LV_FaderComponent.cpp"/>
-        <FILE id="NIlprf" name="LV_FaderComponent.h" compile="0" resource="0"
-              file="Source/UI-Components/LV_FaderComponent.h"/>
-        <FILE id="o2LaUn" name="LV_GroupComponent.cpp" compile="1" resource="0"
-              file="Source/UI-Components/LV_GroupComponent.cpp"/>
-        <FILE id="t8s8Rx" name="LV_GroupComponent.h" compile="0" resource="0"
-              file="Source/UI-Components/LV_GroupComponent.h"/>
-        <FILE id="A9f8C9" name="LV_LabelComponent.cpp" compile="1" resource="0"
-              file="Source/UI-Components/LV_LabelComponent.cpp"/>
-        <FILE id="RgHTyR" name="LV_LabelComponent.h" compile="0" resource="0"
-              file="Source/UI-Components/LV_LabelComponent.h"/>
-        <FILE id="CulYr5" name="LV_MenuComponent.cpp" compile="1" resource="0"
-              file="Source/UI-Components/LV_MenuComponent.cpp"/>
-        <FILE id="jV7q2I" name="LV_MenuComponent.h" compile="0" resource="0"
-              file="Source/UI-Components/LV_MenuComponent.h"/>
-        <FILE id="PXNjCH" name="LV_PowerToggle.cpp" compile="1" resource="0"
-              file="Source/UI-Components/LV_PowerToggle.cpp"/>
-        <FILE id="lOXFSv" name="LV_PowerToggle.h" compile="0" resource="0"
-              file="Source/UI-Components/LV_PowerToggle.h"/>
-        <FILE id="wqlBzJ" name="LV_PushButtonComponent.cpp" compile="1" resource="0"
-              file="Source/UI-Components/LV_PushButtonComponent.cpp"/>
-        <FILE id="ZCFq4F" name="LV_PushButtonComponent.h" compile="0" resource="0"
-              file="Source/UI-Components/LV_PushButtonComponent.h"/>
         <FILE id="TT8FQb" name="LV_Window.cpp" compile="1" resource="0" file="Source/UI-Components/LV_Window.cpp"/>
         <FILE id="M5Ajq1" name="LV_Window.h" compile="0" resource="0" file="Source/UI-Components/LV_Window.h"/>
       </GROUP>
@@ -82,8 +50,7 @@
         <FILE id="BTAG51" name="LV_Label.h" compile="0" resource="0" file="Source/Widgets/LV_Label.h"/>
         <FILE id="wrRqEe" name="LV_Menu.h" compile="0" resource="0" file="Source/Widgets/LV_Menu.h"/>
         <FILE id="v8hutJ" name="LV_PushButton.h" compile="0" resource="0" file="Source/Widgets/LV_PushButton.h"/>
-        <FILE id="MDKqtV" name="LV_PhaseToggle.h" compile="0" resource="0"
-              file="Source/Widgets/LV_PhaseToggle.h"/>
+        <FILE id="MDKqtV" name="LV_Toggle.h" compile="0" resource="0" file="Source/Widgets/LV_Toggle.h"/>
         <FILE id="xxs2hz" name="StyleSheet.cpp" compile="1" resource="0" file="Source/Widgets/StyleSheet.cpp"/>
         <FILE id="sqgtgW" name="StyleSheet.h" compile="0" resource="0" file="Source/Widgets/StyleSheet.h"/>
       </GROUP>

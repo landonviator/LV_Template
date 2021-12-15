@@ -16,11 +16,10 @@ void LVTemplateAudioProcessorEditor::uiResized(float width, float height)
     windowComponent.setWidthAndHeight(width, height);
     windowComponent.setBounds(getLocalBounds());
     
-    sliders.setBoundsConstraints(width, height);
-    sliders.setBounds(getLocalBounds());
+    toggle2.setBounds(50, 50, 48, 48);
     
-    phaseButton.setBounds(300, 300, 32, 32);
-    toggle2.setBounds(50, 50, 32, 32);
+    demoFader.setBounds(200, 200, 300, 300);
+    demoDial.setBounds(500, 200, 128, 128);
     
     // Save plugin size in the tree
     saveWindowSize();

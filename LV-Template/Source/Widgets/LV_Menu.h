@@ -13,7 +13,6 @@
 
 namespace juce
 {
-
     class LV_Menu : public ComboBox
     {
         

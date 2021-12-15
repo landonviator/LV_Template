@@ -11,7 +11,9 @@
 
 //==============================================================================
 LVTemplateAudioProcessorEditor::LVTemplateAudioProcessorEditor (LVTemplateAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), sliders(audioProcessor.treeState)
+    : AudioProcessorEditor (&p), audioProcessor (p),
+demoFader(" dB", -24.0, 24.0, 0.25, 0.0),
+demoDial(" dB", -24.0, 24.0, 0.25, 0.0)
 {
     uiConstructor();
 }

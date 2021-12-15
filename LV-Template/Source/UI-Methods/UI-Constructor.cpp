@@ -13,10 +13,15 @@
 void LVTemplateAudioProcessorEditor::uiConstructor()
 {
     addAndMakeVisible(windowComponent);
-    addAndMakeVisible(sliders);
     
     // Window
     initWindow();
     
     addAndMakeVisible(toggle2);
+    toggle2.setToggleStyle(juce::LV_Toggle::ToggleStyle::kPower);
+    
+    addAndMakeVisible(demoFader);
+    
+    demoDial.setDialStyle(juce::LV_Dial::DialStyle::kHardDial);
+    addAndMakeVisible(demoDial);
 }

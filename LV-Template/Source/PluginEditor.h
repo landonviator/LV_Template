@@ -11,9 +11,9 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "UI-Components/LV_Window.h"
-#include "UI-Components/LV_PowerToggle.h"
-#include "Widgets/LV_PhaseToggle.h"
-#include "DemoSliderBank.h"
+#include "Widgets/LV_Toggle.h"
+#include "Widgets/LV_Dial.h"
+#include "Widgets/LV_Fader.h"
 
 //==============================================================================
 /**
@@ -44,11 +44,9 @@ private:
     void saveWindowSize();
     bool constructorFinished {false};
     
-    /** Test Sliders ==============================================================*/
-    DemoSliderBank sliders;
-    
-    juce::LV_PowerToggle phaseButton;
-    juce::LV_PhaseToggle toggle2 {};
+    juce::LV_Toggle toggle2 {};
+    juce::LV_Fader demoFader;
+    juce::LV_Dial demoDial;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

@@ -269,10 +269,10 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
             if (! isTwoVal)
             {
                 Rectangle<float> thumbRec;
-                thumbRec.setSize(static_cast<float> (height / 4.0), static_cast<float> (height / 10.0));
+                thumbRec.setSize(static_cast<float> (width / 4.0), static_cast<float> (height / 9.0));
                 
                 g.setColour(slider.findColour(Slider::thumbColourId));
-                g.fillRoundedRectangle(thumbRec.withCentre(isThreeVal ? thumbPoint : maxPoint), 4.0f);
+                g.fillRoundedRectangle(thumbRec.withCentre(isThreeVal ? thumbPoint : maxPoint), 6.0f);
             }
 
             if (isTwoVal || isThreeVal)
@@ -335,7 +335,7 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
 
     /** Toggle Styles ====================================================================*/
 
-    void LV_CustomToggleLAF::drawToggleButton(juce::Graphics &g,
+    void LV_PhaseToggleLAF::drawToggleButton(juce::Graphics &g,
                                                    juce::ToggleButton &toggleButton,
                                                    bool shouldDrawButtonAsHighlighted,
                                                    bool shouldDrawButtonAsDown)
@@ -346,39 +346,12 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
                 
         auto size = jmin(bounds.getWidth(), bounds.getHeight()) - 6;
         auto r = bounds.withSizeKeepingCentre(size, size).toFloat();
-                
-        float ang = 30.f;
-                
-        size -= 9;
+        auto sr = bounds.withSizeKeepingCentre(size / 2.5, size / 2.5).toFloat();
         
-//        switch (toggleStyle)
-//        {
-//            case ToggleStyle::kPhaseToggle :
-//            {
-                button.startNewSubPath(r.getX(), r.getY() + r.getHeight());
-                button.lineTo(r.getX() + r.getWidth(), r.getY());
-//            } break;
-//
-//            case ToggleStyle::kPowerToggle :
-//            {
-//                button.addCentredArc(r.getCentreX(),
-//                                            r.getCentreY(),
-//                                            size * 0.5,
-//                                            size * 0.5,
-//                                            0.f,
-//                                            degreesToRadians(ang),
-//                                            degreesToRadians(360.f - ang),
-//                                            true);
-//
-//                button.startNewSubPath(r.getCentreX(), r.getY());
-//                button.lineTo(r.getCentre());
-//            } break;
-//
-//            case ToggleStyle::kGenericToggle :
-//            {
-//            } break;
-//        }
-
+        button.addEllipse(sr);
+        
+        button.startNewSubPath(sr.getX(), sr.getY() + sr.getHeight());
+        button.lineTo(sr.getX() + sr.getWidth(), sr.getY());
                 
         PathStrokeType pst(2.0f, PathStrokeType::JointStyle::curved);
                 
@@ -389,4 +362,43 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
         g.strokePath(button, pst);
         g.drawEllipse(r, 2);
     }
+
+void LV_PowerToggleLAF::drawToggleButton(juce::Graphics &g,
+                                               juce::ToggleButton &toggleButton,
+                                               bool shouldDrawButtonAsHighlighted,
+                                               bool shouldDrawButtonAsDown)
+{
+    Path button;
+            
+    auto bounds = toggleButton.getLocalBounds();
+            
+    auto size = jmin(bounds.getWidth(), bounds.getHeight()) - 6;
+    auto r = bounds.withSizeKeepingCentre(size, size).toFloat();
+            
+    float ang = 30.f;
+            
+    size -= 9;
+    
+
+    button.addCentredArc(r.getCentreX(),
+                                r.getCentreY(),
+                                size * 0.25,
+                                size * 0.25,
+                                0.f,
+                                degreesToRadians(ang),
+                                degreesToRadians(360.f - ang),
+                                true);
+            
+    button.startNewSubPath(r.getCentreX(), r.getY() + r.getHeight() * 0.21);
+    button.lineTo(r.getCentre());
+            
+    PathStrokeType pst(2.0f, PathStrokeType::JointStyle::curved);
+            
+    auto color =
+    toggleButton.getToggleState() ? toggleButton.findColour(juce::ToggleButton::tickDisabledColourId) : toggleButton.findColour(juce::ToggleButton::tickColourId);
+            
+    g.setColour(color);
+    g.strokePath(button, pst);
+    g.drawEllipse(r, 2);
+}
 }

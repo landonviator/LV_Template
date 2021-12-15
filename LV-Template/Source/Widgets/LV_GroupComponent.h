@@ -24,21 +24,15 @@
 
 namespace juce
 {
-
-class LV_GroupComponent : public GroupComponent
-{
-public:
-    
-    LV_GroupComponent()
+    class LV_GroupComponent : public GroupComponent
     {
-        setColour(juce::GroupComponent::ColourIds::outlineColourId, juce::Colours::whitesmoke.withAlpha(0.125f));
-        setColour(juce::GroupComponent::ColourIds::textColourId, juce::Colours::whitesmoke.withAlpha(0.125f));
-        setTextLabelPosition(juce::Justification::centred);
-    }
-    
-private:
-
-    
-    
-};
+    public:
+        
+        LV_GroupComponent()
+        {
+            setColour(juce::GroupComponent::ColourIds::outlineColourId, juce::Colours::whitesmoke.withAlpha(0.125f));
+            setColour(juce::GroupComponent::ColourIds::textColourId, juce::Colours::whitesmoke.withAlpha(0.125f));
+            setTextLabelPosition(juce::Justification::centred);
+        }
+    };
 }

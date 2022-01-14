@@ -31,7 +31,7 @@ namespace juce
         LV_GroupComponent()
         {
             setColour(juce::GroupComponent::ColourIds::outlineColourId, juce::Colours::whitesmoke.withAlpha(0.125f));
-            setColour(juce::GroupComponent::ColourIds::textColourId, juce::Colours::whitesmoke.withAlpha(0.125f));
+            setColour(juce::GroupComponent::ColourIds::textColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
             setTextLabelPosition(juce::Justification::centred);
         }
     };

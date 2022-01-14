@@ -234,7 +234,7 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
             backgroundTrack.startNewSubPath (startPoint);
             backgroundTrack.lineTo (endPoint);
             g.setColour (slider.findColour (Slider::backgroundColourId));
-            g.strokePath (backgroundTrack, { static_cast<float>(trackWidth), PathStrokeType::curved, PathStrokeType::rounded });
+            g.strokePath (backgroundTrack, { static_cast<float>(trackWidth * 1.25), PathStrokeType::curved, PathStrokeType::rounded });
 
             Path valueTrack;
             Point<float> minPoint, maxPoint, thumbPoint;
@@ -269,7 +269,7 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
             if (! isTwoVal)
             {
                 Rectangle<float> thumbRec;
-                thumbRec.setSize(static_cast<float> (width / 4.0), static_cast<float> (height / 9.0));
+                thumbRec.setSize(static_cast<float> (width / 2.0), static_cast<float> (width / 6.0));
                 
                 g.setColour(slider.findColour(Slider::thumbColourId));
                 g.fillRoundedRectangle(thumbRec.withCentre(isThreeVal ? thumbPoint : maxPoint), 6.0f);

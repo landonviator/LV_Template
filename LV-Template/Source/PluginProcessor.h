@@ -12,6 +12,8 @@
 #include "./Parameters/ParamDefs.h"
 #include "./DSP/LV_CircleMap.h"
 #include "./DSP/LV_SplitDistortion.h"
+#include "./DSP/LV_SVFilter.h"
+#include "./DSP/LV_Clipper.h"
 
 //==============================================================================
 /**
@@ -76,6 +78,8 @@ public:
     float windowWidth {0.0f};
     float windowHeight {0.0f};
     
+    float drive {0.0};
+    
 private:
     
     LV_CircleMap logisticMapModule;
@@ -84,6 +88,14 @@ private:
     /** Parameters ======================================================*/
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     void parameterChanged (const juce::String& parameterID, float newValue) override;
+    
+    juce::dsp::Oversampling<float> oversamplingModule;
+    float overSampleRate {44100.0f};
+    float projectSampleRate {44100.0f};
+    bool oversamplingState = false;
+    
+    LV_SVFilter midToneFilter;
+    LV_Clipper clipperModule;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessor)
 };

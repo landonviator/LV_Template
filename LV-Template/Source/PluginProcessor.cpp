@@ -20,19 +20,22 @@ LVTemplateAudioProcessor::LVTemplateAudioProcessor()
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), false)
                      #endif
                        ),
-treeState (*this, nullptr, "PARAMETER", createParameterLayout())
+treeState (*this, nullptr, "PARAMETER", createParameterLayout()),
+oversamplingModule(2, 3, juce::dsp::Oversampling<float>::FilterType::filterHalfBandPolyphaseIIR)
 #endif
 {
     treeState.addParameterListener (inputID, this);
-    treeState.addParameterListener (drive2ID, this);
+    treeState.addParameterListener (driveID, this);
     treeState.addParameterListener (outputID, this);
+    treeState.addParameterListener (qualityID, this);
 }
 
 LVTemplateAudioProcessor::~LVTemplateAudioProcessor()
 {
     treeState.removeParameterListener (inputID, this);
-    treeState.removeParameterListener (drive2ID, this);
+    treeState.removeParameterListener (driveID, this);
     treeState.removeParameterListener (outputID, this);
+    treeState.removeParameterListener (qualityID, this);
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::createParameterLayout()
@@ -40,15 +43,17 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
   std::vector <std::unique_ptr<juce::RangedAudioParameter>> params;
 
   // Make sure to update the number of reservations after adding params
-  params.reserve(3);
+  params.reserve(4);
 
   auto pInput = std::make_unique<juce::AudioParameterFloat>(inputID, inputName, 0.0, 12.0, 0.0);
-  auto pDrive2 = std::make_unique<juce::AudioParameterFloat>(drive2ID, drive2Name, 20.0, 20000.0, 2500.0);
+  auto pDrive = std::make_unique<juce::AudioParameterFloat>(driveID, driveName, 0.0, 24.0, 0.0);
   auto pOutput = std::make_unique<juce::AudioParameterFloat>(outputID, outputName, 0.0, 100.0, 100.0);
-  
+  auto pQuality = std::make_unique<juce::AudioParameterInt>(qualityID, qualityName, 1, 2, 1);
+
   params.push_back(std::move(pInput));
-  params.push_back(std::move(pDrive2));
+  params.push_back(std::move(pDrive));
   params.push_back(std::move(pOutput));
+  params.push_back(std::move(pQuality));
 
   return { params.begin(), params.end() };
 }
@@ -57,17 +62,29 @@ void LVTemplateAudioProcessor::parameterChanged(const juce::String &parameterID,
 {
     if (parameterID == inputID)
     {
-        splitDistortionModule.setParameter(LV_SplitDistortion::ParameterId::kDrive, newValue);
     }
     
-    else if (parameterID == drive2ID)
+    else if (parameterID == driveID)
     {
-        splitDistortionModule.setParameter(LV_SplitDistortion::ParameterId::kCutoff, newValue);
     }
     
     else
     {
-        splitDistortionModule.setParameter(LV_SplitDistortion::ParameterId::kWet, newValue);
+    }
+    
+    if (parameterID == qualityID)
+    {
+        if (newValue - 1 == 0)
+        {
+            oversamplingState = false;
+            overSampleRate = getSampleRate();
+        }
+        
+        else
+        {
+            oversamplingState = true;
+            overSampleRate = getSampleRate() * oversamplingModule.getOversamplingFactor();
+        }
     }
 }
 
@@ -141,7 +158,32 @@ void LVTemplateAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     spec.sampleRate = sampleRate;
     spec.numChannels = getTotalNumOutputChannels();
     
+    oversamplingState = *treeState.getRawParameterValue(qualityID) - 1;
+    
+    if (oversamplingState)
+    {
+        overSampleRate = spec.sampleRate * oversamplingModule.getOversamplingFactor();
+    }
+    
+    else
+    {
+        overSampleRate = spec.sampleRate;
+    }
+    
+    projectSampleRate = sampleRate;
+    
     splitDistortionModule.prepare(spec);
+    
+    oversamplingModule.reset();
+    oversamplingModule.initProcessing(samplesPerBlock);
+    
+    midToneFilter.reset();
+    midToneFilter.prepare(spec);
+    midToneFilter.setParameter(LV_SVFilter::ParameterId::kType, LV_SVFilter::FilterType::kBandShelf);
+    midToneFilter.setParameter(LV_SVFilter::ParameterId::kCutoff, 1000.0);
+    midToneFilter.setParameter(LV_SVFilter::ParameterId::kGain, 9.0);
+    
+    clipperModule.prepare(spec);
 }
 
 void LVTemplateAudioProcessor::releaseResources()
@@ -186,8 +228,40 @@ void LVTemplateAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         buffer.clear (i, 0, buffer.getNumSamples());
 
     juce::dsp::AudioBlock<float> audioBlock {buffer};
+    juce::dsp::AudioBlock<float> upSampledBlock;
     
-    splitDistortionModule.processBlock(audioBlock);
+    clipperModule.setParameter(LV_Clipper::ParameterId::kDrive, drive);
+    clipperModule.processBlock(audioBlock);
+    
+//    if (oversamplingState)
+//    {
+//        upSampledBlock = oversamplingModule.processSamplesUp(audioBlock);
+//
+//        for (int sample = 0; sample < upSampledBlock.getNumSamples(); ++sample)
+//        {
+//            for (int ch = 0; ch < upSampledBlock.getNumChannels(); ++ch)
+//            {
+//                float* data = upSampledBlock.getChannelPointer(ch);
+//                midToneFilter.setParameter(LV_SVFilter::ParameterId::kSampleRate, overSampleRate);
+//                data[sample] = midToneFilter.processSample(data[sample], ch);
+//            }
+//        }
+//
+//        oversamplingModule.processSamplesDown(audioBlock);
+//    }
+//
+//    else
+//    {
+//        for (int sample = 0; sample < audioBlock.getNumSamples(); ++sample)
+//        {
+//            for (int ch = 0; ch < audioBlock.getNumChannels(); ++ch)
+//            {
+//                float* data = audioBlock.getChannelPointer(ch);
+//                midToneFilter.setParameter(LV_SVFilter::ParameterId::kSampleRate, overSampleRate);
+//                data[sample] = midToneFilter.processSample(data[sample], ch);
+//            }
+//        }
+//    }
 }
 
 //==============================================================================

@@ -21,7 +21,7 @@ namespace juce
         LV_Menu()
         {
             setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.brighter(0.1f));
-            setColour(juce::ComboBox::ColourIds::outlineColourId, juce::Colours::black);
+            setColour(juce::ComboBox::ColourIds::outlineColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
             setColour(juce::ComboBox::ColourIds::focusedOutlineColourId, juce::Colours::black.withAlpha(0.5f));
             setColour(juce::ComboBox::ColourIds::textColourId, juce::Colours::whitesmoke.withAlpha(0.5f));
             setColour(juce::ComboBox::ColourIds::arrowColourId, juce::Colours::skyblue.darker(0.5f));

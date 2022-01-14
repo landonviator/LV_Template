@@ -25,22 +25,22 @@ public:
     
     enum class ParameterId
     {
-            kType,
-            kCutoff,
-            kQ,
-            kGain,
-            kQType,
-            kSampleRate,
-            kBypass,
+        kType,
+        kCutoff,
+        kQ,
+        kGain,
+        kQType,
+        kSampleRate,
+        kBypass,
     };
         
     enum FilterType
     {
-            kLowShelf,
-            kBandShelf,
-            kHighShelf,
-            kLowPass,
-            kHighPass,
+        kLowShelf,
+        kBandShelf,
+        kHighShelf,
+        kLowPass,
+        kHighPass,
     };
     
     enum QType
@@ -50,23 +50,22 @@ public:
     };
     
     void setParameter(ParameterId parameter, float parameterValue);
-    
     void setGain(float value);
-    
-    float convertToGain(const float value);
-    
-    float getShelfQ(float value);
-    
-    float getPeakQ(float value);
+    float getShelfQ(float value) const;
+    float getPeakQ(float value) const;
     
 private:
     
     // Member variables
-    float mCurrentSampleRate, mQ, mCutoff, mGain, mRawGain;
-    bool mGlobalBypass, buttonState;
+    float mCurrentSampleRate {44100.0f};
+    float mQ {0.1f};
+    float mCutoff {1000.0f};
+    float mGain {1.0f};
+    float mRawGain {0.0f};
+    bool mGlobalBypass {false};
     
     // Filter type switch
-    FilterType mType {FilterType::kBandShelf};
+    FilterType mType {FilterType::kLowPass};
     
     // Q mode switch
     QType mQType {QType::kParametric};
@@ -77,6 +76,8 @@ private:
     double mRCoeff2 {0.0};
     double mK {1.0};
     double mInversion {0.0};
+    
+    float twoPi = juce::MathConstants<float>::twoPi;
         
     std::vector<double> mZ1, mZ2; // state variables (z^-1)
 };

@@ -43,6 +43,7 @@ private:
     /** Vars ==================================================================*/
     float width {0.0f};
     float height {0.0f};
+    bool paintInitialized = false;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LV_Window)
 };

@@ -12,6 +12,8 @@
         <FILE id="M5Ajq1" name="LV_Window.h" compile="0" resource="0" file="Source/UI-Components/LV_Window.h"/>
       </GROUP>
       <GROUP id="{29772310-AB21-EBF0-617C-F2D4D184A2D2}" name="UI-Methods">
+        <FILE id="WYsKMw" name="OversamplingMenu.cpp" compile="1" resource="0"
+              file="Source/UI-Methods/OversamplingMenu.cpp"/>
         <FILE id="rEM17z" name="UI-Constructor.cpp" compile="1" resource="0"
               file="Source/UI-Methods/UI-Constructor.cpp"/>
         <FILE id="SPWyR9" name="UI-InitWindow.cpp" compile="1" resource="0"
@@ -35,6 +37,8 @@
         <FILE id="IY5PRn" name="LV_CircleMap.cpp" compile="1" resource="0"
               file="Source/DSP/LV_CircleMap.cpp"/>
         <FILE id="uv9kyg" name="LV_CircleMap.h" compile="0" resource="0" file="Source/DSP/LV_CircleMap.h"/>
+        <FILE id="DGTN7E" name="LV_Clipper.cpp" compile="1" resource="0" file="Source/DSP/LV_Clipper.cpp"/>
+        <FILE id="K0cRYJ" name="LV_Clipper.h" compile="0" resource="0" file="Source/DSP/LV_Clipper.h"/>
         <FILE id="E5oDy7" name="LV_SplitDistortion.cpp" compile="1" resource="0"
               file="Source/DSP/LV_SplitDistortion.cpp"/>
         <FILE id="F8XMHt" name="LV_SplitDistortion.h" compile="0" resource="0"
@@ -53,6 +57,8 @@
         <FILE id="MDKqtV" name="LV_Toggle.h" compile="0" resource="0" file="Source/Widgets/LV_Toggle.h"/>
         <FILE id="xxs2hz" name="StyleSheet.cpp" compile="1" resource="0" file="Source/Widgets/StyleSheet.cpp"/>
         <FILE id="sqgtgW" name="StyleSheet.h" compile="0" resource="0" file="Source/Widgets/StyleSheet.h"/>
+        <FILE id="BHcx35" name="WidgetIncludes.h" compile="0" resource="0"
+              file="Source/Widgets/WidgetIncludes.h"/>
       </GROUP>
       <FILE id="kYfy65" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

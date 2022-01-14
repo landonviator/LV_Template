@@ -13,8 +13,11 @@
 #define inputID "input"
 #define inputName "Input"
 
-#define drive2ID "drive 2"
-#define drive2Name "Drive 2"
+#define driveID "drive"
+#define driveName "Drive"
 
 #define outputID "output"
 #define outputName "Output"
+
+#define qualityID "quality"
+#define qualityName "Quality"

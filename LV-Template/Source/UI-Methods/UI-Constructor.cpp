@@ -17,11 +17,54 @@ void LVTemplateAudioProcessorEditor::uiConstructor()
     // Window
     initWindow();
     
-    addAndMakeVisible(toggle2);
-    toggle2.setToggleStyle(juce::LV_Toggle::ToggleStyle::kPower);
+    initOversamplingMenu();
     
-    addAndMakeVisible(demoFader);
+    // Pre stuff
+    addAndMakeVisible(preGroup);
+    preGroup.setText("Pre Tone");
     
-    demoDial.setDialStyle(juce::LV_Dial::DialStyle::kHardDial);
-    addAndMakeVisible(demoDial);
+    // Clip stuff
+    
+    // Drive
+    addAndMakeVisible(driveFader);
+    driveFader.onValueChange = [this]()
+    {
+        audioProcessor.drive = driveFader.getValue();
+    };
+    
+    addAndMakeVisible(driveFaderLabel);
+    driveFaderLabel.attachToComponent(&driveFader, false);
+    driveFaderLabel.setText("Drive", juce::dontSendNotification);
+    
+    addAndMakeVisible(clipGroup);
+    clipGroup.setText("Clipper");
+    
+    // Ceiling Dial
+    addAndMakeVisible(ceilingDial);
+    addAndMakeVisible(ceilingDialLabel);
+    ceilingDialLabel.attachToComponent(&ceilingDial, false);
+    ceilingDialLabel.setText("Ceiling", juce::dontSendNotification);
+    
+    // Mix Dial
+    addAndMakeVisible(mixDial);
+    addAndMakeVisible(mixDialLabel);
+    mixDialLabel.attachToComponent(&mixDial, false);
+    mixDialLabel.setText("Mix", juce::dontSendNotification);
+    
+    // Trim Dial
+    addAndMakeVisible(trimDial);
+    addAndMakeVisible(trimDialLabel);
+    trimDialLabel.attachToComponent(&trimDial, false);
+    trimDialLabel.setText("Trim", juce::dontSendNotification);
+    
+    // High Pass Filter Dial
+    addAndMakeVisible(hpfDial);
+    addAndMakeVisible(hpfDialLabel);
+    hpfDialLabel.attachToComponent(&hpfDial, false);
+    hpfDialLabel.setText("HPF", juce::dontSendNotification);
+    
+    // Post stuff
+    addAndMakeVisible(postGroup);
+    postGroup.setText("Post Tone");
+    
 }

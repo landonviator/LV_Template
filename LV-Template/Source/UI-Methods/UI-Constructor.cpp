@@ -20,8 +20,7 @@ void LVTemplateAudioProcessorEditor::uiConstructor()
     initOversamplingMenu();
     
     // Pre stuff
-    addAndMakeVisible(preGroup);
-    preGroup.setText("Pre Tone");
+    addAndMakeVisible(preToneComponent);
     
     // Clipper stuff
     addAndMakeVisible(clipperComponent);

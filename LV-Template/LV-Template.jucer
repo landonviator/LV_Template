@@ -12,6 +12,10 @@
               file="Source/UI-Components/LV_ClipperComponent.cpp"/>
         <FILE id="hHhZxe" name="LV_ClipperComponent.h" compile="0" resource="0"
               file="Source/UI-Components/LV_ClipperComponent.h"/>
+        <FILE id="YPSfv9" name="LV_PreToneComponent.cpp" compile="1" resource="0"
+              file="Source/UI-Components/LV_PreToneComponent.cpp"/>
+        <FILE id="grYaWt" name="LV_PreToneComponent.h" compile="0" resource="0"
+              file="Source/UI-Components/LV_PreToneComponent.h"/>
         <FILE id="TT8FQb" name="LV_Window.cpp" compile="1" resource="0" file="Source/UI-Components/LV_Window.cpp"/>
         <FILE id="M5Ajq1" name="LV_Window.h" compile="0" resource="0" file="Source/UI-Components/LV_Window.h"/>
       </GROUP>

@@ -24,12 +24,13 @@ void LVTemplateAudioProcessorEditor::uiResized(float width, float height)
     
     oversamplingMenu.setBounds(500, 6, width * 0.16, width * 0.04);
     
-    // Pre stuff
-    preGroup.setBounds(leftMargin, topMargin, width * 0.24f, height * 0.88f);
+    // Pre Tone
+    preToneComponent.setWidthAndHeight(width, height);
+    preToneComponent.setBounds(leftMargin, topMargin, width * 0.24f, height * 0.88f);
     
     // Clip stuff
     clipperComponent.setWidthAndHeight(width, height);
-    clipperComponent.setBounds(preGroup.getX() + preGroup.getWidth() + leftMargin, topMargin, width * 0.48f, height * 0.88f);
+    clipperComponent.setBounds(preToneComponent.getX() + preToneComponent.getWidth() + leftMargin, topMargin, width * 0.48f, height * 0.88f);
     
     // Post stuff
 //    postGroup.setBounds(clipGroup.getX() + clipGroup.getWidth() + leftMargin, topMargin, width * 0.24f, height * 0.88f);

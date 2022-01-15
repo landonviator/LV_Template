@@ -56,6 +56,20 @@ namespace juce
             }
         }
         
+        
+        void mouseEnter (const MouseEvent& event) override
+        {
+            setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::whitesmoke.withAlpha(0.85f));
+            setColour(juce::ToggleButton::tickColourId, juce::Colours::whitesmoke.withAlpha(0.85f));
+            
+        }
+        
+        void mouseExit (const MouseEvent& event) override
+        {
+            setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::dimgrey);
+            setColour(juce::ToggleButton::tickColourId, juce::Colours::springgreen);
+        }
+        
         private:
         
         LV_PowerToggleLAF powerToggle;

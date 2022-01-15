@@ -360,7 +360,6 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
                 
         g.setColour(color);
         g.strokePath(button, pst);
-        g.drawEllipse(r, 2);
     }
 
 void LV_PowerToggleLAF::drawToggleButton(juce::Graphics &g,
@@ -399,6 +398,5 @@ void LV_PowerToggleLAF::drawToggleButton(juce::Graphics &g,
             
     g.setColour(color);
     g.strokePath(button, pst);
-    g.drawEllipse(r, 2);
 }
 }

@@ -17,6 +17,9 @@ LV_ClipperComponent::LV_ClipperComponent(juce::AudioProcessorValueTreeState& tre
     // Drive
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     
+    addAndMakeVisible(moduleBypass);
+    moduleBypass.setToggleStyle(juce::LV_Toggle::ToggleStyle::kPower);
+    
     driveFaderAttach = std::make_unique<SliderAttachment>(tree, driveID, driveFader);
     addAndMakeVisible(driveFader);
     
@@ -70,7 +73,8 @@ void LV_ClipperComponent::resized()
     
     // Clip stuff
     clipGroup.setBounds(0, 0, getWidth(), getHeight());
-    driveFader.setBounds(clipGroup.getX() + leftMargin, clipGroup.getY() + topMargin, dialSize, clipGroup.getHeight() * 0.55);
+    moduleBypass.setBounds(clipGroup.getX() + leftMargin / 3, clipGroup.getY() + topMargin / 3, 48, 48);
+    driveFader.setBounds(clipGroup.getX() + leftMargin, clipGroup.getY() + topMargin * 2.0, dialSize, clipGroup.getHeight() * 0.45);
     ceilingDial.setBounds(driveFader.getX(), driveFader.getY() + driveFader.getHeight() * spaceBetween, dialSize, dialSize);
     mixDial.setBounds(ceilingDial.getX() + ceilingDial.getWidth() * dialSpaceBetween, ceilingDial.getY(), dialSize, dialSize);
     trimDial.setBounds(mixDial.getX() + mixDial.getWidth() * dialSpaceBetween, mixDial.getY(), dialSize, dialSize);

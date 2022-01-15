@@ -66,6 +66,18 @@ public:
 
 private:
     
+    void mouseEnter (const MouseEvent& event) override
+    {
+        setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(0.8f));
+        setComponentEffect(&dialShadow);
+    }
+    
+    void mouseExit (const MouseEvent& event) override
+    {
+        setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(1.0f));
+        setComponentEffect(&dialShadow);
+    }
+    
     /** Slider ================================================================*/
     Slider dial;
     LV_HardDialLAF hardDial;
@@ -85,7 +97,7 @@ private:
         setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colour::fromRGB(35, 35, 35));
         setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
         setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
-        setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(1.5f));
+        setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(1.0f));
         setRange(rangeStart, rangeEnd, intervalValue);
         setDoubleClickReturnValue(true, returnValue);
         setTextValueSuffix(suffix);

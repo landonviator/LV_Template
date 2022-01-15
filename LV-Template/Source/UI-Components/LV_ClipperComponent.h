@@ -29,6 +29,8 @@ public:
 private:
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     
+    juce::LV_Toggle moduleBypass;
+    
     juce::LV_Fader driveFader {" dB", 0.0, 24.0, 0.01, 0.0};
     juce::LV_Label driveFaderLabel;
     std::unique_ptr<SliderAttachment> driveFaderAttach;

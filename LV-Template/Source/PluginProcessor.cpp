@@ -66,6 +66,7 @@ void LVTemplateAudioProcessor::parameterChanged(const juce::String &parameterID,
     
     else if (parameterID == driveID)
     {
+        clipperModule.setParameter(LV_Clipper::ParameterId::kDrive, newValue);
     }
     
     else
@@ -230,7 +231,6 @@ void LVTemplateAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     juce::dsp::AudioBlock<float> audioBlock {buffer};
     juce::dsp::AudioBlock<float> upSampledBlock;
     
-    clipperModule.setParameter(LV_Clipper::ParameterId::kDrive, drive);
     clipperModule.processBlock(audioBlock);
     
 //    if (oversamplingState)

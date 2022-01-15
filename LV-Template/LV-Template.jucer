@@ -8,6 +8,10 @@
         <FILE id="ADBlnO" name="ParamDefs.h" compile="0" resource="0" file="Source/Parameters/ParamDefs.h"/>
       </GROUP>
       <GROUP id="{3DD0A1A6-7F71-0B05-9919-6CEB64452610}" name="UI-Components">
+        <FILE id="CYWOMD" name="LV_ClipperComponent.cpp" compile="1" resource="0"
+              file="Source/UI-Components/LV_ClipperComponent.cpp"/>
+        <FILE id="hHhZxe" name="LV_ClipperComponent.h" compile="0" resource="0"
+              file="Source/UI-Components/LV_ClipperComponent.h"/>
         <FILE id="TT8FQb" name="LV_Window.cpp" compile="1" resource="0" file="Source/UI-Components/LV_Window.cpp"/>
         <FILE id="M5Ajq1" name="LV_Window.h" compile="0" resource="0" file="Source/UI-Components/LV_Window.h"/>
       </GROUP>

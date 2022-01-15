@@ -28,17 +28,11 @@ void LVTemplateAudioProcessorEditor::uiResized(float width, float height)
     preGroup.setBounds(leftMargin, topMargin, width * 0.24f, height * 0.88f);
     
     // Clip stuff
-    clipGroup.setBounds(preGroup.getX() + preGroup.getWidth() + leftMargin, topMargin, width * 0.48f, height * 0.88f);
-    
-    driveFader.setBounds(clipGroup.getX() * 1.1, clipGroup.getY() * 2, dialSize, clipGroup.getHeight() * 0.55);
-    
-    ceilingDial.setBounds(driveFader.getX(), driveFader.getY() + driveFader.getHeight() * spaceBetween, dialSize, dialSize);
-    mixDial.setBounds(ceilingDial.getX() + ceilingDial.getWidth() * dialSpaceBetween, ceilingDial.getY(), dialSize, dialSize);
-    trimDial.setBounds(mixDial.getX() + mixDial.getWidth() * dialSpaceBetween, mixDial.getY(), dialSize, dialSize);
-    hpfDial.setBounds(trimDial.getX() + trimDial.getWidth() * dialSpaceBetween, trimDial.getY(), dialSize, dialSize);
+    clipperComponent.setWidthAndHeight(width, height);
+    clipperComponent.setBounds(preGroup.getX() + preGroup.getWidth() + leftMargin, topMargin, width * 0.48f, height * 0.88f);
     
     // Post stuff
-    postGroup.setBounds(clipGroup.getX() + clipGroup.getWidth() + leftMargin, topMargin, width * 0.24f, height * 0.88f);
+//    postGroup.setBounds(clipGroup.getX() + clipGroup.getWidth() + leftMargin, topMargin, width * 0.24f, height * 0.88f);
     
     
     

@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "UI-Components/LV_Window.h"
+#include "UI-Components/LV_ClipperComponent.h"
 #include "Widgets/WidgetIncludes.h"
 
 //==============================================================================
@@ -44,21 +45,7 @@ private:
     
     juce::LV_Toggle toggle2 {};
     
-    juce::LV_Fader driveFader;
-    juce::LV_Label driveFaderLabel;
-    
-    juce::LV_Dial ceilingDial;
-    juce::LV_Dial mixDial;
-    juce::LV_Dial trimDial;
-    juce::LV_Dial hpfDial;
-    
-    juce::LV_Label ceilingDialLabel;
-    juce::LV_Label mixDialLabel;
-    juce::LV_Label trimDialLabel;
-    juce::LV_Label hpfDialLabel;
-    
     juce::LV_GroupComponent preGroup;
-    juce::LV_GroupComponent clipGroup;
     juce::LV_GroupComponent postGroup;
     
     juce::LV_Menu oversamplingMenu;
@@ -66,6 +53,8 @@ private:
     
     using ComboBoxAttachment = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
     std::unique_ptr<ComboBoxAttachment> oversamplingMenuAttach;
+    
+    LV_ClipperComponent clipperComponent;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

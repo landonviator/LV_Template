@@ -26,7 +26,5 @@ void LVTemplateAudioProcessorEditor::uiConstructor()
     addAndMakeVisible(clipperComponent);
     
     // Post stuff
-    addAndMakeVisible(postGroup);
-    postGroup.setText("Post Tone");
-    
+    addAndMakeVisible(postComponent);
 }

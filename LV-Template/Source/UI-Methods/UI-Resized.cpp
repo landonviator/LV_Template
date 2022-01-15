@@ -28,14 +28,13 @@ void LVTemplateAudioProcessorEditor::uiResized(float width, float height)
     preToneComponent.setWidthAndHeight(width, height);
     preToneComponent.setBounds(leftMargin, topMargin, width * 0.24f, height * 0.88f);
     
-    // Clip stuff
+    // Clip Stuff
     clipperComponent.setWidthAndHeight(width, height);
     clipperComponent.setBounds(preToneComponent.getX() + preToneComponent.getWidth() + leftMargin, topMargin, width * 0.48f, height * 0.88f);
     
-    // Post stuff
-//    postGroup.setBounds(clipGroup.getX() + clipGroup.getWidth() + leftMargin, topMargin, width * 0.24f, height * 0.88f);
-    
-    
+    // Post Stuff
+    postComponent.setWidthAndHeight(width, height);
+    postComponent.setBounds(clipperComponent.getX() + clipperComponent.getWidth() + leftMargin, topMargin, width * 0.24f, height * 0.88f);
     
     // Save plugin size in the tree
     saveWindowSize();

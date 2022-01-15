@@ -13,6 +13,7 @@
 #include "UI-Components/LV_Window.h"
 #include "UI-Components/LV_ClipperComponent.h"
 #include "UI-Components/LV_PreToneComponent.h"
+#include "UI-Components/LV_PostToneComponent.h"
 #include "Widgets/WidgetIncludes.h"
 
 //==============================================================================
@@ -44,10 +45,6 @@ private:
     void saveWindowSize();
     bool constructorFinished {false};
     
-    juce::LV_Toggle toggle2 {};
-    
-    juce::LV_GroupComponent postGroup;
-    
     juce::LV_Menu oversamplingMenu;
     void initOversamplingMenu();
     
@@ -56,6 +53,7 @@ private:
     
     LV_PreToneComponent preToneComponent;
     LV_ClipperComponent clipperComponent;
+    LV_PostToneComponent postComponent;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

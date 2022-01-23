@@ -41,7 +41,8 @@ void LV_SVFilter::setParameter(ParameterId parameter, float parameterValue)
 
 void LV_SVFilter::setGain(float value)
 {
-    mGain = juce::Decibels::decibelsToGain(value);
+    constexpr double inversion = 1.0 / 20.0;
+    mGain = pow(10, value * inversion) - 1.f;
     mRawGain = value;
 }
 //==============================================================================
@@ -92,9 +93,9 @@ float LV_SVFilter::getPeakQ(float value) const
 }
 //==============================================================================
 
-float LV_SVFilter::processSample(float input, int ch)
+void LV_SVFilter::processBlock(juce::dsp::AudioBlock<float>& block)
 {
-    if (mGlobalBypass) return input;
+    if (mGlobalBypass) return;
         
     float lsLevel = 0.0;
     float bsLevel = 0.0;
@@ -112,21 +113,23 @@ float LV_SVFilter::processSample(float input, int ch)
     }
         
     const double sampleRate2X = mCurrentSampleRate * 2.0;
-    const double halfSampleDuration = 1.0 / mCurrentSampleRate * 0.5;
+    const double halfSampleDuration = 1.0 / mCurrentSampleRate / 2.0;
         
-    // prewarp the cutoff (for bilinear-transform filters)
-    double wd = mCutoff * twoPi;
-    double wa = sampleRate2X * std::tan(wd * halfSampleDuration);
-                
-    //Calculate g (gain element of integrator)
-    mGCoeff = wa * halfSampleDuration;
-                
-    //Calculate Zavalishin's damping parameter (Q)
-    switch (mQType)
+    for (int sample = 0; sample < block.getNumSamples(); ++sample)
     {
-        case kParametric: mRCoeff = 1.0 - mQ; break;
-        case kProportional:
+        // prewarp the cutoff (for bilinear-transform filters)
+        double wd = mCutoff * 6.28f;
+        double wa = sampleRate2X * tan(wd * halfSampleDuration);
+                
+        //Calculate g (gain element of integrator)
+        mGCoeff = wa * halfSampleDuration;
+                
+        //Calculate Zavalishin's damping parameter (Q)
+        switch (mQType)
         {
+            case kParametric: mRCoeff = 1.0 - mQ; break;
+            case kProportional:
+                
             if (mType == kBandShelf)
             {
                 mRCoeff = 1.0 - getPeakQ(mRawGain); break;
@@ -137,29 +140,35 @@ float LV_SVFilter::processSample(float input, int ch)
                 mRCoeff = 1.0 - getShelfQ(mRawGain); break;
             }
         }
-    }
         
-    mRCoeff2 = mRCoeff * 2.0;
+        mRCoeff2 = mRCoeff * 2.0;
                 
-    mInversion = 1.0 / (1.0 + mRCoeff2 * mGCoeff + mGCoeff * mGCoeff);
+        mInversion = 1.0 / (1.0 + mRCoeff2 * mGCoeff + mGCoeff * mGCoeff);
             
-    const auto z1 = mZ1[ch];
-    const auto z2 = mZ2[ch];
-                            
-    const double HP = (input - mRCoeff2 * z1 - mGCoeff * z1 - z2) * mInversion;
-    const double BP = HP * mGCoeff + z1;
-    const double LP = BP * mGCoeff + z2;
-    const double UBP = mRCoeff2 * BP;
-    const double BShelf = input + UBP * mGain;
-    const double LS = input + mGain * LP;
-    const double HS = input + mGain * HP;
+        for (int ch = 0; ch < block.getNumChannels(); ++ch)
+        {
+            const auto z1 = mZ1[ch];
+            const auto z2 = mZ2[ch];
+            
+            float* data = block.getChannelPointer(ch);
+            
+            const float x = data[sample];
                 
-    //Main output code
-    input = BShelf * bsLevel + LS * lsLevel + HS * hsLevel + HP * hpLevel + LP * lpLevel;
-               
-    // unit delay (state variable)
-    mZ1[ch] = mGCoeff * HP + BP;
-    mZ2[ch] = mGCoeff * BP + LP;
-    
-    return input;
+            const double HP = (x - mRCoeff2 * z1 - mGCoeff * z1 - z2) * mInversion;
+            const double BP = HP * mGCoeff + z1;
+            const double LP = BP * mGCoeff + z2;
+            const double UBP = mRCoeff2 * BP;
+            const double BShelf = x + UBP * mGain;
+            const double LS = x + mGain * LP;
+            const double HS = x + mGain * HP;
+                
+            //Main output code
+            data[sample] = BShelf * bsLevel + LS * lsLevel + HS * hsLevel + HP * hpLevel + LP * lpLevel;
+                
+            // unit delay (state variable)
+            mZ1[ch] = mGCoeff * HP + BP;
+            mZ2[ch] = mGCoeff * BP + LP;
+            
+        }
+    }
 }

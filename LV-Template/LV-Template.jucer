@@ -51,6 +51,7 @@
         <FILE id="huF0f9" name="TEXTURE5.png" compile="0" resource="1" file="Source/Assets/TEXTURE5.png"/>
       </GROUP>
       <GROUP id="{ED7AFB7F-1B2F-633E-3DF2-982150233326}" name="DSP">
+        <FILE id="L1Bhsc" name="InitPreTone.cpp" compile="1" resource="0" file="Source/DSP/InitPreTone.cpp"/>
         <FILE id="IY5PRn" name="LV_CircleMap.cpp" compile="1" resource="0"
               file="Source/DSP/LV_CircleMap.cpp"/>
         <FILE id="uv9kyg" name="LV_CircleMap.h" compile="0" resource="0" file="Source/DSP/LV_CircleMap.h"/>

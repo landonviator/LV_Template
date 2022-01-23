@@ -12,22 +12,25 @@
 #include "LV_PreToneComponent.h"
 
 //==============================================================================
-LV_PreToneComponent::LV_PreToneComponent(juce::AudioProcessorValueTreeState& tree)
+LV_PreToneComponent::LV_PreToneComponent(LVTemplateAudioProcessor& p) : audioProcessor(p)
 {
     // Pre stuff
     addAndMakeVisible(preGroup);
     preGroup.setText("Pre Tone");
     
+    powerAttach = std::make_unique<ButtonAttachment>(audioProcessor.treeState, prePowerID, moduleBypass);
     addAndMakeVisible(moduleBypass);
     moduleBypass.setToggleStyle(juce::LV_Toggle::ToggleStyle::kPower);
     
     // Freq
+    freqDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, preFreqID, freqDial);
     addAndMakeVisible(freqDial);
     addAndMakeVisible(freqDialLabel);
     freqDialLabel.attachToComponent(&freqDial, false);
     freqDialLabel.setText("Freq", juce::dontSendNotification);
     
     // Gain
+    gainDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, preGainID, gainDial);
     addAndMakeVisible(gainDial);
     gainDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromRGB(179, 153, 212).darker(1.0f).darker(0.5f));
     gainDial.forceShadow();
@@ -36,6 +39,7 @@ LV_PreToneComponent::LV_PreToneComponent(juce::AudioProcessorValueTreeState& tre
     gainDialLabel.setText("Gain", juce::dontSendNotification);
     
     // Q
+    qDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, preQID, qDial);
     addAndMakeVisible(qDial);
     qDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::palevioletred.darker(1.0).darker(0.3));
     qDial.forceShadow();
@@ -46,6 +50,9 @@ LV_PreToneComponent::LV_PreToneComponent(juce::AudioProcessorValueTreeState& tre
 
 LV_PreToneComponent::~LV_PreToneComponent()
 {
+    freqDialAttach = nullptr;
+    gainDialAttach = nullptr;
+    qDialAttach = nullptr;
 }
 
 void LV_PreToneComponent::paint (juce::Graphics& g)

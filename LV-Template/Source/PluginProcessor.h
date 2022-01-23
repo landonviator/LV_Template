@@ -101,6 +101,8 @@ private:
     void initClipper();
     
     LV_SVFilter preToneModule;
+    void initPreTone();
+    
     LV_SVFilter postToneModule;
     
     

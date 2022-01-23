@@ -21,7 +21,7 @@ public:
     
     void prepare(juce::dsp::ProcessSpec spec);
     
-    float processSample(float input, int ch);
+    void processBlock(juce::dsp::AudioBlock<float>& block);
     
     enum class ParameterId
     {

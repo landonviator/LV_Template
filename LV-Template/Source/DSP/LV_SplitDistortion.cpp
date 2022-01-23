@@ -34,7 +34,7 @@ void LV_SplitDistortion::processBlock(juce::dsp::AudioBlock<float>& block)
             
             currentOutput = input * juce::Decibels::decibelsToGain(18.0f);
             
-            filteredOutput = topBandFilter.processSample(currentOutput, ch);
+//            filteredOutput = topBandFilter.processSample(currentOutput, ch);
             
             auto softClip = std::atanf(filteredOutput * logScale(drive));
             

@@ -40,3 +40,15 @@
 #define clipperPowerID "clipper power"
 #define clipperPowerName "Clipper Power"
 
+#define preFreqID "preFreq"
+#define preFreqName "Pre Freq"
+
+#define preGainID "preGain"
+#define preGainName "Pre Gain"
+
+#define preQID "preQ"
+#define preQName "Pre Q"
+
+#define prePowerID "pre power"
+#define prePowerName "Pre Power"
+

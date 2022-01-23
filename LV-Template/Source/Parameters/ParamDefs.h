@@ -21,3 +21,22 @@
 
 #define qualityID "quality"
 #define qualityName "Quality"
+
+#define clipTypeID "clipType"
+#define clipTypeName "Clip Type"
+
+#define clipColorID "clipColor"
+#define clipColorName "Clip Color"
+
+#define ceilingID "ceiling"
+#define ceilingName "Ceiling"
+
+#define trimID "trim"
+#define trimName "Trim"
+
+#define mixID "mix"
+#define mixName "Mix"
+
+#define clipperPowerID "clipper power"
+#define clipperPowerName "Clipper Power"
+

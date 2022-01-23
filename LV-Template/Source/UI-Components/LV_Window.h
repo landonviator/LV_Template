@@ -26,19 +26,8 @@ public:
     void setWidthAndHeight(float w, float h);
     
 private:
-
-    /** Image background ======================================================*/
-    juce::Image pluginBackground;
-    void paintBackground(juce::Graphics &g);
     
-    /** Logo and Link =========================================================*/
-    juce::Image footerLogo;
-    juce::HyperlinkButton mWebLink;
-    juce::URL mWebUrl {"https://www.patreon.com/ViatorDSP"};
-    void paintLogoAndLink(juce::Graphics &g);
-    
-    /** Text ==================================================================*/
-    void paintText(juce::Graphics &g);
+    juce::Image background;
     
     /** Vars ==================================================================*/
     float width {0.0f};

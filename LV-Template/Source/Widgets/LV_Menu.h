@@ -13,15 +13,15 @@
 
 namespace juce
 {
-    class LV_Menu : public ComboBox
+    class LV_Menu : public ComboBox, private juce::Timer
     {
         
     public:
     
         LV_Menu()
         {
-            setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.brighter(0.1f));
-            setColour(juce::ComboBox::ColourIds::outlineColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
+            setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.brighter(0.1f).withAlpha(0.0f));
+            setColour(juce::ComboBox::ColourIds::outlineColourId, juce::Colours::whitesmoke.withAlpha(0.0f));
             setColour(juce::ComboBox::ColourIds::focusedOutlineColourId, juce::Colours::black.withAlpha(0.5f));
             setColour(juce::ComboBox::ColourIds::textColourId, juce::Colours::whitesmoke.withAlpha(0.5f));
             setColour(juce::ComboBox::ColourIds::arrowColourId, juce::Colours::skyblue.darker(0.5f));
@@ -32,6 +32,27 @@ namespace juce
             getLookAndFeel().setColour(juce::PopupMenu::highlightedTextColourId, juce::Colours::skyblue);
         
             setJustificationType(juce::Justification::centred);
+        }
+        
+        
+        
+    private:
+        
+        void timerCallback() final
+        {
+            setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.brighter(0.1f).withAlpha(0.0f));
+        }
+        
+        void mouseEnter (const MouseEvent& event) override
+        {
+            setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::whitesmoke.withAlpha(0.05f));
+            startTimer(1000);
+        }
+        
+        void mouseExit (const MouseEvent& event) override
+        {
+            setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.brighter(0.1f).withAlpha(0.0f));
+            stopTimer();
         }
     };
 }

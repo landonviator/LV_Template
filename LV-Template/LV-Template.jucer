@@ -12,6 +12,10 @@
               file="Source/UI-Components/LV_ClipperComponent.cpp"/>
         <FILE id="hHhZxe" name="LV_ClipperComponent.h" compile="0" resource="0"
               file="Source/UI-Components/LV_ClipperComponent.h"/>
+        <FILE id="TfQN39" name="LV_HeaderComponent.cpp" compile="1" resource="0"
+              file="Source/UI-Components/LV_HeaderComponent.cpp"/>
+        <FILE id="iXTXHc" name="LV_HeaderComponent.h" compile="0" resource="0"
+              file="Source/UI-Components/LV_HeaderComponent.h"/>
         <FILE id="BtMuye" name="LV_PostToneComponent.cpp" compile="1" resource="0"
               file="Source/UI-Components/LV_PostToneComponent.cpp"/>
         <FILE id="G1RsX9" name="LV_PostToneComponent.h" compile="0" resource="0"
@@ -36,6 +40,7 @@
               file="Source/UI-Methods/UI-SaveWindow.cpp"/>
       </GROUP>
       <GROUP id="{9EBA8083-DC91-C17C-9D62-45028BFA63E3}" name="Assets">
+        <FILE id="KDMeIG" name="dark_blue.png" compile="0" resource="1" file="Source/Assets/dark_blue.png"/>
         <FILE id="XDMAWs" name="landon55-03.png" compile="0" resource="1" file="Source/Assets/landon55-03.png"/>
         <FILE id="ho2yp7" name="landon55-04.png" compile="0" resource="1" file="Source/Assets/landon55-04.png"/>
         <FILE id="TPnhiO" name="pluginBackground.png" compile="0" resource="1"
@@ -57,6 +62,7 @@
               file="Source/DSP/LV_SplitDistortion.h"/>
         <FILE id="c3KUTK" name="LV_SVFilter.cpp" compile="1" resource="0" file="Source/DSP/LV_SVFilter.cpp"/>
         <FILE id="xcsVeQ" name="LV_SVFilter.h" compile="0" resource="0" file="Source/DSP/LV_SVFilter.h"/>
+        <FILE id="C91qNr" name="InitClipper.cpp" compile="1" resource="0" file="Source/DSP/InitClipper.cpp"/>
       </GROUP>
       <GROUP id="{2D743AC8-CC21-A100-D4D8-35C53692ABF7}" name="Widgets">
         <FILE id="NtZqxT" name="LV_Dial.h" compile="0" resource="0" file="Source/Widgets/LV_Dial.h"/>

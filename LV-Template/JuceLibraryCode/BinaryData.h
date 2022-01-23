@@ -8,6 +8,9 @@
 
 namespace BinaryData
 {
+    extern const char*   dark_blue_png;
+    const int            dark_blue_pngSize = 3938445;
+
     extern const char*   landon5503_png;
     const int            landon5503_pngSize = 28292;
 
@@ -27,7 +30,7 @@ namespace BinaryData
     const int            TEXTURE5_pngSize = 3515887;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 6;
+    const int namedResourceListSize = 7;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

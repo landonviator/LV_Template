@@ -22,7 +22,8 @@ void LVTemplateAudioProcessorEditor::uiResized(float width, float height)
     windowComponent.setWidthAndHeight(width, height);
     windowComponent.setBounds(getLocalBounds());
     
-    oversamplingMenu.setBounds(500, 6, width * 0.16, width * 0.04);
+    headerComponent.setWidthAndHeight(width, height);
+    headerComponent.setBounds(0, 0, width, height * 0.08f);
     
     // Pre Tone
     preToneComponent.setWidthAndHeight(width, height);

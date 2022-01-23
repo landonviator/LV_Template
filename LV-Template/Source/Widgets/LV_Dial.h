@@ -63,18 +63,23 @@ public:
             }
         }
     }
+    
+    void forceShadow()
+    {
+        setComponentEffect(&dialShadow);
+    }
 
 private:
     
     void mouseEnter (const MouseEvent& event) override
     {
-        setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(0.8f));
+        setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedBrightness(1.25));
         setComponentEffect(&dialShadow);
     }
     
     void mouseExit (const MouseEvent& event) override
     {
-        setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(1.0f));
+        setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedBrightness(0.8f));
         setComponentEffect(&dialShadow);
     }
     

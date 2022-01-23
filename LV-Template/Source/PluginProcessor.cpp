@@ -24,10 +24,20 @@ treeState (*this, nullptr, "PARAMETER", createParameterLayout()),
 oversamplingModule(2, 3, juce::dsp::Oversampling<float>::FilterType::filterHalfBandPolyphaseIIR)
 #endif
 {
+    scopeModule.setBufferSize(256);
+    scopeModule.setSamplesPerBlock(256);
+    scopeModule.setRepaintRate(32);
+    
     treeState.addParameterListener (inputID, this);
     treeState.addParameterListener (driveID, this);
     treeState.addParameterListener (outputID, this);
     treeState.addParameterListener (qualityID, this);
+    treeState.addParameterListener (clipTypeID, this);
+    treeState.addParameterListener (clipColorID, this);
+    treeState.addParameterListener (ceilingID, this);
+    treeState.addParameterListener (trimID, this);
+    treeState.addParameterListener (mixID, this);
+    treeState.addParameterListener (clipperPowerID, this);
 }
 
 LVTemplateAudioProcessor::~LVTemplateAudioProcessor()
@@ -36,6 +46,12 @@ LVTemplateAudioProcessor::~LVTemplateAudioProcessor()
     treeState.removeParameterListener (driveID, this);
     treeState.removeParameterListener (outputID, this);
     treeState.removeParameterListener (qualityID, this);
+    treeState.removeParameterListener (clipTypeID, this);
+    treeState.removeParameterListener (clipColorID, this);
+    treeState.removeParameterListener (ceilingID, this);
+    treeState.removeParameterListener (trimID, this);
+    treeState.removeParameterListener (mixID, this);
+    treeState.removeParameterListener (clipperPowerID, this);
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::createParameterLayout()
@@ -43,17 +59,29 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
   std::vector <std::unique_ptr<juce::RangedAudioParameter>> params;
 
   // Make sure to update the number of reservations after adding params
-  params.reserve(4);
+  params.reserve(11);
 
   auto pInput = std::make_unique<juce::AudioParameterFloat>(inputID, inputName, 0.0, 12.0, 0.0);
   auto pDrive = std::make_unique<juce::AudioParameterFloat>(driveID, driveName, 0.0, 24.0, 0.0);
   auto pOutput = std::make_unique<juce::AudioParameterFloat>(outputID, outputName, 0.0, 100.0, 100.0);
   auto pQuality = std::make_unique<juce::AudioParameterInt>(qualityID, qualityName, 1, 2, 1);
-
+  auto pClipType = std::make_unique<juce::AudioParameterInt>(clipTypeID, clipTypeName, 1, 3, 1);
+  auto pClipColor = std::make_unique<juce::AudioParameterInt>(clipColorID, clipColorName, 1, 3, 3);
+  auto pCeiling = std::make_unique<juce::AudioParameterFloat>(ceilingID, ceilingName, -60.0, 0.0, 0.0);
+  auto pTrim = std::make_unique<juce::AudioParameterFloat>(trimID, trimName, -96.0, 24.0, 0.0);
+  auto pMix = std::make_unique<juce::AudioParameterFloat>(mixID, mixName, 0.0, 100.0, 100.0);
+  auto pClipperPower = std::make_unique<juce::AudioParameterBool> (clipperPowerID, clipperPowerName, false);
+    
   params.push_back(std::move(pInput));
   params.push_back(std::move(pDrive));
   params.push_back(std::move(pOutput));
   params.push_back(std::move(pQuality));
+  params.push_back(std::move(pClipType));
+  params.push_back(std::move(pClipColor));
+  params.push_back(std::move(pCeiling));
+  params.push_back(std::move(pTrim));
+  params.push_back(std::move(pMix));
+  params.push_back(std::move(pClipperPower));
 
   return { params.begin(), params.end() };
 }
@@ -64,13 +92,41 @@ void LVTemplateAudioProcessor::parameterChanged(const juce::String &parameterID,
     {
     }
     
-    else if (parameterID == driveID)
+    if (parameterID == driveID)
     {
         clipperModule.setParameter(LV_Clipper::ParameterId::kDrive, newValue);
     }
     
-    else
+    if (parameterID == ceilingID)
     {
+        clipperModule.setParameter(LV_Clipper::ParameterId::kCeiling, newValue);
+    }
+    
+    if (parameterID == trimID)
+    {
+        clipperModule.setParameter(LV_Clipper::ParameterId::kTrim, newValue);
+    }
+    
+    if (parameterID == mixID)
+    {
+        clipperModule.setParameter(LV_Clipper::ParameterId::kMix, newValue);
+    }
+    
+    if (parameterID == clipperPowerID)
+    {
+        clipperModule.setParameter(LV_Clipper::ParameterId::kBypass, newValue);
+    }
+    
+    if (parameterID == clipTypeID)
+    {
+        clipTypeChoice = newValue;
+        
+        switch (static_cast<int>(clipTypeChoice))
+        {
+            case 1: clipperModule.setClipperType(LV_Clipper::ClipperTypeId::kHardClipper); break;
+            case 2: clipperModule.setClipperType(LV_Clipper::ClipperTypeId::kSoftClipper); break;
+            case 3: clipperModule.setClipperType(LV_Clipper::ClipperTypeId::kAnalogClipper); break;
+        }
     }
     
     if (parameterID == qualityID)
@@ -173,18 +229,18 @@ void LVTemplateAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     projectSampleRate = sampleRate;
     
-    splitDistortionModule.prepare(spec);
-    
     oversamplingModule.reset();
     oversamplingModule.initProcessing(samplesPerBlock);
     
-    midToneFilter.reset();
-    midToneFilter.prepare(spec);
-    midToneFilter.setParameter(LV_SVFilter::ParameterId::kType, LV_SVFilter::FilterType::kBandShelf);
-    midToneFilter.setParameter(LV_SVFilter::ParameterId::kCutoff, 1000.0);
-    midToneFilter.setParameter(LV_SVFilter::ParameterId::kGain, 9.0);
+    preToneModule.prepare(spec);
+    preToneModule.setParameter(LV_SVFilter::ParameterId::kType, LV_SVFilter::FilterType::kBandShelf);
+    preToneModule.setParameter(LV_SVFilter::ParameterId::kQType, LV_SVFilter::QType::kParametric);
+    preToneModule.setParameter(LV_SVFilter::ParameterId::kCutoff, 1000.0);
+    preToneModule.setParameter(LV_SVFilter::ParameterId::kQ, 0.3);
+    preToneModule.setParameter(LV_SVFilter::ParameterId::kGain, 0.0);
     
     clipperModule.prepare(spec);
+    initClipper();
 }
 
 void LVTemplateAudioProcessor::releaseResources()
@@ -232,6 +288,7 @@ void LVTemplateAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     juce::dsp::AudioBlock<float> upSampledBlock;
     
     clipperModule.processBlock(audioBlock);
+    scopeModule.pushBuffer(buffer);
     
 //    if (oversamplingState)
 //    {
@@ -293,10 +350,15 @@ void LVTemplateAudioProcessor::setStateInformation (const void* data, int sizeIn
     if (tree.isValid())
     {
         treeState.state = tree;
+        
+        // Window Size
+        windowWidth = variableTree.getProperty("width");
+        windowHeight = variableTree.getProperty("height");
+        
+        // Clipper
+        initClipper();
     }
     
-    windowWidth = variableTree.getProperty("width");
-    windowHeight = variableTree.getProperty("height");
 }
 
 //==============================================================================

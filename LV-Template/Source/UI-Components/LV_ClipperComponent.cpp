@@ -12,17 +12,19 @@
 #include "LV_ClipperComponent.h"
 
 //==============================================================================
-LV_ClipperComponent::LV_ClipperComponent(juce::AudioProcessorValueTreeState& tree)
+LV_ClipperComponent::LV_ClipperComponent(LVTemplateAudioProcessor& p) : audioProcessor(p)
 {
     // Drive
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     
+    powerAttach = std::make_unique<ButtonAttachment>(audioProcessor.treeState, clipperPowerID, moduleBypass);
     addAndMakeVisible(moduleBypass);
     moduleBypass.setToggleStyle(juce::LV_Toggle::ToggleStyle::kPower);
     
-    driveFaderAttach = std::make_unique<SliderAttachment>(tree, driveID, driveFader);
+    driveFaderAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, driveID, driveFader);
     addAndMakeVisible(driveFader);
-    
+    driveFader.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.brighter(0.4f));
+    driveFader.forceShadow();
     addAndMakeVisible(driveFaderLabel);
     driveFaderLabel.attachToComponent(&driveFader, false);
     driveFaderLabel.setText("Drive", juce::dontSendNotification);
@@ -31,32 +33,47 @@ LV_ClipperComponent::LV_ClipperComponent(juce::AudioProcessorValueTreeState& tre
     clipGroup.setText("Clipper");
     
     // Ceiling Dial
+    ceilingDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, ceilingID, ceilingDial);
     addAndMakeVisible(ceilingDial);
+    ceilingDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.brighter(0.15f));
+    ceilingDial.forceShadow();
     addAndMakeVisible(ceilingDialLabel);
     ceilingDialLabel.attachToComponent(&ceilingDial, false);
     ceilingDialLabel.setText("Ceiling", juce::dontSendNotification);
     
     // Mix Dial
+    mixDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, mixID, mixDial);
     addAndMakeVisible(mixDial);
+    mixDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.brighter(0.15f));
+    mixDial.forceShadow();
     addAndMakeVisible(mixDialLabel);
     mixDialLabel.attachToComponent(&mixDial, false);
     mixDialLabel.setText("Mix", juce::dontSendNotification);
     
     // Trim Dial
+    trimDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, trimID, trimDial);
     addAndMakeVisible(trimDial);
+    trimDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.brighter(0.15f));
+    trimDial.forceShadow();
     addAndMakeVisible(trimDialLabel);
     trimDialLabel.attachToComponent(&trimDial, false);
     trimDialLabel.setText("Trim", juce::dontSendNotification);
     
-    // High Pass Filter Dial
-    addAndMakeVisible(hpfDial);
-    addAndMakeVisible(hpfDialLabel);
-    hpfDialLabel.attachToComponent(&hpfDial, false);
-    hpfDialLabel.setText("HPF", juce::dontSendNotification);
+    // Scope stuff
+    addAndMakeVisible(scopeGroup);
+    
+    addAndMakeVisible(audioProcessor.scopeModule);
+    audioProcessor.scopeModule.setOpaque(false);
+    audioProcessor.scopeModule.setColours(scopeColor.withAlpha(0.0f), juce::Colours::whitesmoke);
 }
 
 LV_ClipperComponent::~LV_ClipperComponent()
 {
+    driveFaderAttach = nullptr;
+    ceilingDialAttach = nullptr;
+    trimDialAttach = nullptr;
+    mixDialAttach = nullptr;
+    powerAttach = nullptr;
 }
 
 void LV_ClipperComponent::paint (juce::Graphics& g)
@@ -69,7 +86,7 @@ void LV_ClipperComponent::resized()
     auto topMargin = getWidth() * 0.1;
     auto dialSize = width * 0.1;
     auto spaceBetween = 1.15;
-    auto dialSpaceBetween = 1.1;
+    auto dialSpaceBetween = 1.65;
     
     // Clip stuff
     clipGroup.setBounds(0, 0, getWidth(), getHeight());
@@ -78,7 +95,9 @@ void LV_ClipperComponent::resized()
     ceilingDial.setBounds(driveFader.getX(), driveFader.getY() + driveFader.getHeight() * spaceBetween, dialSize, dialSize);
     mixDial.setBounds(ceilingDial.getX() + ceilingDial.getWidth() * dialSpaceBetween, ceilingDial.getY(), dialSize, dialSize);
     trimDial.setBounds(mixDial.getX() + mixDial.getWidth() * dialSpaceBetween, mixDial.getY(), dialSize, dialSize);
-    hpfDial.setBounds(trimDial.getX() + trimDial.getWidth() * dialSpaceBetween, trimDial.getY(), dialSize, dialSize);
+    
+    scopeGroup.setBounds(leftMargin * 6.0, topMargin * 1.4, width * 0.3, height * 0.45);
+    audioProcessor.scopeModule.setBounds(scopeGroup.getX() + 4, topMargin * 1.75, scopeGroup.getWidth() - 6, height * 0.4);
 }
 
 void LV_ClipperComponent::setWidthAndHeight(float w, float h)

@@ -15,10 +15,16 @@ void LV_Clipper::prepare(juce::dsp::ProcessSpec& spec)
     sampleRate = spec.sampleRate;
     
     drive.reset(sampleRate, 0.02);
+    ceiling.reset(sampleRate, 0.02);
+    trim.reset(sampleRate, 0.02);
+    mix.reset(sampleRate, 0.02);
 }
 
 void LV_Clipper::processBlock(juce::dsp::AudioBlock<float>& block)
 {
+    
+    if (bypassModule) return;
+    
     for (auto sample {0}; sample < block.getNumSamples(); sample++)
     {
         for (auto ch {0}; ch < block.getNumChannels(); ch++)
@@ -26,21 +32,39 @@ void LV_Clipper::processBlock(juce::dsp::AudioBlock<float>& block)
             float* data = block.getChannelPointer(ch);
             
             // Raw input
-            const auto input = data[sample];
+            drySignal = data[sample];
+            const auto newInput = data[sample] * juce::Decibels::decibelsToGain(ceiling.getNextValue() * -1.0);
             
             switch (clipperType)
             {
-                case ClipperTypeId::kSoftClipper:
+                case ClipperTypeId::kHardClipper:
                 {
-                    clippedSignal = returnSoftClip(input * logScale(juce::jmap(drive.getNextValue(), 0.0f, 24.0f, 0.0f, 6.0f)));
-                    data[sample] = clippedSignal;
+                    clippedSignal = returnHardClip(newInput * logScale(drive.getNextValue()), ch);
+                    clippedSignal *= juce::Decibels::decibelsToGain(ceiling.getNextValue());
+                    clippedSignal *= juce::Decibels::decibelsToGain(trim.getNextValue());
+                    blendSignal = (1.0 - mix.getNextValue()) * drySignal + mix.getNextValue() * clippedSignal;
+                    data[sample] = blendSignal;
                     break;
                 }
                     
-                case ClipperTypeId::kHardClipper:
+                case ClipperTypeId::kSoftClipper:
                 {
-                    clippedSignal = returnHardClip(input * logScale(drive.getNextValue()));
-                    data[sample] = clippedSignal;
+                    clippedSignal = returnSoftClip(newInput * logScale(juce::jmap(drive.getNextValue(), 0.0f, 24.0f, -1.0f, 4.0f)));
+                    clippedSignal *= juce::Decibels::decibelsToGain(ceiling.getNextValue());
+                    clippedSignal *= juce::Decibels::decibelsToGain(trim.getNextValue());
+                    blendSignal = (1.0 - mix.getNextValue()) * drySignal + mix.getNextValue() * clippedSignal;
+                    data[sample] = blendSignal;
+                    break;
+                }
+                    
+                    
+                case ClipperTypeId::kAnalogClipper:
+                {
+                    clippedSignal = returnAnalogClip(newInput * logScale(drive.getNextValue()), ch);
+                    clippedSignal *= juce::Decibels::decibelsToGain(ceiling.getNextValue());
+                    clippedSignal *= juce::Decibels::decibelsToGain(trim.getNextValue());
+                    blendSignal = (1.0 - mix.getNextValue()) * drySignal + mix.getNextValue() * clippedSignal;
+                    data[sample] = blendSignal;
                     break;
                 }
             }
@@ -50,10 +74,10 @@ void LV_Clipper::processBlock(juce::dsp::AudioBlock<float>& block)
 
 float LV_Clipper::returnSoftClip(const float input)
 {
-    return constA * input + constB * std::pow(input, 3);
+    return softCoeffA * input + softCoeffB * std::pow(input, 3);
 }
 
-float LV_Clipper::returnHardClip(const float input)
+float LV_Clipper::returnHardClip(const float input, const int channel)
 {
     auto newInput = piDivisor * std::atan(input) * juce::Decibels::decibelsToGain(6.0);
     
@@ -65,19 +89,38 @@ float LV_Clipper::returnHardClip(const float input)
     return newInput;
 }
 
-void LV_Clipper::setClipperType(ClipperTypeId clipperType)
+float LV_Clipper::returnAnalogClip(const float input, const int channel)
 {
-    switch (clipperType)
+    auto diode = juce::Decibels::decibelsToGain(6.5) * (std::exp(analogCoeffA * input / (analogCoeffB * analogCoeffC)) - 1.0);
+    
+    if (std::abs(diode) > 1.0)
     {
+        diode *= 1.0 / std::abs(diode);
+    }
+    
+    return diode;
+}
+
+void LV_Clipper::setClipperType(ClipperTypeId newType)
+{
+    switch (newType)
+    {
+        case LV_Clipper::ClipperTypeId::kHardClipper:
+        {
+            clipperType = ClipperTypeId::kHardClipper;
+            break;
+        }
+            
         case LV_Clipper::ClipperTypeId::kSoftClipper:
         {
             clipperType = ClipperTypeId::kSoftClipper;
             break;
         }
             
-        case LV_Clipper::ClipperTypeId::kHardClipper:
+            
+        case LV_Clipper::ClipperTypeId::kAnalogClipper:
         {
-            clipperType = ClipperTypeId::kHardClipper;
+            clipperType = ClipperTypeId::kAnalogClipper;
             break;
         }
     }
@@ -87,27 +130,28 @@ void LV_Clipper::setParameter(ParameterId parameter, float parameterValue)
 {
     switch (parameter)
     {
-        case LV_Clipper::ParameterId::kPreamp:
-        {
-//            preamp = parameterValue;
-            break;
-        }
-            
         case LV_Clipper::ParameterId::kDrive:
         {
             drive.setTargetValue(parameterValue);
             break;
         }
             
-        case LV_Clipper::ParameterId::kWet:
+        case LV_Clipper::ParameterId::kCeiling:
         {
-            wet = juce::jmap(parameterValue, 0.0f, 100.0f, 0.0f, 1.0f);
+            ceiling.setTargetValue(parameterValue);
+            break;
+        }
+            
+        case LV_Clipper::ParameterId::kMix:
+        {
+            const auto newMix = juce::jmap(parameterValue, 0.0f, 100.0f, 0.0f, 1.0f);
+            mix.setTargetValue(newMix);
             break;
         }
             
         case LV_Clipper::ParameterId::kTrim:
         {
-            trim = parameterValue;
+            trim.setTargetValue(parameterValue);
             break;
         }
             

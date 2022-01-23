@@ -12,8 +12,9 @@
 //==============================================================================
 LVTemplateAudioProcessorEditor::LVTemplateAudioProcessorEditor (LVTemplateAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p),
+headerComponent(audioProcessor.treeState),
 preToneComponent(audioProcessor.treeState),
-clipperComponent(audioProcessor.treeState),
+clipperComponent(audioProcessor),
 postComponent(audioProcessor.treeState)
 {
     uiConstructor();

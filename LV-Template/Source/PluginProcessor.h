@@ -78,7 +78,7 @@ public:
     float windowWidth {0.0f};
     float windowHeight {0.0f};
     
-    float drive {0.0};
+    juce::AudioVisualiserComponent scopeModule {1};
     
 private:
     
@@ -95,7 +95,15 @@ private:
     bool oversamplingState = false;
     
     LV_SVFilter midToneFilter;
+    
     LV_Clipper clipperModule;
+    float clipTypeChoice {1.0f};
+    void initClipper();
+    
+    LV_SVFilter preToneModule;
+    LV_SVFilter postToneModule;
+    
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessor)
 };

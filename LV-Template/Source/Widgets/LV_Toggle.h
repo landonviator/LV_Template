@@ -23,8 +23,8 @@ namespace juce
         LV_Toggle()
         {
             setClickingTogglesState(true);
-            setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::dimgrey);
-            setColour(juce::ToggleButton::tickColourId, juce::Colours::springgreen);
+            setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::dimgrey.withAlpha(0.5f));
+            setColour(juce::ToggleButton::tickColourId, juce::Colours::springgreen.withAlpha(0.5f));
             setLookAndFeel(&powerToggle);
         }
         
@@ -59,15 +59,15 @@ namespace juce
         
         void mouseEnter (const MouseEvent& event) override
         {
-            setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::whitesmoke.withAlpha(0.85f));
-            setColour(juce::ToggleButton::tickColourId, juce::Colours::whitesmoke.withAlpha(0.85f));
+            setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::whitesmoke.withAlpha(0.5f));
+            setColour(juce::ToggleButton::tickColourId, juce::Colours::whitesmoke.withAlpha(0.5f));
             
         }
         
         void mouseExit (const MouseEvent& event) override
         {
-            setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::dimgrey);
-            setColour(juce::ToggleButton::tickColourId, juce::Colours::springgreen);
+            setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::dimgrey.withAlpha(0.5f));
+            setColour(juce::ToggleButton::tickColourId, juce::Colours::springgreen.withAlpha(0.5f));
         }
         
         private:

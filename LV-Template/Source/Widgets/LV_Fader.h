@@ -51,17 +51,22 @@ namespace juce
             setLookAndFeel(nullptr);
         }
         
+        void forceShadow()
+        {
+            setComponentEffect(&sliderShadow);
+        }
+        
     private:
         
         void mouseEnter (const MouseEvent& event) override
         {
-            setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(1.0).withAlpha(0.9f));
+            setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedBrightness(1.25));
             setComponentEffect(&sliderShadow);
         }
         
         void mouseExit (const MouseEvent& event) override
         {
-            setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(1.0));
+            setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedBrightness(0.8));
             setComponentEffect(&sliderShadow);
         }
         

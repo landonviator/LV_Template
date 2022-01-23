@@ -17,7 +17,10 @@ void LVTemplateAudioProcessorEditor::uiConstructor()
     // Window
     initWindow();
     
-    initOversamplingMenu();
+    // Header
+    addAndMakeVisible(headerComponent);
+    
+    
     
     // Pre stuff
     addAndMakeVisible(preToneComponent);

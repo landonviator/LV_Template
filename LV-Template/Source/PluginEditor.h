@@ -14,6 +14,7 @@
 #include "UI-Components/LV_ClipperComponent.h"
 #include "UI-Components/LV_PreToneComponent.h"
 #include "UI-Components/LV_PostToneComponent.h"
+#include "UI-Components/LV_HeaderComponent.h"
 #include "Widgets/WidgetIncludes.h"
 
 //==============================================================================
@@ -45,15 +46,10 @@ private:
     void saveWindowSize();
     bool constructorFinished {false};
     
-    juce::LV_Menu oversamplingMenu;
-    void initOversamplingMenu();
-    
-    using ComboBoxAttachment = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
-    std::unique_ptr<ComboBoxAttachment> oversamplingMenuAttach;
-    
+    LV_HeaderComponent headerComponent;
     LV_PreToneComponent preToneComponent;
     LV_ClipperComponent clipperComponent;
     LV_PostToneComponent postComponent;
-
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

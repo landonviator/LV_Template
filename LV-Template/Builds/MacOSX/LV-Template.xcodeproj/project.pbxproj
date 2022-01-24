@@ -58,6 +58,7 @@
 		91DBDB98D684A3D5A95B04D3 /* BinaryData4.cpp */ = {isa = PBXBuildFile; fileRef = 9323F10AAA4418CEB7B4A1AB; };
 		965E51DFB0DCFBFA4A21895D /* include_juce_audio_plugin_client_AU_1.mm */ = {isa = PBXBuildFile; fileRef = D76B7D0CC6A6D7E67F546C4A; };
 		9A5987CC83F7723AE5874E30 /* LV_SVFilter.cpp */ = {isa = PBXBuildFile; fileRef = 86ECF82AF4C0BD5A383BC00E; };
+		9A9D6550856A13CE232C75E8 /* InitPostTone.cpp */ = {isa = PBXBuildFile; fileRef = C90AFC3D45185C8DB34B1B71; };
 		A77E998F56794ED8A72ACF36 /* Standalone Plugin */ = {isa = PBXBuildFile; fileRef = C79D4DF9092D6964A00C3549; };
 		A884F2E3B27ADD9890539DF6 /* PluginProcessor.cpp */ = {isa = PBXBuildFile; fileRef = 28E986E69A159BE55ED2468D; };
 		A93305F73C4F2B12315B666E /* Carbon.framework */ = {isa = PBXBuildFile; fileRef = FC00BB7DECDF21EB3925FC7E; };
@@ -171,6 +172,7 @@
 		C3683ABA288AA375E57EE4F0 /* LV_Fader.h */ /* LV_Fader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LV_Fader.h; path = ../../Source/Widgets/LV_Fader.h; sourceTree = SOURCE_ROOT; };
 		C3D9059767581FE1C776EDBF /* include_juce_audio_plugin_client_Standalone.cpp */ /* include_juce_audio_plugin_client_Standalone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_Standalone.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp; sourceTree = SOURCE_ROOT; };
 		C79D4DF9092D6964A00C3549 /* Standalone Plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LV-Template.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C90AFC3D45185C8DB34B1B71 /* InitPostTone.cpp */ /* InitPostTone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = InitPostTone.cpp; path = ../../Source/DSP/InitPostTone.cpp; sourceTree = SOURCE_ROOT; };
 		C93AEEECAB4D75BF2DB89177 /* landon55-03.png */ /* landon55-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "landon55-03.png"; path = "../../Source/Assets/landon55-03.png"; sourceTree = SOURCE_ROOT; };
 		CABD6961D87A350F24F7D22B /* Info-Standalone_Plugin.plist */ /* Info-Standalone_Plugin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Standalone_Plugin.plist"; path = "Info-Standalone_Plugin.plist"; sourceTree = SOURCE_ROOT; };
 		D2138438E78BB9BF6714868D /* UI-SaveWindow.cpp */ /* UI-SaveWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "UI-SaveWindow.cpp"; path = "../../Source/UI-Methods/UI-SaveWindow.cpp"; sourceTree = SOURCE_ROOT; };
@@ -304,6 +306,7 @@
 		69787E3A1DC64A833580E215 /* DSP */ = {
 			isa = PBXGroup;
 			children = (
+				C90AFC3D45185C8DB34B1B71,
 				22E668D4478FEBA874AF960D,
 				EC007E52C68518455AFC4F5F,
 				25B34D21366CE3AD2C4CCC08,
@@ -767,6 +770,7 @@
 				8FF04CCFEF69A3E5C5284CC6,
 				ADFE7902372F387465DE7F76,
 				1E4214C14BB2F87653B0A822,
+				9A9D6550856A13CE232C75E8,
 				39EEB3FA7204A76C3B4426FB,
 				D9EE62A7618A94921227A806,
 				572348C6834C4754B3F1E75D,

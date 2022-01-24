@@ -32,6 +32,7 @@ public:
         kQType,
         kSampleRate,
         kBypass,
+        kClipOutput
     };
         
     enum FilterType
@@ -63,6 +64,7 @@ private:
     float mGain {1.0f};
     float mRawGain {0.0f};
     bool mGlobalBypass {false};
+    bool mClipOutput {false};
     
     // Filter type switch
     FilterType mType {FilterType::kLowPass};

@@ -42,6 +42,10 @@ oversamplingModule(2, 3, juce::dsp::Oversampling<float>::FilterType::filterHalfB
     treeState.addParameterListener (preGainID, this);
     treeState.addParameterListener (preQID, this);
     treeState.addParameterListener (prePowerID, this);
+    treeState.addParameterListener (postFreqID, this);
+    treeState.addParameterListener (postGainID, this);
+    treeState.addParameterListener (postQID, this);
+    treeState.addParameterListener (postPowerID, this);
 }
 
 LVTemplateAudioProcessor::~LVTemplateAudioProcessor()
@@ -60,6 +64,10 @@ LVTemplateAudioProcessor::~LVTemplateAudioProcessor()
     treeState.removeParameterListener (preGainID, this);
     treeState.removeParameterListener (preQID, this);
     treeState.removeParameterListener (prePowerID, this);
+    treeState.removeParameterListener (postFreqID, this);
+    treeState.removeParameterListener (postGainID, this);
+    treeState.removeParameterListener (postQID, this);
+    treeState.removeParameterListener (postPowerID, this);
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::createParameterLayout()
@@ -67,7 +75,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
   std::vector <std::unique_ptr<juce::RangedAudioParameter>> params;
 
   // Make sure to update the number of reservations after adding params
-  params.reserve(15);
+  params.reserve(19);
 
   auto pInput = std::make_unique<juce::AudioParameterFloat>(inputID, inputName, 0.0, 12.0, 0.0);
   auto pDrive = std::make_unique<juce::AudioParameterFloat>(driveID, driveName, 0.0, 24.0, 0.0);
@@ -83,6 +91,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
   auto pPreGain = std::make_unique<juce::AudioParameterFloat>(preGainID, preGainName, -12.0, 12.0, 0.0);
   auto pPreQ = std::make_unique<juce::AudioParameterInt>(preQID, preQName, 0.0, 100.0, 50.0);
   auto pPrePower = std::make_unique<juce::AudioParameterBool> (prePowerID, prePowerName, false);
+  auto pPostFreq = std::make_unique<juce::AudioParameterInt>(postFreqID, postFreqName, 250.0, 2500.0, 1000.0);
+  auto pPostGain = std::make_unique<juce::AudioParameterFloat>(postGainID, postGainName, -12.0, 12.0, 0.0);
+  auto pPostQ = std::make_unique<juce::AudioParameterInt>(postQID, postQName, 0.0, 100.0, 50.0);
+  auto pPostPower = std::make_unique<juce::AudioParameterBool> (postPowerID, postPowerName, false);
     
   params.push_back(std::move(pInput));
   params.push_back(std::move(pDrive));
@@ -98,16 +110,17 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
   params.push_back(std::move(pPreGain));
   params.push_back(std::move(pPreQ));
   params.push_back(std::move(pPrePower));
+  params.push_back(std::move(pPostFreq));
+  params.push_back(std::move(pPostGain));
+  params.push_back(std::move(pPostQ));
+  params.push_back(std::move(pPostPower));
 
   return { params.begin(), params.end() };
 }
 
 void LVTemplateAudioProcessor::parameterChanged(const juce::String &parameterID, float newValue)
 {
-    if (parameterID == inputID)
-    {
-    }
-    
+    /** Clipper */
     if (parameterID == driveID)
     {
         clipperModule.setParameter(LV_Clipper::ParameterId::kDrive, newValue);
@@ -128,6 +141,24 @@ void LVTemplateAudioProcessor::parameterChanged(const juce::String &parameterID,
         clipperModule.setParameter(LV_Clipper::ParameterId::kMix, newValue);
     }
     
+    if (parameterID == clipperPowerID)
+    {
+        clipperModule.setParameter(LV_Clipper::ParameterId::kBypass, newValue);
+    }
+    
+    if (parameterID == clipTypeID)
+    {
+        clipTypeChoice = newValue;
+        
+        switch (static_cast<int>(clipTypeChoice))
+        {
+            case 1: clipperModule.setClipperType(LV_Clipper::ClipperTypeId::kHardClipper); break;
+            case 2: clipperModule.setClipperType(LV_Clipper::ClipperTypeId::kSoftClipper); break;
+            case 3: clipperModule.setClipperType(LV_Clipper::ClipperTypeId::kAnalogClipper); break;
+        }
+    }
+    
+    /** Pre */
     if (parameterID == preFreqID)
     {
         preToneModule.setParameter(LV_SVFilter::ParameterId::kCutoff, newValue);
@@ -149,23 +180,29 @@ void LVTemplateAudioProcessor::parameterChanged(const juce::String &parameterID,
         preToneModule.setParameter(LV_SVFilter::ParameterId::kBypass, newValue);
     }
     
-    if (parameterID == clipperPowerID)
+    /** Post */
+    if (parameterID == postFreqID)
     {
-        clipperModule.setParameter(LV_Clipper::ParameterId::kBypass, newValue);
+        postToneModule.setParameter(LV_SVFilter::ParameterId::kCutoff, newValue);
     }
     
-    if (parameterID == clipTypeID)
+    if (parameterID == postGainID)
     {
-        clipTypeChoice = newValue;
-        
-        switch (static_cast<int>(clipTypeChoice))
-        {
-            case 1: clipperModule.setClipperType(LV_Clipper::ClipperTypeId::kHardClipper); break;
-            case 2: clipperModule.setClipperType(LV_Clipper::ClipperTypeId::kSoftClipper); break;
-            case 3: clipperModule.setClipperType(LV_Clipper::ClipperTypeId::kAnalogClipper); break;
-        }
+        postToneModule.setParameter(LV_SVFilter::ParameterId::kGain, newValue);
     }
     
+    if (parameterID == postQID)
+    {
+        auto newQ = juce::jmap(newValue, 0.0f, 100.0f, 0.01f, 0.95f);
+        postToneModule.setParameter(LV_SVFilter::ParameterId::kQ, newQ);
+    }
+    
+    if (parameterID == postPowerID)
+    {
+        postToneModule.setParameter(LV_SVFilter::ParameterId::kBypass, newValue);
+    }
+    
+    /** Oversampling */
     if (parameterID == qualityID)
     {
         if (newValue - 1 == 0)
@@ -274,6 +311,9 @@ void LVTemplateAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     clipperModule.prepare(spec);
     initClipper();
+    
+    postToneModule.prepare(spec);
+    initPostTone();
 }
 
 void LVTemplateAudioProcessor::releaseResources()
@@ -322,6 +362,7 @@ void LVTemplateAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
     preToneModule.processBlock(audioBlock);
     clipperModule.processBlock(audioBlock);
+    postToneModule.processBlock(audioBlock);
     scopeModule.pushBuffer(buffer);
     
 //    if (oversamplingState)
@@ -394,6 +435,9 @@ void LVTemplateAudioProcessor::setStateInformation (const void* data, int sizeIn
         
         // Clipper
         initClipper();
+        
+        // Post Tone
+        initPostTone();
     }
     
 }

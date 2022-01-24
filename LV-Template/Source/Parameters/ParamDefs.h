@@ -52,3 +52,15 @@
 #define prePowerID "pre power"
 #define prePowerName "Pre Power"
 
+#define postFreqID "postFreq"
+#define postFreqName "Post Freq"
+
+#define postGainID "postGain"
+#define postGainName "Post Gain"
+
+#define postQID "postQ"
+#define postQName "Post Q"
+
+#define postPowerID "post power"
+#define postPowerName "Pre Power"
+

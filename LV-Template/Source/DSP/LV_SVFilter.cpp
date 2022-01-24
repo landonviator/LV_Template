@@ -35,6 +35,7 @@ void LV_SVFilter::setParameter(ParameterId parameter, float parameterValue)
         case ParameterId::kGain: setGain(parameterValue); break;
         case ParameterId::kSampleRate: mCurrentSampleRate = parameterValue; break;
         case ParameterId::kBypass: mGlobalBypass = static_cast<bool>(parameterValue);
+        case ParameterId::kClipOutput: mClipOutput = static_cast<bool>(parameterValue);
     }
 }
 //==============================================================================
@@ -162,8 +163,12 @@ void LV_SVFilter::processBlock(juce::dsp::AudioBlock<float>& block)
             const double LS = x + mGain * LP;
             const double HS = x + mGain * HP;
                 
-            //Main output code
             data[sample] = BShelf * bsLevel + LS * lsLevel + HS * hsLevel + HP * hpLevel + LP * lpLevel;
+            
+            if (mClipOutput && std::abs(data[sample]) > 1.0)
+            {
+                data[sample] *= 1.0 / std::abs(data[sample]);
+            }
                 
             // unit delay (state variable)
             mZ1[ch] = mGCoeff * HP + BP;

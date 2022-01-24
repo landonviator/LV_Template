@@ -53,6 +53,7 @@ LV_PreToneComponent::~LV_PreToneComponent()
     freqDialAttach = nullptr;
     gainDialAttach = nullptr;
     qDialAttach = nullptr;
+    powerAttach = nullptr;
 }
 
 void LV_PreToneComponent::paint (juce::Graphics& g)
@@ -64,8 +65,6 @@ void LV_PreToneComponent::resized()
     auto leftMargin = getWidth() * 0.05;
     auto topMargin = getWidth() * 0.1;
     auto dialSize = width * 0.1;
-    auto spaceBetween = 1.15;
-    auto dialSpaceBetween = 1.1;
     
     // Pre stuff
     preGroup.setBounds(0, 0, getWidth(), getHeight());

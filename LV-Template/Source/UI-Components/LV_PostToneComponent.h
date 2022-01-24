@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "../PluginProcessor.h"
 #include "../Widgets/WidgetIncludes.h"
 #include "../Parameters/ParamDefs.h"
 //==============================================================================
@@ -19,7 +20,7 @@
 class LV_PostToneComponent  : public juce::Component
 {
 public:
-    LV_PostToneComponent(juce::AudioProcessorValueTreeState& tree);
+    LV_PostToneComponent(LVTemplateAudioProcessor& p);
     ~LV_PostToneComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -41,11 +42,18 @@ private:
     juce::LV_Label gainDialLabel;
     juce::LV_Label qDialLabel;
     
+    std::unique_ptr<SliderAttachment> freqDialAttach;
+    std::unique_ptr<SliderAttachment> gainDialAttach;
+    std::unique_ptr<SliderAttachment> qDialAttach;
+    std::unique_ptr<ButtonAttachment> powerAttach;
+    
     juce::LV_GroupComponent postGroup;
     
     /** Vars ==================================================================*/
     float width {0.0f};
     float height {0.0f};
+    
+    LVTemplateAudioProcessor& audioProcessor;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LV_PostToneComponent)
 };

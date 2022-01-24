@@ -104,7 +104,7 @@ private:
     void initPreTone();
     
     LV_SVFilter postToneModule;
-    
+    void initPostTone();
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessor)

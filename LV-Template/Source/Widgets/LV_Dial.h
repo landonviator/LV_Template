@@ -73,13 +73,13 @@ private:
     
     void mouseEnter (const MouseEvent& event) override
     {
-        setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedBrightness(1.25));
+        setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedLightness(1.25));
         setComponentEffect(&dialShadow);
     }
     
     void mouseExit (const MouseEvent& event) override
     {
-        setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedBrightness(0.8f));
+        setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedLightness(0.8f));
         setComponentEffect(&dialShadow);
     }
     
@@ -99,9 +99,10 @@ private:
         setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
         setTextBoxStyle(juce::Slider::TextBoxBelow, false, 96, 32);
         setColour(juce::Slider::ColourIds::rotarySliderFillColourId, findColour(Slider::ColourIds::thumbColourId));
-        setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colour::fromRGB(35, 35, 35));
+        setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.brighter(0.1).withAlpha(0.8f));
+        setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::black.brighter(0.1).withAlpha(0.8f));
         setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
-        setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
+        setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.36f));
         setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(1.0f));
         setRange(rangeStart, rangeEnd, intervalValue);
         setDoubleClickReturnValue(true, returnValue);

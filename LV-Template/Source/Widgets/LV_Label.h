@@ -22,8 +22,11 @@ public:
     {
         setJustificationType(juce::Justification::centredTop);
         setColour(0x1000280, juce::Colour::fromFloatRGBA(0, 0, 0, 0));
-        setColour(0x1000281, juce::Colour::fromFloatRGBA(1, 1, 1, 0.25));
+        setColour(0x1000281, juce::Colours::whitesmoke.withAlpha(0.36f));
         setColour(0x1000282, juce::Colour::fromFloatRGBA(0, 0, 0, 0));
+        
+        const Font font (juce::Font ("Montserrat", 16.0f, juce::Font::FontStyleFlags::bold));
+        setFont(font);
     }
     
 private:

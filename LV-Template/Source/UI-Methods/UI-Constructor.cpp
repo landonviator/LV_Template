@@ -19,15 +19,4 @@ void LVTemplateAudioProcessorEditor::uiConstructor()
     
     // Header
     addAndMakeVisible(headerComponent);
-    
-    
-    
-    // Pre stuff
-    addAndMakeVisible(preToneComponent);
-    
-    // Clipper stuff
-    addAndMakeVisible(clipperComponent);
-    
-    // Post stuff
-    addAndMakeVisible(postComponent);
 }

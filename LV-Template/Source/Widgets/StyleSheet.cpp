@@ -166,11 +166,11 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
         g.setColour(slider.findColour(Slider::thumbColourId).withAlpha(0.7f)); //center
         g.fillEllipse(dialArea);
         
-        g.setColour(juce::Colours::whitesmoke.darker(1.75f).withAlpha(0.7f)); //outline
+        g.setColour(slider.findColour(juce::Slider::ColourIds::rotarySliderOutlineColourId)); //outline
         g.drawEllipse(rx, ry, diameter, diameter, 4.0f);
         juce::Path dialTick;
-        g.setColour(juce::Colours::whitesmoke.darker(1.75f).withAlpha(0.7f)); //tick color
-        dialTick.addRectangle(0, -radius + 2, 4.0f, radius * 0.6);
+        g.setColour(slider.findColour(juce::Slider::ColourIds::trackColourId)); //tick color
+        dialTick.addRoundedRectangle(0, -radius + 4, 4.0f, radius * 0.6, 2.0);
         g.fillPath(dialTick, juce::AffineTransform::rotation(angle).translated(centerX, centerY));
     }
 
@@ -181,7 +181,7 @@ void LV_AlphaDialLAF::drawLabel(Graphics &g, Label &label)
         if (! label.isBeingEdited())
         {
             auto alpha = label.isEnabled() ? 1.0f : 0.5f;
-            const Font font (juce::Font ("Helvetica", 12.0f, juce::Font::FontStyleFlags::bold));
+            const Font font (juce::Font ("Montserrat", 16.0f, juce::Font::FontStyleFlags::bold));
 
             g.setColour (label.findColour (Label::textColourId).withMultipliedAlpha (alpha));
             g.setFont (font);
@@ -399,4 +399,67 @@ void LV_PowerToggleLAF::drawToggleButton(juce::Graphics &g,
     g.setColour(color);
     g.strokePath(button, pst);
 }
+
+void LV_CustomBorder::drawGroupComponentOutline (Graphics& g, int width, int height,
+                                                const String& text, const Justification& position,
+                                                GroupComponent& group)
+{
+    const float textH = 24.0f;
+    const float indent = 3.0f;
+    const float textEdgeGap = 4.0f;
+    auto cs = 5.0f;
+
+    Font f (Font (juce::Font ("Montserrat", 24.0f, juce::Font::FontStyleFlags::bold)));
+
+    Path p;
+    auto x = indent;
+    auto y = f.getAscent() - 3.0f;
+    auto w = jmax (0.0f, (float) width - x * 2.0f);
+    auto h = jmax (0.0f, (float) height - y  - indent);
+    cs = jmin (cs, w * 0.5f, h * 0.5f);
+    auto cs2 = 2.0f * cs;
+
+    auto textW = text.isEmpty() ? 0
+                                : jlimit (0.0f,
+                                          jmax (0.0f, w - cs2 - textEdgeGap * 2),
+                                          (float) f.getStringWidth (text) + textEdgeGap * 2.0f);
+    auto textX = cs + textEdgeGap;
+
+    if (position.testFlags (Justification::horizontallyCentred))
+        textX = cs + (w - cs2 - textW) * 0.5f;
+    else if (position.testFlags (Justification::right))
+        textX = w - cs - textW - textEdgeGap;
+
+    p.startNewSubPath (x + textX + textW, y);
+    p.lineTo (x + w - cs, y);
+
+    p.addArc (x + w - cs2, y, cs2, cs2, 0, MathConstants<float>::halfPi);
+    p.lineTo (x + w, y + h - cs);
+
+    p.addArc (x + w - cs2, y + h - cs2, cs2, cs2, MathConstants<float>::halfPi, MathConstants<float>::pi);
+    p.lineTo (x + cs, y + h);
+
+    p.addArc (x, y + h - cs2, cs2, cs2, MathConstants<float>::pi, MathConstants<float>::pi * 1.5f);
+    p.lineTo (x, y + cs);
+
+    p.addArc (x, y, cs2, cs2, MathConstants<float>::pi * 1.5f, MathConstants<float>::twoPi);
+    p.lineTo (x + textX, y);
+
+    auto alpha = group.isEnabled() ? 1.0f : 0.5f;
+
+    g.setColour (group.findColour (GroupComponent::outlineColourId)
+                    .withMultipliedAlpha (alpha));
+
+    g.strokePath (p, PathStrokeType (3.0f));
+
+    g.setColour (group.findColour (GroupComponent::textColourId)
+                    .withMultipliedAlpha (alpha));
+    g.setFont (f);
+    g.drawText (text,
+                roundToInt (x + textX), 6,
+                roundToInt (textW),
+                roundToInt (textH),
+                Justification::centred, true);
+}
+
 }

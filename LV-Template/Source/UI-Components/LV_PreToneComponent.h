@@ -35,9 +35,9 @@ private:
     juce::LV_Toggle moduleBypass;
     juce::LV_GroupComponent preGroup;
     
-    juce::LV_Dial freqDial {" dB", 250.0, 2500.0, 1.0, 1000.0};
+    juce::LV_Dial freqDial {" Hz", 250.0, 2500.0, 1.0, 1000.0};
     juce::LV_Dial gainDial {" dB", -12.0, 12.0, 0.1, 0.0};
-    juce::LV_Dial qDial {" dB", 0.0, 100, 1.0, 50.0};
+    juce::LV_Dial qDial {" %", 0.0, 100, 1.0, 50.0};
     
     std::unique_ptr<SliderAttachment> freqDialAttach;
     std::unique_ptr<SliderAttachment> gainDialAttach;

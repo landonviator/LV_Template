@@ -18,28 +18,28 @@ LV_PreToneComponent::LV_PreToneComponent(LVTemplateAudioProcessor& p) : audioPro
     addAndMakeVisible(preGroup);
     preGroup.setText("Pre Tone");
     
-    powerAttach = std::make_unique<ButtonAttachment>(audioProcessor.treeState, prePowerID, moduleBypass);
+//    powerAttach = std::make_unique<ButtonAttachment>(audioProcessor.treeState, prePowerID, moduleBypass);
     addAndMakeVisible(moduleBypass);
     moduleBypass.setToggleStyle(juce::LV_Toggle::ToggleStyle::kPower);
     
     // Freq
-    freqDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, preFreqID, freqDial);
+//    freqDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, preFreqID, freqDial);
     addAndMakeVisible(freqDial);
     addAndMakeVisible(freqDialLabel);
     freqDialLabel.attachToComponent(&freqDial, false);
     freqDialLabel.setText("Freq", juce::dontSendNotification);
     
     // Gain
-    gainDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, preGainID, gainDial);
+//    gainDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, preGainID, gainDial);
     addAndMakeVisible(gainDial);
-    gainDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromRGB(179, 153, 212).darker(1.0f).darker(0.5f));
+    gainDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::orange.darker(0.5));
     gainDial.forceShadow();
     addAndMakeVisible(gainDialLabel);
     gainDialLabel.attachToComponent(&gainDial, false);
     gainDialLabel.setText("Gain", juce::dontSendNotification);
     
     // Q
-    qDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, preQID, qDial);
+//    qDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, preQID, qDial);
     addAndMakeVisible(qDial);
     qDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::palevioletred.darker(1.0).darker(0.3));
     qDial.forceShadow();
@@ -50,10 +50,10 @@ LV_PreToneComponent::LV_PreToneComponent(LVTemplateAudioProcessor& p) : audioPro
 
 LV_PreToneComponent::~LV_PreToneComponent()
 {
-    freqDialAttach = nullptr;
-    gainDialAttach = nullptr;
-    qDialAttach = nullptr;
-    powerAttach = nullptr;
+//    freqDialAttach = nullptr;
+//    gainDialAttach = nullptr;
+//    qDialAttach = nullptr;
+//    powerAttach = nullptr;
 }
 
 void LV_PreToneComponent::paint (juce::Graphics& g)

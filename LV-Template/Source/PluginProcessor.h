@@ -94,18 +94,6 @@ private:
     float projectSampleRate {44100.0f};
     bool oversamplingState = false;
     
-    LV_SVFilter midToneFilter;
-    
-    LV_Clipper clipperModule;
-    float clipTypeChoice {1.0f};
-    void initClipper();
-    
-    LV_SVFilter preToneModule;
-    void initPreTone();
-    
-    LV_SVFilter postToneModule;
-    void initPostTone();
-    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessor)
 };

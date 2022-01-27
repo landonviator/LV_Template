@@ -21,6 +21,7 @@
 
 #pragma once
 #include <JuceHeader.h>
+#include "../Widgets/StyleSheet.h"
 
 namespace juce
 {
@@ -31,8 +32,18 @@ namespace juce
         LV_GroupComponent()
         {
             setColour(juce::GroupComponent::ColourIds::outlineColourId, juce::Colours::whitesmoke.withAlpha(0.125f));
-            setColour(juce::GroupComponent::ColourIds::textColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
+            setColour(juce::GroupComponent::ColourIds::textColourId, juce::Colours::whitesmoke.withAlpha(0.36f));
             setTextLabelPosition(juce::Justification::centred);
+            setLookAndFeel(&customBorder);
         }
+        
+        ~LV_GroupComponent()
+        {
+            setLookAndFeel(nullptr);
+        }
+        
+    private:
+        
+        LV_CustomBorder customBorder;
     };
 }

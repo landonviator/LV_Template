@@ -22,19 +22,12 @@ LV_HeaderComponent::LV_HeaderComponent(juce::AudioProcessorValueTreeState& tree)
     oversamplingMenu.addItem("High Quality", 2);
     addAndMakeVisible(oversamplingMenu);
     
-    clipTypeMenuAttach = std::make_unique<ComboBoxAttachment>(tree, clipTypeID, clipTypeMenu);
+//    clipTypeMenuAttach = std::make_unique<ComboBoxAttachment>(tree, clipTypeID, clipTypeMenu);
     clipTypeMenu.setTextWhenNothingSelected("Clip Type");
     clipTypeMenu.addItem("Hard", 1);
     clipTypeMenu.addItem("Soft", 2);
     clipTypeMenu.addItem("Analog", 3);
     addAndMakeVisible(clipTypeMenu);
-    
-    clipColorMenuAttach = std::make_unique<ComboBoxAttachment>(tree, clipColorID, clipColorMenu);
-    clipColorMenu.setTextWhenNothingSelected("Clip Color");
-    clipColorMenu.addItem("Transparent", 1);
-    clipColorMenu.addItem("Vintage", 2);
-    clipColorMenu.addItem("Modern", 3);
-    addAndMakeVisible(clipColorMenu);
 }
 
 LV_HeaderComponent::~LV_HeaderComponent()
@@ -70,8 +63,7 @@ void LV_HeaderComponent::resized()
     float menuHeight = height * 0.06f;
     
     oversamplingMenu.setBounds(rightMargin - menuWidth, topMargin, menuWidth, menuHeight);
-    clipColorMenu.setBounds(oversamplingMenu.getX() - spaceBetween - oversamplingMenu.getWidth(), topMargin, menuWidth, menuHeight);
-    clipTypeMenu.setBounds(clipColorMenu.getX() - spaceBetween - clipColorMenu.getWidth(), topMargin, menuWidth, menuHeight);
+    clipTypeMenu.setBounds(oversamplingMenu.getX() - spaceBetween - oversamplingMenu.getWidth(), topMargin, menuWidth, menuHeight);
 }
 
 void LV_HeaderComponent::setWidthAndHeight(float w, float h)

@@ -30,16 +30,17 @@ LV_PostToneComponent::LV_PostToneComponent(LVTemplateAudioProcessor& p) : audioP
     freqDialLabel.setText("Freq", juce::dontSendNotification);
     
     // Gain
-    gainDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, postGainID, gainDial);
+//    gainDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, postGainID, gainDial);
     addAndMakeVisible(gainDial);
-    gainDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromRGB(179, 153, 212).darker(1.0f).darker(0.5f));
+    gainDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::orange.darker(0.5));
+    gainDial.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::black.brighter(0.1).withAlpha(0.8f));
     gainDial.forceShadow();
     addAndMakeVisible(gainDialLabel);
     gainDialLabel.attachToComponent(&gainDial, false);
     gainDialLabel.setText("Gain", juce::dontSendNotification);
     
     // Q
-    qDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, postQID, qDial);
+//    qDialAttach = std::make_unique<SliderAttachment>(audioProcessor.treeState, postQID, qDial);
     addAndMakeVisible(qDial);
     qDial.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::palevioletred.darker(1.0).darker(0.3));
     qDial.forceShadow();

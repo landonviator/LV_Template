@@ -30,13 +30,11 @@ private:
     
     juce::LV_Menu oversamplingMenu;
     juce::LV_Menu clipTypeMenu;
-    juce::LV_Menu clipColorMenu;
     
     using ComboBoxAttachment = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
     
     std::unique_ptr<ComboBoxAttachment> oversamplingMenuAttach;
     std::unique_ptr<ComboBoxAttachment> clipTypeMenuAttach;
-    std::unique_ptr<ComboBoxAttachment> clipColorMenuAttach;
     
     /** Logo and Link =========================================================*/
     juce::Image footerLogo;

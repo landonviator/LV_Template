@@ -120,4 +120,14 @@ namespace juce
                               bool shouldDrawButtonAsHighlighted,
                               bool shouldDrawButtonAsDown) override;
     };
+
+    class LV_CustomBorder : public LookAndFeel_V2
+    {
+        public:
+        
+        void drawGroupComponentOutline (Graphics& g, int width, int height,
+                                                   const String& text, const Justification& position,
+                                                   GroupComponent& group) override;
+    };
+    
 }

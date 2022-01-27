@@ -53,6 +53,8 @@ private:
     juce::LV_GroupComponent clipGroup;
     juce::LV_GroupComponent scopeGroup;
     
+    juce::Image osc;
+    
     /** Vars ==================================================================*/
     float width {0.0f};
     float height {0.0f};

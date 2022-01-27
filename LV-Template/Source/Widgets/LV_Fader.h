@@ -60,13 +60,13 @@ namespace juce
         
         void mouseEnter (const MouseEvent& event) override
         {
-            setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedBrightness(1.25));
+            setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedLightness(1.25));
             setComponentEffect(&sliderShadow);
         }
         
         void mouseExit (const MouseEvent& event) override
         {
-            setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedBrightness(0.8));
+            setColour(juce::Slider::ColourIds::thumbColourId, findColour(juce::Slider::ColourIds::thumbColourId).withMultipliedLightness(0.8));
             setComponentEffect(&sliderShadow);
         }
         
@@ -87,7 +87,7 @@ namespace juce
             setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.35f));
             setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::black.withAlpha(0.0f));
             setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
-            setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
+            setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.36f));
             setColour(juce::Slider::ColourIds::thumbColourId, juce::Colour::fromFloatRGBA(0.392f, 0.584f, 0.929f, 1.0f).darker(1.0));
             setRange(rangeStart, rangeEnd, intervalValue);
             setDoubleClickReturnValue(true, returnValue);

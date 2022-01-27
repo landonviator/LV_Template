@@ -48,8 +48,6 @@ private:
     
     LV_HeaderComponent headerComponent;
     LV_PreToneComponent preToneComponent;
-    LV_ClipperComponent clipperComponent;
-    LV_PostToneComponent postComponent;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessorEditor)
 };

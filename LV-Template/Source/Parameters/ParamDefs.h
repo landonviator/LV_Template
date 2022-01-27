@@ -10,9 +10,6 @@
 
 #pragma once
 
-#define inputID "input"
-#define inputName "Input"
-
 #define driveID "drive"
 #define driveName "Drive"
 
@@ -24,9 +21,6 @@
 
 #define clipTypeID "clipType"
 #define clipTypeName "Clip Type"
-
-#define clipColorID "clipColor"
-#define clipColorName "Clip Color"
 
 #define ceilingID "ceiling"
 #define ceilingName "Ceiling"
@@ -63,4 +57,3 @@
 
 #define postPowerID "post power"
 #define postPowerName "Pre Power"
-

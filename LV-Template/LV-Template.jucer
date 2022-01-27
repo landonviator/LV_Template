@@ -43,6 +43,8 @@
         <FILE id="KDMeIG" name="dark_blue.png" compile="0" resource="1" file="Source/Assets/dark_blue.png"/>
         <FILE id="XDMAWs" name="landon55-03.png" compile="0" resource="1" file="Source/Assets/landon55-03.png"/>
         <FILE id="ho2yp7" name="landon55-04.png" compile="0" resource="1" file="Source/Assets/landon55-04.png"/>
+        <FILE id="HS3WXe" name="oscilloscope-01.png" compile="0" resource="1"
+              file="Source/Assets/oscilloscope-01.png"/>
         <FILE id="TPnhiO" name="pluginBackground.png" compile="0" resource="1"
               file="Source/Assets/pluginBackground.png"/>
         <FILE id="Qna0ro" name="pluginBackground2.png" compile="0" resource="1"
@@ -51,21 +53,19 @@
         <FILE id="huF0f9" name="TEXTURE5.png" compile="0" resource="1" file="Source/Assets/TEXTURE5.png"/>
       </GROUP>
       <GROUP id="{ED7AFB7F-1B2F-633E-3DF2-982150233326}" name="DSP">
-        <FILE id="eZYKwO" name="InitPostTone.cpp" compile="1" resource="0"
-              file="Source/DSP/InitPostTone.cpp"/>
-        <FILE id="L1Bhsc" name="InitPreTone.cpp" compile="1" resource="0" file="Source/DSP/InitPreTone.cpp"/>
         <FILE id="IY5PRn" name="LV_CircleMap.cpp" compile="1" resource="0"
               file="Source/DSP/LV_CircleMap.cpp"/>
         <FILE id="uv9kyg" name="LV_CircleMap.h" compile="0" resource="0" file="Source/DSP/LV_CircleMap.h"/>
         <FILE id="DGTN7E" name="LV_Clipper.cpp" compile="1" resource="0" file="Source/DSP/LV_Clipper.cpp"/>
         <FILE id="K0cRYJ" name="LV_Clipper.h" compile="0" resource="0" file="Source/DSP/LV_Clipper.h"/>
+        <FILE id="vusfwz" name="LV_Dynamics.cpp" compile="1" resource="0" file="Source/DSP/LV_Dynamics.cpp"/>
+        <FILE id="orVa6B" name="LV_Dynamics.h" compile="0" resource="0" file="Source/DSP/LV_Dynamics.h"/>
         <FILE id="E5oDy7" name="LV_SplitDistortion.cpp" compile="1" resource="0"
               file="Source/DSP/LV_SplitDistortion.cpp"/>
         <FILE id="F8XMHt" name="LV_SplitDistortion.h" compile="0" resource="0"
               file="Source/DSP/LV_SplitDistortion.h"/>
         <FILE id="c3KUTK" name="LV_SVFilter.cpp" compile="1" resource="0" file="Source/DSP/LV_SVFilter.cpp"/>
         <FILE id="xcsVeQ" name="LV_SVFilter.h" compile="0" resource="0" file="Source/DSP/LV_SVFilter.h"/>
-        <FILE id="C91qNr" name="InitClipper.cpp" compile="1" resource="0" file="Source/DSP/InitClipper.cpp"/>
       </GROUP>
       <GROUP id="{2D743AC8-CC21-A100-D4D8-35C53692ABF7}" name="Widgets">
         <FILE id="NtZqxT" name="LV_Dial.h" compile="0" resource="0" file="Source/Widgets/LV_Dial.h"/>

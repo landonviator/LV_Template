@@ -13,7 +13,7 @@
 #include "./DSP/LV_CircleMap.h"
 #include "./DSP/LV_SplitDistortion.h"
 #include "./DSP/LV_SVFilter.h"
-#include "./DSP/LV_Clipper.h"
+#include "./DSP/LV_Dynamics.h"
 
 //==============================================================================
 /**
@@ -93,6 +93,8 @@ private:
     float overSampleRate {44100.0f};
     float projectSampleRate {44100.0f};
     bool oversamplingState = false;
+    
+    LV_Dynamics dynamicsModule;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LVTemplateAudioProcessor)

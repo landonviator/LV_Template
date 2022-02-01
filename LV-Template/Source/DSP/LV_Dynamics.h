@@ -40,9 +40,17 @@ private:
     
     juce::SmoothedValue<float> thresh {0.0f};
     juce::SmoothedValue<float> ratio {2.0f};
-    juce::SmoothedValue<float> attack {50.0f};
-    juce::SmoothedValue<float> release {500.0f};
+    float attack {50.0f};
+    float release {500.0f};
     juce::SmoothedValue<float> trim {0.0f};
+    
+    float alphaAttack;
+    float alphaRelease;
+    
+    float gainSC = 0.0;
+    float gainChangeDB = 0.0;
+    float gainSmoothPrev = 0.0;
+    float gainSmooth;
     
     float sampleRate {44100.0f};
     float clippedSignal {0.0f};

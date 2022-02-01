@@ -29,11 +29,25 @@ oversamplingModule(2, 3, juce::dsp::Oversampling<float>::FilterType::filterHalfB
     scopeModule.setRepaintRate(32);
     
     treeState.addParameterListener (qualityID, this);
+    treeState.addParameterListener ("type", this);
+    treeState.addParameterListener ("preset", this);
+    treeState.addParameterListener ("thresh", this);
+    treeState.addParameterListener ("ratio", this);
+    treeState.addParameterListener ("attack", this);
+    treeState.addParameterListener ("release", this);
+    treeState.addParameterListener ("trim", this);
 }
 
 LVTemplateAudioProcessor::~LVTemplateAudioProcessor()
 {
     treeState.removeParameterListener (qualityID, this);
+    treeState.removeParameterListener ("type", this);
+    treeState.removeParameterListener ("preset", this);
+    treeState.removeParameterListener ("thresh", this);
+    treeState.removeParameterListener ("ratio", this);
+    treeState.removeParameterListener ("attack", this);
+    treeState.removeParameterListener ("release", this);
+    treeState.removeParameterListener ("trim", this);
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::createParameterLayout()
@@ -52,6 +66,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
   auto pRatio = std::make_unique<juce::AudioParameterFloat>("ratio", "Ratio", 2.0, 20.0, 2.0);
   auto pAttack = std::make_unique<juce::AudioParameterFloat>("attack", "Attack", 1.0, 100.0, 50.0);
   auto pRelease = std::make_unique<juce::AudioParameterFloat>("release", "Release", 1.0, 1000.0, 500.0);
+  auto pTrim = std::make_unique<juce::AudioParameterFloat>("trim", "Trim", -24.0, 24.0, 0.0);
     
   params.push_back(std::move(pQuality));
   params.push_back(std::move(pType));
@@ -60,12 +75,48 @@ juce::AudioProcessorValueTreeState::ParameterLayout LVTemplateAudioProcessor::cr
   params.push_back(std::move(pRatio));
   params.push_back(std::move(pAttack));
   params.push_back(std::move(pRelease));
+  params.push_back(std::move(pTrim));
 
   return { params.begin(), params.end() };
 }
 
 void LVTemplateAudioProcessor::parameterChanged(const juce::String &parameterID, float newValue)
 {
+    if (parameterID == "type")
+    {
+        DBG("Compressor type is " << newValue);
+    }
+    
+    if (parameterID == "preset")
+    {
+        DBG("preset is " << newValue);
+    }
+    
+    if (parameterID == "thresh")
+    {
+        dynamicsModule.setParameter(LV_Dynamics::ParameterId::kThresh, newValue);
+    }
+    
+    if (parameterID == "ratio")
+    {
+        dynamicsModule.setParameter(LV_Dynamics::ParameterId::kRatio, newValue);
+    }
+    
+    if (parameterID == "attack")
+    {
+        dynamicsModule.setParameter(LV_Dynamics::ParameterId::kAttack, newValue);
+    }
+    
+    if (parameterID == "release")
+    {
+        dynamicsModule.setParameter(LV_Dynamics::ParameterId::kRelease, newValue);
+    }
+    
+    if (parameterID == "trim")
+    {
+        dynamicsModule.setParameter(LV_Dynamics::ParameterId::kTrim, newValue);
+    }
+    
     /** Oversampling */
     if (parameterID == qualityID)
     {
@@ -169,6 +220,8 @@ void LVTemplateAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     oversamplingModule.reset();
     oversamplingModule.initProcessing(samplesPerBlock);
+    
+    dynamicsModule.prepare(spec);
 }
 
 void LVTemplateAudioProcessor::releaseResources()
@@ -218,11 +271,13 @@ void LVTemplateAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     if (oversamplingState)
     {
         upSampledBlock = oversamplingModule.processSamplesUp(audioBlock);
+        dynamicsModule.processBlock(upSampledBlock);
         oversamplingModule.processSamplesDown(audioBlock);
     }
 
     else
     {
+        dynamicsModule.processBlock(audioBlock);
     }
 }
 
